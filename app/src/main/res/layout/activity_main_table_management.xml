@@ -10,60 +10,102 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="154dp" />
+        android:layout_marginBottom="8dp"
+        android:text="Gestion Tables"
+        app:layout_constraintBottom_toTopOf="@+id/chipGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip4"
+
+    <Button
+        android:id="@+id/button5"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="102dp" />
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:text="Ajouter"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Suprimer"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="désactiver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="365dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Button"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="16dp"
+        android:checkable="true"
+        android:theme="@style/Theme.MaterialComponents.DayNight"
+        android:verticalScrollbarPosition="defaultPosition"
+        app:chipSpacingHorizontal="40dp"
+        app:chipSpacingVertical="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:selectionRequired="true"
+        app:singleSelection="true">
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.chip.ChipGroup
-            android:layout_width="wrap_content"
-            app:singleLine="false"
-            app:singleSelection="false"
-            android:layout_height="wrap_content">
-            <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:padding="16dp"
-                android:textAlignment="center" />
-            <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:padding="16dp"
-                android:textAlignment="center" />
-            <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:padding="16dp"
-                android:textAlignment="center" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            style="@style/ChipTableManagement"
+            android:text="T01"
+            tools:layout_editor_absoluteY="146dp" />
 
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            style="@style/ChipTableManagement"
+            android:text="T02"
+            tools:layout_editor_absoluteY="146dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip6"
+            style="@style/ChipTableManagement"
+            android:text="T03"
+            tools:layout_editor_absoluteY="146dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip7"
+            style="@style/ChipTableManagement"
+            android:text="T04"
+            tools:layout_editor_absoluteY="146dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip8"
+            style="@style/ChipTableManagement"
+            android:text="T05"
+            tools:layout_editor_absoluteY="146dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip9"
+            style="@style/ChipTableManagement"
+            android:text="T06"
+            tools:layout_editor_absoluteY="146dp" />
+    </com.google.android.material.chip.ChipGroup>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
