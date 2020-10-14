@@ -7,87 +7,117 @@
     tools:context=".MainBookingActivity">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
-        android:text="Button"
+        android:onClick="continueBooking"
+        android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        android:layout_width="292dp"
+        android:layout_height="319dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="196dp" />
+        app:layout_constraintTop_toBottomOf="@+id/selectDate" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/numberOfPersons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="35dp" />
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="35dp"
+        android:text="@string/numberOfPersons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/selectDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="155dp" />
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/selectDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="230dp"
-        android:layout_height="20dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="604dp" />
+        android:id="@+id/timeSelect"
+        android:layout_width="130dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/timeSelect"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
     <EditText
         android:id="@+id/editTextNumber"
         android:layout_width="70dp"
         android:layout_height="50dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="28dp"
+        android:autoText="true"
+        android:autofillHints="2"
         android:ems="10"
+        android:importantForAutofill="auto"
         android:inputType="number"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="80dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfPersons" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="56dp"
-        android:layout_height="31dp"
-        android:text="Button"
-        tools:layout_editor_absoluteX="137dp"
-        tools:layout_editor_absoluteY="89dp" />
+        android:id="@+id/plusButton"
+        android:layout_width="57dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/plusButton"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfPersons" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="56dp"
-        android:layout_height="31dp"
-        android:text="Button"
-        tools:layout_editor_absoluteX="214dp"
-        tools:layout_editor_absoluteY="89dp" />
+        android:id="@+id/minusButton"
+        android:layout_width="57dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/minusButton"
+        app:layout_constraintStart_toEndOf="@+id/plusButton"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfPersons" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="554dp" />
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/period"
+        android:layout_width="179dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/timeSelect"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:singleLine="true"
+        app:singleSelection="true">
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch"
-        tools:layout_editor_absoluteX="224dp"
-        tools:layout_editor_absoluteY="554dp" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/midday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="80dp"
+            android:clickable="true"
+            android:minWidth="80dp"
+            android:text="@string/midday" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/night"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="80dp"
+            android:clickable="true"
+            android:minWidth="80dp"
+            android:text="@string/night" />
+    </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

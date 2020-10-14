@@ -3,4 +3,20 @@
     <string name="bookingButton">Reservation</string>
     <string name="bookingManagement">Manage a registration</string>
     <string name="tableManagmeent">Manage the tables</string>
+    <string name="numberOfPersons">Select the number of persons</string>
+    <string name="plusButton">+</string>
+    <string name="minusButton">-</string>
+    <string name="timeSelect">Select a time slot</string>
+    <string name="selectDate">Select a date</string>
+    <string name="next">Next</string>
+    <string name="midday">Midday</string>
+    <string name="night">Night</string>
+    <string name="selectTable">Select a table</string>
+    <string name="name">Enter your name</string>
+    <string name="nameHint">Name</string>
+    <string name="telephoneNumber">Enter your telephone number</string>
+    <string name="telephoneHint">079/797.79.79</string>
+    <string name="comment">Enter a comment if needed</string>
+    <string name="commentHint">Baby chair, Vegetarian, Allergy</string>
+    <string name="validate">Validate</string>
 </resources>
