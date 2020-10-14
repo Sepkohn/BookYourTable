@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BookingDatasActivity"></activity>
+        <activity android:name=".TableManagementModify"></activity>
+        <activity android:name=".TableManagementAdd" />
+        <activity android:name=".MainTableManagement" />
+        <activity android:name=".BookingDatasActivity" />
         <activity android:name=".MainBookingActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

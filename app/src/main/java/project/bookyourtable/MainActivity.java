@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainBookingActivity.class);
         startActivity(intent);
     }
+    public void createTableManagement(View view){
+        Intent intent = new Intent(this, MainTableManagement.class);
+        startActivity(intent);
+    }
+
 }
