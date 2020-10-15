@@ -26,8 +26,10 @@
         android:layout_height="121dp"
         android:layout_marginStart="57dp"
         android:layout_marginTop="84dp"
+        android:backgroundTint="#2E2E51"
         android:onClick="createBooking"
         android:text="@string/bookingButton"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -38,7 +40,10 @@
         android:layout_height="121dp"
         android:layout_marginStart="57dp"
         android:layout_marginTop="32dp"
+        android:backgroundTint="#2E2E51"
+        android:onClick="createTableManagement"
         android:text="@string/tableManagmeent"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bookingButton" />
 
@@ -48,9 +53,13 @@
         android:layout_width="145dp"
         android:layout_height="121dp"
         android:layout_marginStart="64dp"
+
         android:layout_marginTop="84dp"
         android:layout_marginEnd="42dp"
+        android:backgroundTint="#2E2E51"
+
         android:text="@string/bookingManagement"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bookingButton"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />

@@ -3,6 +3,8 @@
     <string name="bookingButton">Reservation</string>
     <string name="bookingManagement">Manage a registration</string>
     <string name="tableManagmeent">Manage the tables</string>
+    <string name="title_activity_main_table_management">MainTableManagement</string>
+    <string name="previous">Previous</string>
     <string name="numberOfPersons">Select the number of persons</string>
     <string name="plusButton">+</string>
     <string name="minusButton">-</string>
@@ -19,4 +21,6 @@
     <string name="comment">Enter a comment if needed</string>
     <string name="commentHint">Baby chair, Vegetarian, Allergy</string>
     <string name="validate">Validate</string>
+
+  
 </resources>
