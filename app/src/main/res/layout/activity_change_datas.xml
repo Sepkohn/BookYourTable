@@ -2,71 +2,53 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainBookingActivity">
+    tools:context=".ChangeDatasActivity">
 
-    <Button
-        android:id="@+id/next"
+    <EditText
+        android:id="@+id/nameHint"
+        style="@style/helpString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:onClick="continueBooking"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="292dp"
-        android:layout_height="319dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/nameHint"
+        android:inputType="textPersonName"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectDate" />
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/helpString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/name"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/numberOfPersons"
         style="@style/helpString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
         android:text="@string/numberOfPersons"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/selectDate"
-        style="@style/helpString"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/selectDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
-
-    <TextView
-        android:id="@+id/timeSelect"
-        style="@style/helpString"
-        android:layout_width="143dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/timeSelect"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        app:layout_constraintTop_toBottomOf="@+id/nameHint" />
 
     <EditText
         android:id="@+id/editTextNumber"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="28dp"
-        android:autoText="true"
+        android:layout_width="62dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
         android:autofillHints="2"
         android:ems="10"
         android:importantForAutofill="auto"
@@ -79,7 +61,7 @@
         android:layout_width="57dp"
         android:layout_height="34dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="18dp"
         android:text="@string/plusButton"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber"
         app:layout_constraintTop_toBottomOf="@+id/numberOfPersons" />
@@ -89,17 +71,49 @@
         android:layout_width="57dp"
         android:layout_height="34dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="18dp"
         android:text="@string/minusButton"
         app:layout_constraintStart_toEndOf="@+id/plusButton"
         app:layout_constraintTop_toBottomOf="@+id/numberOfPersons" />
+
+    <TextView
+        android:id="@+id/selectDate"
+        style="@style/helpString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/selectDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="279dp"
+        android:layout_height="294dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectDate" />
+
+    <TextView
+        android:id="@+id/timeSelect"
+        style="@style/helpString"
+        android:layout_width="143dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/timeSelect"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/period"
         android:layout_width="167dp"
         android:layout_height="34dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/timeSelect"
         app:layout_constraintTop_toBottomOf="@+id/calendarView"
         app:singleLine="true"
@@ -125,7 +139,6 @@
             android:minWidth="80dp"
             android:text="@string/night" />
     </com.google.android.material.chip.ChipGroup>
-
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/timeSlots"
@@ -188,5 +201,17 @@
             android:minWidth="50dp"
             android:text="13:30" />
     </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:onClick="validateBooking"
+        android:text="@string/validate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
