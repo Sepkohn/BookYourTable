@@ -10,11 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".TableManagementModify"/>
-        <activity android:name=".TableManagementAdd"/>
 
-
-        <activity android:name=".MainTableManagement"
+        <activity android:name=".table.MainTableManagement"
             android:parentActivityName=".MainActivity"
             android:label="Gestion Tables">
             <meta-data android:name="android.support.PARENT_ACTIVITY"

@@ -4,59 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainTableManagement">
+    tools:context=".table.MainTableManagement">
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="Gestion Tables"
-        app:layout_constraintBottom_toTopOf="@+id/chipGroup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:text="Ajouter"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Suprimer"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="désactiver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+        android:id="@+id/chipGroupTables"
         android:layout_width="365dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
         android:layout_marginEnd="16dp"
         android:checkable="true"
         android:theme="@style/Theme.MaterialComponents.DayNight"
@@ -65,47 +20,85 @@
         app:chipSpacingVertical="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:selectionRequired="true"
-        app:singleSelection="true">
+        app:singleSelection="true"
+        tools:layout_editor_absoluteY="107dp">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip4"
+            android:id="@+id/T1"
             style="@style/ChipTableManagement"
             android:text="T01"
-            tools:layout_editor_absoluteY="146dp" />
+            android:visibility="visible"
+            tools:visibility="visible" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip5"
+            android:id="@+id/T2"
             style="@style/ChipTableManagement"
-            android:text="T02"
-            tools:layout_editor_absoluteY="146dp" />
+            android:text="T02" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip6"
+            android:id="@+id/T3"
             style="@style/ChipTableManagement"
-            android:text="T03"
-            tools:layout_editor_absoluteY="146dp" />
+            android:text="T03" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip7"
+            android:id="@+id/T4"
             style="@style/ChipTableManagement"
-            android:text="T04"
-            tools:layout_editor_absoluteY="146dp" />
+            android:text="T04" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip8"
+            android:id="@+id/T5"
             style="@style/ChipTableManagement"
-            android:text="T05"
-            tools:layout_editor_absoluteY="146dp" />
+            android:text="T05" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip9"
+            android:id="@+id/T6"
             style="@style/ChipTableManagement"
-            android:text="T06"
-            tools:layout_editor_absoluteY="146dp" />
+            android:text="T06" />
     </com.google.android.material.chip.ChipGroup>
 
+    <LinearLayout
+        android:layout_width="165dp"
+        android:layout_height="169dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:text="Ajouter"
+            app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Suprimer"
+            app:layout_constraintBottom_toTopOf="@+id/buttonDesactivate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonDesactivate"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:text="désactiver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
