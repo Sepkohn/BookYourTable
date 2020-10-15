@@ -21,6 +21,14 @@
     <string name="comment">Enter a comment if needed</string>
     <string name="commentHint">Baby chair, Vegetarian, Allergy</string>
     <string name="validate">Validate</string>
+    <string name="validationText">The booking has been registered</string>
+    <string name="backToMenu">Back to menu</string>
+    <string name="newReservationMenu">Register a new reservation</string>
+    <string name="modifyAReservation">Modify a reservation</string>
+    <string name="reservationList">Reservation list from</string>
+    <string name="modify">Modify</string>
+    <string name="delete">Delete</string>
+    <string name="selectReservation">Select a Reservation</string>
 
-  
+
 </resources>

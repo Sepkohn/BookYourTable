@@ -20,6 +20,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainBookingActivity.class);
         startActivity(intent);
     }
+
+    public void modifyBooking(View view){
+        Intent intent = new Intent(this, BookingsDateActivity.class);
+        startActivity(intent);
+    }
     public void createTableManagement(View view){
         Intent intent = new Intent(this, MainTableManagement.class);
         startActivity(intent);

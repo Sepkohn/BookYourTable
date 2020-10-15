@@ -6,16 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class BookingDatasActivity extends AppCompatActivity {
+public class BookingsDateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_booking_datas);
+        setContentView(R.layout.activity_bookings_date);
     }
 
-    public void validateBooking(View view){
-        Intent intent = new Intent(this, ConfirmationActivity.class);
+    public void getReservationsList(View view){
+        Intent intent = new Intent(this, ReservationsListActivity.class);
         startActivity(intent);
     }
 }

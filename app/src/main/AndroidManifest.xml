@@ -10,27 +10,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".ChangeDatasActivity"></activity>
+        <activity android:name=".ReservationsListActivity" />
+        <activity android:name=".BookingsDateActivity" />
+        <activity android:name=".ConfirmationActivity" />
+        <activity android:name=".TableManagementModify" />
+        <activity android:name=".TableManagementAdd" />
+        <activity
+            android:name=".MainTableManagement"
+            android:label="Gestion Tables"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
 
-        <activity android:name=".table.MainTableManagement"
-            android:parentActivityName=".MainActivity"
-            android:label="Gestion Tables">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
-
-        <activity android:name=".BookingDatasActivity"
+        <activity
+            android:name=".BookingDatasActivity"
             android:parentActivityName=".MainBookingActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainBookingActivity" />
         </activity>
-
-        <activity android:name=".MainBookingActivity"
+        <activity
+            android:name=".MainBookingActivity"
             android:parentActivityName=".MainActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
