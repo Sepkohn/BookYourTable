@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".table.MainTableManagement">
+    tools:context=".ui.table.MainTableManagement">
 
 
     <com.google.android.material.chip.ChipGroup
@@ -12,6 +12,7 @@
         android:layout_width="365dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="107dp"
         android:layout_marginEnd="16dp"
         android:checkable="true"
         android:theme="@style/Theme.MaterialComponents.DayNight"
@@ -20,9 +21,9 @@
         app:chipSpacingVertical="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:selectionRequired="true"
-        app:singleSelection="true"
-        tools:layout_editor_absoluteY="107dp">
+        app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/T1"
@@ -58,8 +59,8 @@
     </com.google.android.material.chip.ChipGroup>
 
     <LinearLayout
-        android:layout_width="165dp"
-        android:layout_height="169dp"
+        android:layout_width="171dp"
+        android:layout_height="159dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,35 +69,19 @@
 
         <Button
             android:id="@+id/buttonAdd"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="8dp"
-            android:text="Ajouter"
-            app:layout_constraintBottom_toTopOf="@+id/buttonDelete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.476"
-            app:layout_constraintStart_toStartOf="parent" />
+            style="@style/buttonsManagementTable"
+            android:text="Ajouter" />
+
 
         <Button
             android:id="@+id/buttonDelete"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Suprimer"
-            app:layout_constraintBottom_toTopOf="@+id/buttonDesactivate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.476"
-            app:layout_constraintStart_toStartOf="parent" />
+            style="@style/buttonsManagementTable"
+            android:text="Suprimer" />
 
         <Button
             android:id="@+id/buttonDesactivate"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:text="désactiver"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            style="@style/buttonsManagementTable"
+            android:text="désactiver" />
 
     </LinearLayout>
 

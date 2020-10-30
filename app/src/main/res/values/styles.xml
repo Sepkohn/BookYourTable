@@ -29,9 +29,9 @@
 
     </style>
     <style name="AddingTableDialog">
-        <item name="android:background">@color/colorPrimaryDark</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:layout_marginLeft">150dp</item>
+<!--        <item name="android:background">@color/colorPrimaryDark</item>-->
+<!--        <item name="android:textSize">18sp</item>-->
+<!--        <item name="android:layout_marginLeft">150dp</item>-->
 
     </style>
     <style name="helpString">
@@ -40,6 +40,13 @@
         <item name="android:layout_marginStart">28dp</item>
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="buttonsManagementTable">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">#2E2E51</item>
+        <item name="android:layout_marginBottom">5dp</item>
     </style>
 
 
