@@ -2,6 +2,8 @@ package project.bookyourtable.Database.Entity;
 
 import java.util.Date;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
 
 @Entity(tablename = "bookings",
@@ -11,7 +13,7 @@ import androidx.room.Entity;
         }
 public class BookingEntity {
 
-   @PrimaryKey(autoGenerate = true)
+   @PrimaryKey(autoGenerate = true);
 
     private Date date;
 
