@@ -48,8 +48,8 @@ public class MainBookingActivity extends AppCompatActivity {
         EditText numberPersons = findViewById(R.id.editTextNumber);
         int number = Integer.parseInt(numberPersons.getText().toString().trim());
 
-        if(number<=0){
-            displayNumbrePersons(numberPersons, 0);
+        if(number<=1){
+            displayNumbrePersons(numberPersons, 1);
         }
         else
             displayNumbrePersons(numberPersons,number-1);

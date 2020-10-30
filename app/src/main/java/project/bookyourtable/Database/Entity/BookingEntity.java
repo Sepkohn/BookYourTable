@@ -3,17 +3,27 @@ package project.bookyourtable.Database.Entity;
 import java.util.Date;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tablename = "bookings",
+        /*@Entity(tableName = "bookings",
             foreignKeys =
-            @ForeignKey{
-
-        }
+            @ForeignKey(
+                entity = null.class,
+                parentColumns = "",
+                childColumns = "",
+                onDelete = ForeignKey.NO_ACTION),
+            indices = {
+                @Index(
+                        value = {"tableNumber"}
+                )
+            }
+)*/
 public class BookingEntity {
 
-   @PrimaryKey(autoGenerate = true);
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     private Date date;
 
@@ -24,5 +34,13 @@ public class BookingEntity {
     private String message;
 
     private int tableNumber;
+
+    public BookingEntity(Date date, String name, String telephoneNumber, String message, int tableNumber){
+        this.date = date;
+        this.name = name;
+        this.telephoneNumber = telephoneNumber;
+        this.message = message;
+        this.tableNumber = tableNumber;
+    }
 
 }
