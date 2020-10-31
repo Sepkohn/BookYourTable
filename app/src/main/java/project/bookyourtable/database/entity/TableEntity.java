@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 public class TableEntity {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "tableId")
     private Long id;
 
     @ColumnInfo(name = "personNumber")
