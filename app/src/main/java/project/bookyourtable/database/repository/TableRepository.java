@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.TableEntity;
 
 public class TableRepository {
