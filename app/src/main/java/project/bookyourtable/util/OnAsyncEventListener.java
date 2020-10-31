@@ -1,4 +1,4 @@
-package project.bookyourtable.database.async.table;
+package project.bookyourtable.util;
 
 public interface OnAsyncEventListener {
     void onSuccess();
