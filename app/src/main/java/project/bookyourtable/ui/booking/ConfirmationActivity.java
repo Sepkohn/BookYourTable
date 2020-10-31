@@ -1,10 +1,13 @@
-package project.bookyourtable;
+package project.bookyourtable.ui.booking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import project.bookyourtable.R;
+import project.bookyourtable.ui.MainActivity;
 
 public class ConfirmationActivity extends AppCompatActivity {
 

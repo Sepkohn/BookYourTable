@@ -10,59 +10,59 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ChangeDatasActivity"
+        <activity android:name=".ui.booking.ChangeDatasActivity"
             android:label="@string/modifyAReservation"
-            android:parentActivityName=".ReservationsListActivity">
+            android:parentActivityName=".ui.booking.ReservationsListActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".ReservationsListActivity"/>
+            android:value=".ui.booking.ReservationsListActivity"/>
         </activity>
 
-        <activity android:name=".ReservationsListActivity"
+        <activity android:name=".ui.booking.ReservationsListActivity"
             android:label="@string/manageBooking"
-            android:parentActivityName=".BookingsDateActivity">
+            android:parentActivityName=".ui.booking.BookingsDateActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".BookingsDateActivity"/>
+            android:value=".ui.booking.BookingsDateActivity"/>
         </activity>
 
-        <activity android:name=".BookingsDateActivity"
+        <activity android:name=".ui.booking.BookingsDateActivity"
             android:label="@string/manageBooking"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.MainActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity"/>
+            android:value=".ui.MainActivity"/>
         </activity>
 
-        <activity android:name=".table.MainTableManagement"
+        <activity android:name=".ui.table.MainTableManagement"
             android:label="@string/manageTables"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".ui.MainActivity"/>
         </activity>
 
-        <activity android:name=".ConfirmationActivity" />
+        <activity android:name=".ui.booking.ConfirmationActivity" />
 
         <activity
-            android:name=".BookingDatasActivity"
+            android:name=".ui.booking.BookingDatasActivity"
             android:label="@string/newReservationMenu"
-            android:parentActivityName=".MainBookingActivity">
+            android:parentActivityName=".ui.booking.MainBookingActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainBookingActivity" />
+                android:value=".ui.booking.MainBookingActivity" />
         </activity>
 
         <activity
-            android:name=".MainBookingActivity"
+            android:name=".ui.booking.MainBookingActivity"
             android:label="@string/newReservationMenu"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.MainActivity" />
         </activity>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

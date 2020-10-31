@@ -1,7 +1,6 @@
-package project.bookyourtable.table;
+package project.bookyourtable.ui.table;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -73,6 +72,7 @@ public class MainTableManagement extends AppCompatActivity {
 
                 }else{
                     chip.setChipBackgroundColor(ColorStateList.valueOf(R.color.colorTest));
+                    System.out.println("TOUDOM");
                 }
 
 

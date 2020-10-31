@@ -1,4 +1,4 @@
-package project.bookyourtable;
+package project.bookyourtable.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import project.bookyourtable.table.MainTableManagement;
+import project.bookyourtable.R;
+import project.bookyourtable.ui.booking.BookingsDateActivity;
+import project.bookyourtable.ui.booking.MainBookingActivity;
+import project.bookyourtable.ui.table.MainTableManagement;
 
 public class MainActivity extends AppCompatActivity {
 
