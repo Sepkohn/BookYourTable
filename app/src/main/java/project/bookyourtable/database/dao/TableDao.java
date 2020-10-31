@@ -9,19 +9,25 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.Date;
 import java.util.List;
 
+import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 
 public interface TableDao {
 
-    @Query("SELECT * FROM Btables WHERE id = :id")
-    LiveData<TableEntity> getById(String id);
+    @Query("SELECT * FROM Btables WHERE tableId = :id")
+    LiveData<TableEntity> getTableById(Long id);
 
     @Query("SELECT * FROM Btables")
     LiveData<List<TableEntity>> getAll();
 
+    @Query("SELECT * FROM Btables WHERE availability = :state")
+    LiveData<List<TableEntity>> getByAvailabilitx(boolean state);
 
+    @Query("SELECT * FROM Btables WHERE personNumber = :number")
+    LiveData<List<TableEntity>> getBypersonNumber(int number);
 
 
     @Insert
