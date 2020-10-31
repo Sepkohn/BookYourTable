@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "table", primaryKeys = {"id"})
+@Entity(tableName = "Btables", primaryKeys = {"id"})
 public class TableEntity {
 
     @PrimaryKey(autoGenerate = true)

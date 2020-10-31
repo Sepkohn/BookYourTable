@@ -3,6 +3,7 @@ package project.bookyourtable;
 import android.app.Application;
 import project.bookyourtable.database.AppDatabase;
 import project.bookyourtable.database.repository.BookingRepository;
+import project.bookyourtable.database.repository.TableRepository;
 
 /**
  * Android Application class. Used for accessing singletons.
@@ -22,7 +23,7 @@ public class BaseApp extends Application {
         return BookingRepository.getInstance();
     }
 
-    public ClientRepository getClientRepository() {
-        return ClientRepository.getInstance();
+    public TableRepository getClientRepository() {
+        return TableRepository.getInstance();
     }
 }
