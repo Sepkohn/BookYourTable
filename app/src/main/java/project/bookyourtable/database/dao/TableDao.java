@@ -16,7 +16,7 @@ import project.bookyourtable.database.entity.TableEntity;
 public interface TableDao {
 
     @Query("SELECT * FROM Btables WHERE id = :id")
-    LiveData<TableEntity> getById(String id);
+    LiveData<TableEntity> getById(Long id);
 
     @Query("SELECT * FROM Btables")
     LiveData<List<TableEntity>> getAll();

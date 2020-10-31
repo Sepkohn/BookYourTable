@@ -12,8 +12,6 @@ import project.bookyourtable.ui.booking.BookingDatasActivity;
 
 public class MainBookingActivity extends AppCompatActivity {
 
-
-
     public MainBookingActivity(){
 
     }

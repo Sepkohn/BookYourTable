@@ -1,7 +1,6 @@
 package project.bookyourtable.database.repository;
 
 import android.app.Application;
-import android.util.Pair;
 
 import androidx.lifecycle.LiveData;
 
@@ -9,7 +8,7 @@ import java.util.List;
 
 import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.async.table.CreateTable;
-import project.bookyourtable.database.async.table.OnAsyncEventListener;
+import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.database.entity.TableEntity;
 
 public class TableRepository {
