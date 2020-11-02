@@ -10,19 +10,21 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 
-@Entity(tableName = "bookings",
-            foreignKeys =
-            @ForeignKey(
-                entity = TableEntity.class,
-                parentColumns = "tableId",
-                childColumns = "",
-                onDelete = ForeignKey.NO_ACTION),
-            indices = {
-                @Index(
-                        value = {"tableNumber"}
-                )
-            }
-)
+//@Entity(tableName = "bookings",
+////        foreignKeys =
+////        @ForeignKey(
+////                entity = TableEntity.class,
+////                parentColumns = "tableId",
+////                childColumns = "",
+////                onDelete = ForeignKey.NO_ACTION),
+////        indices = {
+////                @Index(
+////                        value = {"tableId"} //Avant tu avais mis tableNumber je met en attendant pour run le code
+////                )
+////        }
+////)
+
+@Entity(tableName = "bookings")
 public class BookingEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -55,6 +57,9 @@ public class BookingEntity {
 
     public Long getId(){return id;}
     public void setId(Long id){this.id = id; }
+
+    public Date getDate(){return date;}
+    public void setDate(Date date){this.date = date; }
 
     public String getName(){return name; }
     public void setName(String personNumber){ this.name=personNumber; }
