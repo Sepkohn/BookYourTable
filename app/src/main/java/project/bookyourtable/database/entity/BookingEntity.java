@@ -26,7 +26,7 @@ public class BookingEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "bookingId")
-    private int id;
+    private Long id;
 
     @ColumnInfo(name = "date")
     private Date date;

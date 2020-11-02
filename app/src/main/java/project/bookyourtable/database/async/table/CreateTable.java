@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.TableEntity;
-import project.bookyourtable.database.dao.TableDao;
+import project.bookyourtable.util.OnAsyncEventListener;
 
 public class CreateTable extends AsyncTask<TableEntity, Void, Void> {
 

@@ -17,8 +17,10 @@ import project.bookyourtable.database.entity.TableEntity;
 
 public interface TableDao {
 
+
     @Query("SELECT * FROM Btables WHERE tableId = :id")
     LiveData<TableEntity> getTableById(Long id);
+
 
     @Query("SELECT * FROM Btables")
     LiveData<List<TableEntity>> getAll();
