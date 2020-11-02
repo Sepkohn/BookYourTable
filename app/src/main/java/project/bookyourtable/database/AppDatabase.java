@@ -1,7 +1,6 @@
 package project.bookyourtable.database;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteConstraintException;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -12,17 +11,16 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.Date;
-import java.util.List;
 import java.util.concurrent.Executors;
 
 import project.bookyourtable.database.dao.BookingDao;
 import project.bookyourtable.database.dao.TableDao;
+
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 
 @Database(entities = {BookingEntity.class, TableEntity.class}, version = 1)
-public abstract class AppDatabase {
+public abstract class AppDatabase extends RoomDatabase  {
     private static final String TAG = "AppDatabase";
 
     private static AppDatabase instance;
@@ -31,7 +29,7 @@ public abstract class AppDatabase {
 
     public abstract BookingDao bookingDao();
 
-    public abstract TableDao TableDao();
+    public abstract TableDao tableDao();
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
@@ -54,37 +52,23 @@ public abstract class AppDatabase {
      */
     private static AppDatabase buildDatabase(final Context appContext) {
         Log.i(TAG, "Database will be initialized.");
-        return Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").build();
-
-
-//        return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
-////                .addCallback(new RoomDatabase.Callback() {
-////                    @Override
-////                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
-////                        super.onCreate(db);
-////                        Executors.newSingleThreadExecutor().execute(() -> {
-////                            AppDatabase database = AppDatabase.getInstance(appContext);
-////                            //initializeDemoData(database);
-////                            // notify that the database was created and it's ready to be used
-////                            database.setDatabaseCreated();
-////                        });
-////                    }
-////                }).build();
-
+        return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
+                .addCallback(new RoomDatabase.Callback() {
+                    @Override
+                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                        super.onCreate(db);
+                        Executors.newSingleThreadExecutor().execute(() -> {
+                            AppDatabase database = AppDatabase.getInstance(appContext);
+                            DatabaseInitializer.populateDatabase(database);
+                            // notify that the database was created and it's ready to be used
+                            database.setDatabaseCreated();
+                        });
+                    }
+                }).build();
     }
 
-//    public static void initializeDemoData(final AppDatabase database) {
-//        Executors.newSingleThreadExecutor().execute(() -> {
-//            database.runInTransaction(() -> {
-//                Log.i(TAG, "Wipe database.");
-//                database.bookingDao().deleteAll();
-//                database.tableDao().deleteAll();
-//
-//                DatabaseInitializer.populateDatabase(database);
-//            });
-//        });
-//    }
+
+
 
     /**
      * Check whether the database already exists and expose it via {@link #getDatabaseCreated()}
@@ -104,43 +88,3 @@ public abstract class AppDatabase {
         return mIsDatabaseCreated;
     }
 }
-
-
-//    public BookingDao bookingDao(){
-//
-//        return new BookingDao() {
-//            @Override
-//            public LiveData<List<BookingEntity>> getAllBookings() {
-//                return null;
-//            }
-//
-//            @Override
-//            public LiveData<BookingEntity> getBookingsByDate(Date date) {
-//                return null;
-//            }
-//
-//            @Override
-//            public LiveData<BookingEntity> getBookingsById(int id) {
-//                return null;
-//            }
-//
-//            @Override
-//            public void insert(BookingEntity bookingEntity) throws SQLiteConstraintException {
-//
-//            }
-//
-//            @Override
-//            public void update(BookingEntity bookingEntity) {
-//
-//            }
-//
-//            @Override
-//            public void delete(BookingEntity bookingEntity) {
-//
-//            }
-//        };
-//      }
-// }
-
-
-

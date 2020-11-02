@@ -2,7 +2,7 @@
     <string name="app_name">BookYourTable</string>
     <string name="bookingButton">Reservation</string>
     <string name="bookingManagement">Manage a registration</string>
-    <string name="tableManagmeent">Manage the tables</string>
+    <string name="tableManagement">Manage the tables</string>
     <string name="title_activity_main_table_management">MainTableManagement</string>
     <string name="previous">Previous</string>
     <string name="numberOfPersons">Select the number of persons</string>
@@ -31,6 +31,11 @@
     <string name="delete">Delete</string>
     <string name="selectReservation">Select a Reservation</string>
     <string name="manageTables">Manage Tables</string>
+
+    <string name="Ajouter">Ajouter</string>
+    <string name="Supprimer">Supprimer</string>
+    <string name="Desactiver">Désactiver</string>
+    @string/
 
 
 

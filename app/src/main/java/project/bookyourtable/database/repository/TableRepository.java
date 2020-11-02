@@ -30,19 +30,19 @@ public class TableRepository {
     }
 
     public LiveData<TableEntity> getTableById(final Long tableId, Context context) {
-        return ((BaseApp) context).getDatabase().TableDao().getTableById(tableId);
+        return ((BaseApp) context).getDatabase().tableDao().getTableById(tableId);
     }
 
     public LiveData<List<TableEntity>> getTables(Context context) {
-        return ((BaseApp) context).getDatabase().TableDao().getAll();
+        return ((BaseApp) context).getDatabase().tableDao().getAll();
     }
 
     public LiveData<List<TableEntity>> getByAvailabilitx(boolean state, Context context) {
-        return ((BaseApp) context).getDatabase().TableDao().getByAvailabilitx(state);
+        return ((BaseApp) context).getDatabase().tableDao().getByAvailability (state);
     }
 
     public LiveData<List<TableEntity>> getBypersonNumber(int number, Context context) {
-        return ((BaseApp) context).getDatabase().TableDao().getBypersonNumber(number);
+        return ((BaseApp) context).getDatabase().tableDao().getBypersonNumber(number);
     }
 
     public void insert(final TableEntity table, OnAsyncEventListener callback,
