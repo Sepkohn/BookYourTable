@@ -2,30 +2,32 @@ package project.bookyourtable.database.async.table;
 
 import android.content.Context;
 import android.os.AsyncTask;
+
 import project.bookyourtable.database.AppDatabase;
+import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.util.OnAsyncEventListener;
 
-public class CreateTable extends AsyncTask<TableEntity, Void, Void>{
+public class UpdateTable extends AsyncTask<TableEntity, Void, Void> {
 
     private AppDatabase database;
     private Exception exception;
     private OnAsyncEventListener callBack;
 
-    public CreateTable(Context context, OnAsyncEventListener callBack) {
+    public UpdateTable(Context context, OnAsyncEventListener callBack) {
         database = AppDatabase.getInstance(context);
         this.callBack = callBack;
     }
 
-    public void execute (TableEntity tableEntity) {
 
+    public void execute(TableEntity tableEntity) {
     }
 
     @Override
-    protected Void doInBackground(TableEntity... bookingEntities) {
+    protected Void doInBackground(TableEntity... tableEntities) {
         try{
-            for(TableEntity table : bookingEntities)
-                database.tableDao().insert(table);
+            for(TableEntity table : tableEntities)
+                database.tableDao().delete(table);
         }
         catch (Exception e){
             exception = e;

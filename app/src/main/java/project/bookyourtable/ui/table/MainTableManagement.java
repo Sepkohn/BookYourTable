@@ -35,49 +35,49 @@ public class MainTableManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_table_management);
 
-        final ChipGroup chipGroup = findViewById(R.id.chipGroupTables);
+       // final ChipGroup chipGroup = findViewById(R.id.chipGroupTables);
 
 //        tables = chipGroup.getCheckedChipIds();
 //        for(Integer id: tables){
 //            Chip chip = chipGroup.findViewById(id);
 //        }
 
-        btnAdd = (Button) findViewById(R.id.buttonAdd);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddItemDialog(MainTableManagement.this, R.style.AddingTableDialog);
-            }
-        });
-
-        btnDel = (Button) findViewById(R.id.buttonDelete);
-        btnDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddItemDialog(MainTableManagement.this, R.style.AddingTableDialog);
-            }
-        });
-        btnDis = (Button) findViewById(R.id.buttonDesactivate);
-        btnDis.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View v) {
-                int idTable = chipGroup.getCheckedChipId();
-
-                Chip chip = findViewById(idTable);
-
-
-                if(chip.getChipBackgroundColor()  == (ColorStateList.valueOf(R.color.colorPrimary))){
-
-
-                }else{
-                    chip.setChipBackgroundColor(ColorStateList.valueOf(R.color.colorTest));
-                    System.out.println("TOUDOM");
-                }
-
-
-            }
-        });
+//        btnAdd = (Button) findViewById(R.id.buttonAdd);
+//        btnAdd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showAddItemDialog(MainTableManagement.this, R.style.AddingTableDialog);
+//            }
+//        });
+//
+//        btnDel = (Button) findViewById(R.id.buttonDelete);
+//        btnDel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showAddItemDialog(MainTableManagement.this, R.style.AddingTableDialog);
+//            }
+//        });
+//        btnDis = (Button) findViewById(R.id.buttonDesactivate);
+//        btnDis.setOnClickListener(new View.OnClickListener() {
+//            @SuppressLint("ResourceAsColor")
+//            @Override
+//            public void onClick(View v) {
+//               int idTable = chipGroup.getCheckedChipId();
+//
+//                Chip chip = findViewById(idTable);
+//
+//
+//                if(chip.getChipBackgroundColor()  == (ColorStateList.valueOf(R.color.colorPrimary))){
+//
+//
+//                }else{
+//                    chip.setChipBackgroundColor(ColorStateList.valueOf(R.color.colorTest));
+//                    System.out.println("TOUDOM");
+//                }
+//
+//
+//            }
+//        });
 
     }
 

@@ -1,10 +1,11 @@
 package project.bookyourtable.database.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Btables", primaryKeys = {"id"})
+@Entity(tableName = "Btables")
 public class TableEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -22,7 +23,7 @@ public class TableEntity {
 
     public TableEntity(){}
 
-    public TableEntity(int personNumber, boolean availability, int location)
+    public TableEntity(@NonNull int personNumber, boolean availability, int location)
     {
         this.personNumber=personNumber;
         this.availability=availability;
@@ -38,8 +39,8 @@ public class TableEntity {
     public boolean getAvailability(){return availability; }
     public void setAvailability(boolean availability){ this.availability=availability; }
 
-    public int getlocation(){return location; }
-    public void setlocation(int location){ this.location=location; }
+    public int getLocation(){return location; }
+    public void setLocation(int location){ this.location=location; }
 
 
 }

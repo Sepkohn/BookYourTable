@@ -7,21 +7,24 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 
-        @Entity(tableName = "bookings",
-            foreignKeys =
-            @ForeignKey(
-                entity = TableEntity.class,
-                parentColumns = "tableId",
-                childColumns = "",
-                onDelete = ForeignKey.NO_ACTION),
-            indices = {
-                @Index(
-                        value = {"tableNumber"}
-                )
-            }
-)
+//@Entity(tableName = "bookings",
+////        foreignKeys =
+////        @ForeignKey(
+////                entity = TableEntity.class,
+////                parentColumns = "tableId",
+////                childColumns = "",
+////                onDelete = ForeignKey.NO_ACTION),
+////        indices = {
+////                @Index(
+////                        value = {"tableId"} //Avant tu avais mis tableNumber je met en attendant pour run le code
+////                )
+////        }
+////)
+
+@Entity(tableName = "bookings")
 public class BookingEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -29,6 +32,7 @@ public class BookingEntity {
     private Long id;
 
     @ColumnInfo(name = "date")
+    @TypeConverters({DataTypeConverter.class})
     private Date date;
 
     @ColumnInfo(name = "name")
@@ -50,5 +54,23 @@ public class BookingEntity {
         this.message = message;
         this.tableNumber = tableNumber;
     }
+
+    public Long getId(){return id;}
+    public void setId(Long id){this.id = id; }
+
+    public Date getDate(){return date;}
+    public void setDate(Date date){this.date = date; }
+
+    public String getName(){return name; }
+    public void setName(String personNumber){ this.name=personNumber; }
+
+    public String getTelephoneNumber(){return telephoneNumber; }
+    public void setTelephoneNumber(String telephoneNumber){ this.telephoneNumber=telephoneNumber; }
+
+    public String getMessage(){return message; }
+    public void setMessage(String message){ this.message=message; }
+
+    public int getTableNumber(){return tableNumber; }
+    public void setTableNumber(int tableNumber){ this.tableNumber=tableNumber; }
 
 }

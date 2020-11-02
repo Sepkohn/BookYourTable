@@ -33,7 +33,7 @@ public class BookingRepository {
         return instance;
     }
 
-    public LiveData<BookingEntity> getBookingById(final int accountId, Context context) {
+    public LiveData<BookingEntity> getBookingById(final long accountId, Context context) {
         return ((BaseApp) context).getDatabase().bookingDao().getBookingsById(accountId);
     }
 

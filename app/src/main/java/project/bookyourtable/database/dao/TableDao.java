@@ -3,32 +3,35 @@ package project.bookyourtable.database.dao;
 import android.database.sqlite.SQLiteConstraintException;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
 
 import project.bookyourtable.database.entity.TableEntity;
-
+@Dao
 public interface TableDao {
 
-    @Query("SELECT * FROM Btables WHERE id = :id")
-    LiveData<TableEntity> getById(Long id);
+
+    @Query("SELECT * FROM Btables WHERE tableId = :id")
+    LiveData<TableEntity> getTableById(Long id);
+
 
     @Query("SELECT * FROM Btables")
     LiveData<List<TableEntity>> getAll();
 
+    @Query("SELECT * FROM Btables WHERE availability = :state")
+    LiveData<List<TableEntity>> getByAvailability(boolean state);
 
+    @Query("SELECT * FROM Btables WHERE personNumber = :number")
+    LiveData<List<TableEntity>> getBypersonNumber(int number);
 
 
     @Insert
-    long insert(TableEntity tables) throws SQLiteConstraintException;
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<TableEntity> tables);
+    void insert(TableEntity tables) throws SQLiteConstraintException;
 
     @Update
     void update(TableEntity tables);

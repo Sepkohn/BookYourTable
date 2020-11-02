@@ -1,6 +1,7 @@
 package project.bookyourtable.database.repository;
 
-import android.app.Application;
+
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
@@ -28,31 +29,35 @@ public class TableRepository {
         return instance;
     }
 
-    public LiveData<TableEntity> getAccount(final Long tableId, Application application) {
-        return ((BaseApp) application).getDatabase().TableDao().getById(tableId);
+    public LiveData<TableEntity> getTableById(final Long tableId, Context context) {
+        return ((BaseApp) context).getDatabase().tableDao().getTableById(tableId);
     }
 
-    public LiveData<List<TableEntity>> getAccounts(Application application) {
-        return ((BaseApp) application).getDatabase().TableDao().getAll();
+    public LiveData<List<TableEntity>> getTables(Context context) {
+        return ((BaseApp) context).getDatabase().tableDao().getAll();
     }
 
-    public LiveData<List<TableEntity>> getByOwner(final String owner, Application application) {
-        return ((BaseApp) application).getDatabase().TableDao().getOwned(owner);
+    public LiveData<List<TableEntity>> getByAvailabilitx(boolean state, Context context) {
+        return ((BaseApp) context).getDatabase().tableDao().getByAvailability (state);
     }
 
-    public void insert(final TableEntity account, OnAsyncEventListener callback,
-                       Application application) {
-        new CreateTable(application, callback).execute(account);
+    public LiveData<List<TableEntity>> getBypersonNumber(int number, Context context) {
+        return ((BaseApp) context).getDatabase().tableDao().getBypersonNumber(number);
     }
 
-    public void update(final TableEntity account, OnAsyncEventListener callback,
-                       Application application) {
-        new CreateTable(application, callback).execute(account);
+    public void insert(final TableEntity table, OnAsyncEventListener callback,
+                       Context context) {
+        new CreateTable(context, callback).execute(table);
     }
 
-    public void delete(final TableEntity account, OnAsyncEventListener callback,
-                       Application application) {
-        new CreateTable(application, callback).execute(account);
+    public void update(final TableEntity table, OnAsyncEventListener callback,
+                       Context context) {
+        new CreateTable(context, callback).execute(table);
+    }
+
+    public void delete(final TableEntity table, OnAsyncEventListener callback,
+                       Context context) {
+        new CreateTable(context, callback).execute(table);
     }
 
 
