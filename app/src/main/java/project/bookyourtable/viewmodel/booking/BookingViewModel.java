@@ -1,4 +1,4 @@
-package project.bookyourtable.viewModels.booking;
+package project.bookyourtable.viewmodel.booking;
 
 import android.app.Application;
 import android.content.Context;
@@ -24,7 +24,6 @@ public class BookingViewModel extends AndroidViewModel {
             @NonNull Application application,
             final long bookingId,
             BookingRepository repository){
-
         super(application);
 
         this.repository = repository;
