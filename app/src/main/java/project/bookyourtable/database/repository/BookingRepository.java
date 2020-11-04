@@ -5,7 +5,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import project.bookyourtable.BaseApp;
