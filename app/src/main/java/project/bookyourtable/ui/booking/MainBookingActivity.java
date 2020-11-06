@@ -34,7 +34,7 @@ import static java.lang.Integer.parseInt;
 
 public class MainBookingActivity extends AppCompatActivity {
 
-    GregorianCalendar bookingdate;
+    Date bookingdate;
     ChipGroup cg;
     public static final String MY_ENTITY = ".project.bookyourtable.ui.booking.ENTITY";
 
@@ -56,7 +56,8 @@ public class MainBookingActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView arg0, int year, int month,
                                             int date) {
-                bookingdate = new GregorianCalendar(year,month,date);
+
+                bookingdate = new Date(year-1900, month, date);
             }
         });
     }
@@ -102,7 +103,7 @@ public class MainBookingActivity extends AppCompatActivity {
         EditText numberPersons = findViewById(R.id.editTextNumber);
         int number = parseInt(numberPersons.getText().toString().trim());
 
-        GregorianCalendar today = new GregorianCalendar();
+        Date today = new Date();
 
 
         boolean isATimeSlot = verifyTimeSlot();
@@ -130,13 +131,12 @@ public class MainBookingActivity extends AppCompatActivity {
         int hours = parseInt(value[0]);
         int minutes = parseInt(value[1]);
 
-        int year = bookingdate.YEAR;
-        int month = bookingdate.MONTH;
-        int date = bookingdate.DATE;
+        bookingdate.setHours(hours);
+        bookingdate.setMinutes(minutes);
 
         BookingEntity entity = new BookingEntity();
-        entity.setCalendar(new GregorianCalendar(year, month, date, hours, minutes));
         entity.setNumberPersons(number);
+        entity.setDate(bookingdate);
 
         return entity;
 
