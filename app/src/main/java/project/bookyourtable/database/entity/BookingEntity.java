@@ -1,9 +1,8 @@
 package project.bookyourtable.database.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Date;
+
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -14,21 +13,19 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 
-//@Entity(tableName = "bookings",
-////        foreignKeys =
-////        @ForeignKey(
-////                entity = TableEntity.class,
-////                parentColumns = "tableId",
-////                childColumns = "",
-////                onDelete = ForeignKey.NO_ACTION),
-////        indices = {
-////                @Index(
-////                        value = {"tableId"} //Avant tu avais mis tableNumber je met en attendant pour run le code
-////                )
-////        }
-////)
-
-@Entity(tableName = "bookings")
+@Entity(tableName = "bookings",
+       foreignKeys =
+       @ForeignKey(
+               entity = TableEntity.class,
+               parentColumns = "tableId",
+               childColumns = "tableNumber",
+               onDelete = ForeignKey.NO_ACTION),
+      indices = {
+               @Index(
+                       value = {"tableNumber"}, unique = true
+                )
+     }
+)
 public class BookingEntity implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
@@ -36,7 +33,7 @@ public class BookingEntity implements Serializable {
     private Long id;
 
     @ColumnInfo(name = "date")
-    @TypeConverters(DataTypeConverter.class)
+    @TypeConverters({DataTypeConverter.class})
     private Date date;
 
     @ColumnInfo(name = "name")
@@ -49,18 +46,15 @@ public class BookingEntity implements Serializable {
     private String message;
 
     @ColumnInfo(name = "tableNumber")
-    private int tableNumber;
+    private Long tableNumber;
 
     @Ignore
     private int numberPersons;
-    @Ignore
-    private GregorianCalendar calendar;
-
 
     @Ignore
     public BookingEntity(){}
 
-    public BookingEntity(Date date, String name, String telephoneNumber, String message, int tableNumber){
+    public BookingEntity(Date date, String name, String telephoneNumber, String message, Long tableNumber){
         this.date = date;
         this.name = name;
         this.telephoneNumber = telephoneNumber;
@@ -83,10 +77,8 @@ public class BookingEntity implements Serializable {
     public String getMessage(){return message; }
     public void setMessage(String message){ this.message=message; }
 
-    public int getTableNumber(){return tableNumber; }
-    public void setTableNumber(int tableNumber){ this.tableNumber=tableNumber; }
-
-    public void setDate(GregorianCalendar calendar){this.date = new java.sql.Date(calendar.YEAR, calendar.MONTH, calendar.DATE);}
+    public Long getTableNumber(){return tableNumber; }
+    public void setTableNumber(Long tableNumber){ this.tableNumber=tableNumber; }
 
     public void setDate(Date date) {
         this.date = date;
@@ -96,12 +88,8 @@ public class BookingEntity implements Serializable {
     public int getNumberPersons() {
         return numberPersons;
     }
-
     public void setNumberPersons(int numberPersons) {
         this.numberPersons = numberPersons;
     }
-
-    public GregorianCalendar getCalendar(){return calendar;}
-    public void setCalendar(GregorianCalendar date){this.calendar = date; }
 
 }
