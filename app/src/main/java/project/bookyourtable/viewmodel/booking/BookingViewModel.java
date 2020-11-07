@@ -75,10 +75,6 @@ public class BookingViewModel extends AndroidViewModel {
         return observableBooking;
     }
 
-    public void createBooking(BookingEntity booking, OnAsyncEventListener callback) {
-        repository.insert(booking, callback, applicationContext);
-    }
-
     public void updateBooking(BookingEntity booking, OnAsyncEventListener callback) {
         repository.update(booking, callback, applicationContext);
     }

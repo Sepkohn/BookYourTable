@@ -1,11 +1,11 @@
 package project.bookyourtable.database.repository;
 
-import android.app.Application;
+
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import project.bookyourtable.BaseApp;
@@ -41,7 +41,7 @@ public class BookingRepository {
         return ((BaseApp) context).getDatabase().bookingDao().getAllBookings();
     }
 
-    public LiveData<BookingEntity> getBookingByDate(final Date date, Context context) {
+    public LiveData<List<BookingEntity>> getBookingsByDate(final Date date, Context context) {
         return ((BaseApp) context).getDatabase().bookingDao().getBookingsByDate(date);
     }
 

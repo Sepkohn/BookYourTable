@@ -9,6 +9,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.repository.BookingRepository;
 import project.bookyourtable.util.OnAsyncEventListener;

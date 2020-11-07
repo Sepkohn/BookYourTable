@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.Executors;
@@ -19,7 +20,7 @@ import project.bookyourtable.database.dao.TableDao;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 
-@Database(entities = {BookingEntity.class, TableEntity.class}, version = 1)
+@Database(entities = {BookingEntity.class, TableEntity.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase  {
     private static final String TAG = "AppDatabase";
 
@@ -37,7 +38,10 @@ public abstract class AppDatabase extends RoomDatabase  {
         if (instance == null) {
             synchronized (AppDatabase.class) {
                 if (instance == null) {
-                    instance = buildDatabase(context.getApplicationContext());
+                    //instance = buildDatabase(context.getApplicationContext());
+                    instance = Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class, "AppDataBase")
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                            .build();
                     instance.updateDatabaseCreated(context.getApplicationContext());
                 }
             }
@@ -52,6 +56,7 @@ public abstract class AppDatabase extends RoomDatabase  {
      */
     private static AppDatabase buildDatabase(final Context appContext) {
         Log.i(TAG, "Database will be initialized.");
+
         return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
                 .addCallback(new RoomDatabase.Callback() {
                     @Override
@@ -67,7 +72,20 @@ public abstract class AppDatabase extends RoomDatabase  {
                 }).build();
     }
 
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            // Since we didn't alter the table, there's nothing else to do here.
+        }
+    };
 
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE bookings "
+                    + " ADD COLUMN time String");
+        }
+    };
 
 
     /**
@@ -78,7 +96,9 @@ public abstract class AppDatabase extends RoomDatabase  {
             Log.i(TAG, "Database initialized.");
             setDatabaseCreated();
         }
+
     }
+
 
     private void setDatabaseCreated(){
         mIsDatabaseCreated.postValue(true);
