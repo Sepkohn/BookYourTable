@@ -36,6 +36,9 @@ public class BookingEntity implements Serializable {
     @TypeConverters({DataTypeConverter.class})
     private Date date;
 
+    @ColumnInfo(name = "time")
+    private String time;
+
     @ColumnInfo(name = "name")
     private String name;
 
@@ -54,8 +57,9 @@ public class BookingEntity implements Serializable {
     @Ignore
     public BookingEntity(){}
 
-    public BookingEntity(Date date, String name, String telephoneNumber, String message, Long tableNumber){
+    public BookingEntity(Date date,String time, String name, String telephoneNumber, String message, Long tableNumber){
         this.date = date;
+        this.time = time;
         this.name = name;
         this.telephoneNumber = telephoneNumber;
         this.message = message;
@@ -67,6 +71,18 @@ public class BookingEntity implements Serializable {
     public Long getId(){return id;}
     public void setId(Long id){this.id = id; }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    public Date getDate(){return date;}
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getName(){return name; }
     public void setName(String personNumber){ this.name=personNumber; }
@@ -80,10 +96,7 @@ public class BookingEntity implements Serializable {
     public Long getTableNumber(){return tableNumber; }
     public void setTableNumber(Long tableNumber){ this.tableNumber=tableNumber; }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-    public Date getDate(){return date;}
+
 
     public int getNumberPersons() {
         return numberPersons;

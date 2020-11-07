@@ -57,12 +57,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.chip.ChipGroup
+        android:id="@+id/reservationChips"
         android:layout_width="349dp"
         android:layout_height="401dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:singleSelection="true">
 
     </com.google.android.material.chip.ChipGroup>
 

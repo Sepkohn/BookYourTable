@@ -1,27 +1,25 @@
 package project.bookyourtable.ui.booking;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.sql.SQLOutput;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import project.bookyourtable.BaseApp;
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.util.OnAsyncEventListener;
-import project.bookyourtable.viewmodel.booking.BookingViewModel;
 import project.bookyourtable.viewmodel.booking.CreateBookingViewModel;
 
 
 public class BookingDatasActivity extends AppCompatActivity {
 
+    private static final String TAG = "BookingDatasActivity";
     BookingEntity entity;
     CreateBookingViewModel createBookingViewModel;
 
@@ -33,7 +31,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.entity = (BookingEntity) intent.getSerializableExtra(MainBookingActivity.MY_ENTITY);
 
-        CreateBookingViewModel.Factory factory = new CreateBookingViewModel.Factory(getApplication());
+        CreateBookingViewModel.Factory factory = new CreateBookingViewModel.Factory((BaseApp) getApplication());
         createBookingViewModel = new ViewModelProvider(this, factory).get(CreateBookingViewModel.class);
 
     }
@@ -42,17 +40,14 @@ public class BookingDatasActivity extends AppCompatActivity {
         if(verifyFormations()) {
             createBookingViewModel.createBooking(entity, new OnAsyncEventListener() {
 
-                Toast toast;
                 @Override
                 public void onSuccess() {
-                    toast = Toast.makeText(getApplicationContext(),"ITS OKAY",Toast.LENGTH_LONG);
-                    toast.show();
+                   Log.d(TAG, "Create booking ok");
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    toast = Toast.makeText(getApplicationContext(),"ITS NOT NOT NOT OKAY",Toast.LENGTH_LONG);
-                    toast.show();
+                    Log.d(TAG, "Create booking NOT NOT NOT okay", e);
 
                 }
             });
@@ -60,6 +55,10 @@ public class BookingDatasActivity extends AppCompatActivity {
             Intent intent = new Intent(BookingDatasActivity.this, ConfirmationActivity.class);
             startActivity(intent);
 
+        }
+        else{
+            Toast toast = Toast.makeText(this,"Please select a table and fill your name and number",Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 

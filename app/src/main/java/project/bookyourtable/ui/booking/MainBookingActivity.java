@@ -1,34 +1,23 @@
 package project.bookyourtable.ui.booking;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.content.Entity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
-import project.bookyourtable.ui.booking.BookingDatasActivity;
-
-import java.time.LocalDateTime;
 
 import static java.lang.Integer.parseInt;
 
@@ -37,6 +26,8 @@ public class MainBookingActivity extends AppCompatActivity {
     Date bookingdate;
     ChipGroup cg;
     public static final String MY_ENTITY = ".project.bookyourtable.ui.booking.ENTITY";
+
+
 
     public MainBookingActivity(){
 
@@ -49,17 +40,8 @@ public class MainBookingActivity extends AppCompatActivity {
 
         CalendarView view = findViewById(R.id.calendarView);
 
-        view.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        view.setOnDateChangeListener((arg0, year, month, date) -> bookingdate = new Date(year-1900, month, date));
 
-            DateFormat df = new SimpleDateFormat("dd:MM:yyyy");
-            @SuppressLint("WrongConstant")
-            @Override
-            public void onSelectedDayChange(CalendarView arg0, int year, int month,
-                                            int date) {
-
-                bookingdate = new Date(year-1900, month, date);
-            }
-        });
     }
 
     public void continueBooking(View view){
@@ -69,7 +51,10 @@ public class MainBookingActivity extends AppCompatActivity {
             intent.putExtra(MY_ENTITY, (Serializable) entity);
             startActivity(intent);
         }
-        //else message d'erreur
+        else{
+            Toast toast = Toast.makeText(this,"Please select all values to continue",Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
 
@@ -106,9 +91,10 @@ public class MainBookingActivity extends AppCompatActivity {
         Date today = new Date();
 
 
+
         boolean isATimeSlot = verifyTimeSlot();
 
-        if(number>0&&isATimeSlot&&!(bookingdate.compareTo(today) <0)){
+        if(number>0&&isATimeSlot&&bookingdate.compareTo(today)>=0){
            return createEntity(number);
         }
 
@@ -126,17 +112,12 @@ public class MainBookingActivity extends AppCompatActivity {
     private BookingEntity createEntity(int number){
         Chip chip = findViewById(cg.getCheckedChipId());
 
-        String[] value = ((String) chip.getText()).split(":");
-
-        int hours = parseInt(value[0]);
-        int minutes = parseInt(value[1]);
-
-        bookingdate.setHours(hours);
-        bookingdate.setMinutes(minutes);
+        String time = chip.getText().toString();
 
         BookingEntity entity = new BookingEntity();
         entity.setNumberPersons(number);
         entity.setDate(bookingdate);
+        //entity.setTime(time);
 
         return entity;
 
