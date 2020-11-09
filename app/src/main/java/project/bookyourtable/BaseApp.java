@@ -23,7 +23,7 @@ public class BaseApp extends Application {
         return BookingRepository.getInstance();
     }
 
-    public TableRepository getClientRepository() {
+    public TableRepository getTableRepository() {
         return TableRepository.getInstance();
     }
 }

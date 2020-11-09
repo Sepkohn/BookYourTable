@@ -15,7 +15,7 @@ public class DatabaseInitializer {
         task.execute();
     }
 
-    private static void addClient(final AppDatabase db, final int personNumber, final boolean availability,
+    private static void addTable(final AppDatabase db, final int personNumber, final boolean availability,
                                   final int location) {
         TableEntity table = new TableEntity(personNumber, availability, location);
         db.tableDao().insert(table);
@@ -24,10 +24,10 @@ public class DatabaseInitializer {
     private static void populateWithTestData(AppDatabase db) {
         db.tableDao().deleteAll();
 
-        addClient(db, 4, true, 1);
-        addClient(db, 2, true, 2);
-        addClient(db, 1, true, 3);
-        addClient(db, 6, false, 4);
+        addTable(db, 4, true, 1);
+        addTable(db, 2, true, 2);
+        addTable(db, 1, true, 3);
+        addTable(db, 6, false, 4);
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {

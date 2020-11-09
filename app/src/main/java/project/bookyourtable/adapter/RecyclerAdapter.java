@@ -1,6 +1,8 @@
 package project.bookyourtable.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -14,9 +16,9 @@ import project.bookyourtable.R;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.util.RecyclerViewItemClickListener;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private List<TableEntity> data;
+    private List<T> mdata;
     private RecyclerViewItemClickListener listener;
 
     // Provide a reference to the views for each data item
@@ -35,10 +37,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.listener = listener;
     }
 
+    //VIA CA ON AJOUTE LES COMPORTEMENTS CLIC LONG ET CLICK A LA LISTE
     @Override
     public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         TextView v = (TextView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_view, parent, false);
+
         final ViewHolder viewHolder = new ViewHolder(v);
         v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));         //Créer le layout recycleView pour l'affichage des tables
         v.setOnLongClickListener(view -> {
@@ -50,28 +55,28 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, int position) {
-        TableEntity item = data.get(position);
-        holder.textView.setText(item.toString());
+        T item = mdata.get(position);
+        holder.textView.setText(item.getClass()+"TOTO sa");
     }
 
     @Override
     public int getItemCount() {
-        if (data != null) {
-            return data.size();
+        if (mdata != null) {
+            return mdata.size();
         } else {
             return 0;
         }
     }
 
-    public void setData(final List<TableEntity> data) {
-        if (this.data == null) {
-            this.data = data;
+    public void setData(final List<T> data) {
+        if (mdata == null) {
+            mdata = data;
             notifyItemRangeInserted(0, data.size());
         } else {
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
                 @Override
                 public int getOldListSize() {
-                    return RecyclerAdapter.this.data.size();
+                    return mdata.size();
                 }
 
                 @Override
@@ -82,28 +87,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
 
-                    if (RecyclerAdapter.this.data instanceof TableEntity) {
-                        return (RecyclerAdapter.this.data.get(oldItemPosition)).getId().equals(
-                                (data.get(newItemPosition)).getId());
+                    if (data instanceof TableEntity) {
+                        return ((TableEntity) data.get(oldItemPosition)).getId().equals(((TableEntity) data.get(newItemPosition)).getId());
                     }
                     return false;
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    if (RecyclerAdapter.this.data instanceof TableEntity) {
-                        TableEntity newTable = data.get(newItemPosition);
-                        TableEntity oldTable = RecyclerAdapter.this.data.get(newItemPosition);
-                        return Objects.equals(newTable.getId(), oldTable.getId())
-//                                && Objects.equals(newTable.getFirstName(), oldTable.getFirstName())
-//                                && Objects.equals(newTable.getLastName(), oldTable.getLastName())
-                                ;
-
+                    if (data instanceof TableEntity) {
+                        TableEntity newTable = (TableEntity) data.get(newItemPosition);
+                        TableEntity oldTable = (TableEntity) data.get(newItemPosition);
+                        return newTable.getId().equals(oldTable.getId())
+                                && Objects.equals(newTable.getPersonNumber(), oldTable.getPersonNumber())
+                                && Objects.equals(newTable.getAvailability(), oldTable.getAvailability())
+                                && newTable.getLocation()==(oldTable.getLocation());
                     }
                     return false;
                 }
             });
-            this.data = data;
+            mdata = data;
             result.dispatchUpdatesTo(this);
         }
     }

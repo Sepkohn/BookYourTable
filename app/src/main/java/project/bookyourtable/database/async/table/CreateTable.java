@@ -10,11 +10,11 @@ public class CreateTable extends AsyncTask<TableEntity, Void, Void>{
 
     private AppDatabase database;
     private Exception exception;
-    private OnAsyncEventListener callBack;
+    private OnAsyncEventListener callback;
 
     public CreateTable(Context context, OnAsyncEventListener callBack) {
         database = AppDatabase.getInstance(context);
-        this.callBack = callBack;
+        this.callback = callBack;
     }
 
     public void execute (TableEntity tableEntity) {
@@ -33,13 +33,16 @@ public class CreateTable extends AsyncTask<TableEntity, Void, Void>{
         return null;
     }
 
+
     @Override
     protected void onPostExecute(Void aVoid) {
-        if(exception ==null){
-            callBack.onSuccess();
-        }
-        else{
-            callBack.onFailure(exception);
+        if (callback != null) {
+            if (exception == null) {
+                callback.onSuccess();
+            } else {
+                callback.onFailure(exception);
+            }
         }
     }
 }
+

@@ -21,7 +21,7 @@ public class TableViewModel extends AndroidViewModel {
     private Context context;
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
-    private final MediatorLiveData<TableEntity> observableClient;
+    private final MediatorLiveData<TableEntity> observableTable;
 
     public TableViewModel(@NonNull Application application,
                            final long tableId, TableRepository tableRepository) {
@@ -31,14 +31,14 @@ public class TableViewModel extends AndroidViewModel {
 
         context = application.getApplicationContext();
 
-        observableClient = new MediatorLiveData<>();
+        observableTable = new MediatorLiveData<>();
         // set by default null, until we get data from the database.
-        observableClient.setValue(null);
+        observableTable.setValue(null);
 
-        LiveData<TableEntity> client = repository.getTableById(tableId, context);
+        LiveData<TableEntity> table = repository.getTableById(tableId, context);
 
         // observe the changes of the client entity from the database and forward them
-        observableClient.addSource(client, observableClient::setValue);
+        observableTable.addSource(table, observableTable::setValue);
     }
 
     /**
@@ -70,7 +70,7 @@ public class TableViewModel extends AndroidViewModel {
      * Expose the LiveData ClientEntity query so the UI can observe it.
      */
     public LiveData<TableEntity> getTable() {
-        return observableClient;
+        return observableTable;
     }
 
     public void createTable(TableEntity table, OnAsyncEventListener callback) {

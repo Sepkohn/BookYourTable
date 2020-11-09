@@ -22,7 +22,7 @@ import androidx.room.TypeConverters;
                onDelete = ForeignKey.NO_ACTION),
       indices = {
                @Index(
-                       value = {"tableNumber"}, unique = true
+                       value = {"tableNumber"}, unique = true // remarque: est ce que cela ne va pas bloquer la réservation de la table pour un autre jour si on met unique ?
                 )
      }
 )

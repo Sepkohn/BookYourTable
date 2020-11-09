@@ -9,7 +9,8 @@ import android.view.View;
 import project.bookyourtable.R;
 import project.bookyourtable.ui.booking.BookingsDateActivity;
 import project.bookyourtable.ui.booking.MainBookingActivity;
-import project.bookyourtable.ui.table.MainTableManagement;
+import project.bookyourtable.ui.table.TableActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void createTableManagement(View view){
-        Intent intent = new Intent(this, MainTableManagement.class);
+        Intent intent = new Intent(this, TableActivity.class);
         startActivity(intent);
     }
 
