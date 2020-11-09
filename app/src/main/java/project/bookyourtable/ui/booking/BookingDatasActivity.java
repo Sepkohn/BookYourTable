@@ -6,16 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import project.bookyourtable.BaseApp;
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.viewmodel.booking.CreateBookingViewModel;
-
 
 public class BookingDatasActivity extends AppCompatActivity {
 

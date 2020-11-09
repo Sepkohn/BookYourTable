@@ -35,8 +35,16 @@
             android:value=".ui.MainActivity"/>
         </activity>
 
-        <activity android:name=".ui.table.MainTableManagement"
+        <activity android:name=".ui.table.TableActivity"
             android:label="@string/manageTables"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity"/>
+        </activity>
+
+        <activity android:name=".ui.table.EditTableActivity"
+            android:label="Edit Tables"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

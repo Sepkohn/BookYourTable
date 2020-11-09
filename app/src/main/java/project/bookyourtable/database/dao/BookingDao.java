@@ -39,4 +39,7 @@ public interface BookingDao {
     @Delete
     void delete(BookingEntity bookingEntity);
 
+    @Query("DELETE FROM bookings") //Q pour initializeDemoData dans AppDatabase
+    void deleteAll();
+
 }

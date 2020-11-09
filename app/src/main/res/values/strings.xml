@@ -35,6 +35,9 @@
     <string name="Ajouter">Ajouter</string>
     <string name="Supprimer">Supprimer</string>
     <string name="Desactiver">Désactiver</string>
+    <string name="btn_cancelDialogue">Cancel</string>
+    <string name="btn_okDialogue">Ok</string>
+    <string name="num_ro_de_table">Numéro de table:</string>
     @string/
 
 

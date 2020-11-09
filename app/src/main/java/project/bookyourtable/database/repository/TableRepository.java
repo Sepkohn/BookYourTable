@@ -1,6 +1,7 @@
 package project.bookyourtable.database.repository;
 
 
+import android.app.Application;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
@@ -43,6 +44,10 @@ public class TableRepository {
 
     public LiveData<List<TableEntity>> getBypersonNumber(int number, Context context) {
         return ((BaseApp) context).getDatabase().tableDao().getBypersonNumber(number);
+    }
+
+    public LiveData<List<TableEntity>> getByOwner(Context context) {
+        return ((BaseApp) context).getDatabase().tableDao().getAll();
     }
 
     public void insert(final TableEntity table, OnAsyncEventListener callback,

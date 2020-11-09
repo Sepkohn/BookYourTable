@@ -26,22 +26,34 @@ public abstract class AppDatabase extends RoomDatabase  {
 
     private static AppDatabase instance;
 
-    private static final String DATABASE_NAME = "bank-database";
+    private static final String DATABASE_NAME = "database";
 
     public abstract BookingDao bookingDao();
-
     public abstract TableDao tableDao();
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
+    //Valentin
+//    public static AppDatabase getInstance(final Context context) {
+//        if (instance == null) {
+//            synchronized (AppDatabase.class) {
+//                if (instance == null) {
+//                    instance = Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class, "AppDataBase")
+//                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+//                            .build();
+//                    instance.updateDatabaseCreated(context.getApplicationContext());
+//                }
+//            }
+//        }
+//        return instance;
+//    }
+
+    //Quentin
     public static AppDatabase getInstance(final Context context) {
         if (instance == null) {
             synchronized (AppDatabase.class) {
                 if (instance == null) {
-                    //instance = buildDatabase(context.getApplicationContext());
-                    instance = Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class, "AppDataBase")
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
-                            .build();
+                    instance = buildDatabase(context.getApplicationContext());
                     instance.updateDatabaseCreated(context.getApplicationContext());
                 }
             }
@@ -64,7 +76,11 @@ public abstract class AppDatabase extends RoomDatabase  {
                         super.onCreate(db);
                         Executors.newSingleThreadExecutor().execute(() -> {
                             AppDatabase database = AppDatabase.getInstance(appContext);
-                            DatabaseInitializer.populateDatabase(database);
+
+
+                            //DatabaseInitializer.populateDatabase(database); //Q
+                            initializeDemoData(database); //Q
+
                             // notify that the database was created and it's ready to be used
                             database.setDatabaseCreated();
                         });
@@ -72,21 +88,33 @@ public abstract class AppDatabase extends RoomDatabase  {
                 }).build();
     }
 
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-            // Since we didn't alter the table, there's nothing else to do here.
-        }
-    };
+//    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+//        @Override
+//        public void migrate(SupportSQLiteDatabase database) {
+//            // Since we didn't alter the table, there's nothing else to do here.
+//        }
+//    };
+//
+//    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+//        @Override
+//        public void migrate(SupportSQLiteDatabase database) {
+//            database.execSQL("ALTER TABLE bookings "
+//                    + " ADD COLUMN time String");
+//        }
+//    };
 
-    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE bookings "
-                    + " ADD COLUMN time String");
-        }
-    };
 
+    public static void initializeDemoData(final AppDatabase database) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            database.runInTransaction(() -> {
+                Log.i(TAG, "Wipe database.");
+                database.bookingDao().deleteAll();
+                database.tableDao().deleteAll();
+
+                DatabaseInitializer.populateDatabase(database);
+            });
+        });
+    }
 
     /**
      * Check whether the database already exists and expose it via {@link #getDatabaseCreated()}

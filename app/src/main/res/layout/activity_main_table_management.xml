@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.table.MainTableManagement">
-
+    tools:context=".ui.table.TableActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="171dp"
         android:layout_height="159dp"
         android:layout_marginBottom="8dp"
@@ -35,105 +35,15 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="360dp"
-        android:layout_height="671dp"
+        android:id="@+id/tableRecyclerView"
+        android:layout_width="411dp"
+        android:layout_height="472dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--  Copie avec chipbutton
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.table.MainTableManagement"
-    tools:ignore="MissingDefaultResource">
-
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroupTables"
-        android:layout_width="365dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="16dp"
-        android:checkable="true"
-        android:theme="@style/Theme.MaterialComponents.DayNight"
-        android:verticalScrollbarPosition="defaultPosition"
-        app:chipSpacingHorizontal="40dp"
-        app:chipSpacingVertical="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:selectionRequired="true"
-        app:singleSelection="true">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/T1"
-            style="@style/ChipTableManagement"
-            android:text="T01"
-            android:visibility="visible"
-            tools:visibility="visible" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/T2"
-            style="@style/ChipTableManagement"
-            android:text="T02" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/T3"
-            style="@style/ChipTableManagement"
-            android:text="T03" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/T4"
-            style="@style/ChipTableManagement"
-            android:text="T04" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/T5"
-            style="@style/ChipTableManagement"
-            android:text="T05" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/T6"
-            style="@style/ChipTableManagement"
-            android:text="T06" />
-    </com.google.android.material.chip.ChipGroup>
-
-    <LinearLayout
-        android:layout_width="171dp"
-        android:layout_height="159dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/buttonAdd"
-            style="@style/buttonsManagementTable"
-            android:text="Ajouter" />
-
-
-        <Button
-            android:id="@+id/buttonDelete"
-            style="@style/buttonsManagementTable"
-            android:text="Suprimer" />
-
-        <Button
-            android:id="@+id/buttonDesactivate"
-            style="@style/buttonsManagementTable"
-            android:text="désactiver" />
-
-    </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>-->
