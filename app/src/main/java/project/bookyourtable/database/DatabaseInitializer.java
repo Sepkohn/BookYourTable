@@ -23,7 +23,7 @@ public class DatabaseInitializer {
 
     private static void populateWithTestData(AppDatabase db) {
         db.tableDao().deleteAll();
-
+        System.out.println("OK JE SUIS LA");
         addTable(db, 4, true, 1);
         addTable(db, 2, true, 2);
         addTable(db, 1, true, 3);

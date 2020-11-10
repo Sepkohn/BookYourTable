@@ -36,14 +36,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tableRecyclerView"
-        android:layout_width="411dp"
-        android:layout_height="472dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="352dp"
+        android:layout_height="485dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
