@@ -61,7 +61,7 @@
         android:text="@string/name"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableRecyclerView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tableRecyclerView3" />
 
     <EditText
         android:id="@+id/nameHint"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tableRecyclerView"
+        android:id="@+id/tableRecyclerView3"
         android:layout_width="371dp"
         android:layout_height="87dp"
         android:layout_marginStart="16dp"
