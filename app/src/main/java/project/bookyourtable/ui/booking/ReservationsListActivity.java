@@ -2,6 +2,7 @@ package project.bookyourtable.ui.booking;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -58,17 +59,18 @@ public class ReservationsListActivity extends AppCompatActivity {
 
     private void displayBookings() {
         cg = findViewById(R.id.reservationChips);
-        ArrayList<BookingEntity> list = (ArrayList<BookingEntity>) bookings.getValue();
-        if(list!=null){
-            System.out.println("The  list is not null");
-            for (BookingEntity entity:list) {
-                createChip(entity);
-            }
-        }
-        else
-            System.out.println("The list is null");
+        bookings.observe(this, bookingEntities -> {
+            if (bookingEntities != null) {
+                System.out.println("The  list is not null");
+                for (BookingEntity entity : bookingEntities) {
+                    createChip(entity);
+                }
+            } else
+                System.out.println("The list is null");
 
+        });
     }
+
 
     private void createChip(BookingEntity entity) {
         String name = entity.getName();
@@ -87,7 +89,6 @@ public class ReservationsListActivity extends AppCompatActivity {
         chip.setId(entity.getId().intValue());
         chip.setCheckable(true);
         chip.setChipBackgroundColorResource(R.color.colorAccent);
-        chip.setCloseIconVisible(true);
         cg.addView(chip);
     }
 

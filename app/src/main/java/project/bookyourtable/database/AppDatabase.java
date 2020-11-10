@@ -19,7 +19,7 @@ import project.bookyourtable.database.dao.TableDao;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 
-@Database(entities = {BookingEntity.class, TableEntity.class}, version = 3)
+@Database(entities = {BookingEntity.class, TableEntity.class}, version = 4)
 public abstract class AppDatabase extends RoomDatabase  {
     private static final String TAG = "AppDatabase";
 
@@ -84,7 +84,9 @@ public abstract class AppDatabase extends RoomDatabase  {
                             database.setDatabaseCreated();
                         });
                     }
-                }).build();
+                })
+                .fallbackToDestructiveMigration()
+                .build();
     }
 
 //    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
