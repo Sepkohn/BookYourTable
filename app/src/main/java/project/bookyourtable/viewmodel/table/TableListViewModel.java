@@ -76,7 +76,7 @@ public class TableListViewModel extends AndroidViewModel {
     /**
      * Expose the LiveData AccountEntities query so the UI can observe it.
      */
-    public LiveData<List<TableEntity>> getOwnAccounts() {
+    public LiveData<List<TableEntity>> getOwnTables() {
         return observableOwnTables;
     }
 

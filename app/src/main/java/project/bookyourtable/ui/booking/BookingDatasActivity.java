@@ -80,7 +80,7 @@ public class BookingDatasActivity extends AppCompatActivity {
                 getApplication());
 
         viewModel = ViewModelProviders.of(this, factory2).get(TableListViewModel.class);
-        viewModel.getOwnAccounts().observe(this, tableEntities -> {
+        viewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
                 tables = tableEntities;
                 adapter.setData(tables);
