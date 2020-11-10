@@ -41,29 +41,26 @@ public class EditTableActivity extends AppCompatActivity {
 //        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
 //        owner = settings.getString(BaseActivity.PREFS_USER, null);
 
-//        etAccountName = findViewById(R.id.accountName);
-//        etAccountName.requestFocus();
         etnumtable= findViewById(R.id.inputnumtable);
-        //etnumberperson.requestFocus();
+        etnumtable.requestFocus();
+        etnumberperson= findViewById(R.id.intputnumberperson);
 
-        etnumtable= findViewById(R.id.intputnumberperson);
-       // etnumberperson.requestFocus();
 
-        Button okBtn = findViewById(R.id.btn_okDialogue);
-        okBtn.setOnClickListener(view -> {
+        Button saveBtn = findViewById(R.id.btn_okDialogue);
+        saveBtn.setOnClickListener(view -> {
             saveChanges(Integer.parseInt(etnumtable.getText().toString()),Integer.parseInt(etnumberperson.getText().toString()) );
             onBackPressed();
             toast.show();
         });
 
-        Long tableId = getIntent().getLongExtra("accountId", 0L);
+        Long tableId = getIntent().getLongExtra("tableId", 0L);
         if (tableId == 0L) {
             setTitle("Create Table");
             toast = Toast.makeText(this, "Table created", Toast.LENGTH_LONG);
             isEditMode = false;
         } else {
             setTitle("Edit Table");
-            okBtn.setText("Add Changes");
+            saveBtn.setText("Add Changes");
             toast = Toast.makeText(this, "Table edited", Toast.LENGTH_LONG);
             isEditMode = true;
         }
@@ -72,9 +69,9 @@ public class EditTableActivity extends AppCompatActivity {
                 getApplication(), tableId);
         tableViewModel = ViewModelProviders.of(this, factory).get(TableViewModel.class);
         if (isEditMode) {
-            tableViewModel.getTable().observe(this, tableEntity -> {
-                if (tableEntity != null) {
-                    tableEntity = tableEntity;
+            tableViewModel.getTable().observe(this, tableE -> {
+                if (tableE != null) {
+                    tableEntity = tableE;
                     etnumberperson.setText(tableEntity.getPersonNumber());
                     etnumtable.setText(tableEntity.getLocation());
                 }
@@ -104,9 +101,9 @@ public class EditTableActivity extends AppCompatActivity {
             }
         } else {
             TableEntity newTableEntity = new TableEntity();
-            newTableEntity.setPersonNumber(4);
+            newTableEntity.setPersonNumber(personNumber);
             newTableEntity.setAvailability(true);
-            newTableEntity.setLocation(000);
+            newTableEntity.setLocation(location);
 
             tableViewModel.createTable(newTableEntity, new OnAsyncEventListener() {
                 @Override

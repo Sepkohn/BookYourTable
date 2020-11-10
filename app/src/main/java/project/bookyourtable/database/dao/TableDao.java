@@ -30,8 +30,10 @@ public interface TableDao {
     LiveData<List<TableEntity>> getBypersonNumber(int number);
 
 
+
+
     @Insert
-    void insert(TableEntity tables) throws SQLiteConstraintException;
+    long insert(TableEntity tables);
 
     @Update
     void update(TableEntity tables);

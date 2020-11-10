@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Btables")
 public class TableEntity {
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "tableId")
     private Long id;
@@ -24,7 +23,7 @@ public class TableEntity {
 
     public TableEntity(){}
 
-    public TableEntity(@NonNull int personNumber, boolean availability, int location)
+    public TableEntity(int personNumber, boolean availability, int location)
     {
         this.personNumber=personNumber;
         this.availability=availability;

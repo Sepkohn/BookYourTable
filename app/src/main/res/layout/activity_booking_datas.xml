@@ -58,11 +58,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="12dp"
         android:text="@string/name"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup2" />
+        app:layout_constraintTop_toBottomOf="@+id/tableRecyclerView2" />
 
     <EditText
         android:id="@+id/nameHint"
@@ -102,15 +101,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup2"
-        android:layout_width="358dp"
-        android:layout_height="131dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="10dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tableRecyclerView"
+        android:layout_width="371dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectTable">
+        app:layout_constraintTop_toBottomOf="@+id/selectTable" />
 
-    </com.google.android.material.chip.ChipGroup>
+<!--        <com.google.android.material.chip.ChipGroup-->
+<!--        android:id="@+id/chipGroup2"-->
+<!--        android:layout_width="358dp"-->
+<!--        android:layout_height="131dp"-->
+<!--        android:layout_marginStart="28dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/selectTable">-->
+
+
+<!--    </com.google.android.material.chip.ChipGroup>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
