@@ -66,7 +66,8 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
     public void onBindViewHolder(@NonNull ViewHolder viewholder, int position) {
 
         TableEntity item = mdata.get(position);
-        viewholder.textView.setText("Table id: " + item.getId() + "(Personnes: " +item.getPersonNumber()+ ", Position: " + item.getLocation() + ".");
+        //viewholder.textView.setText("Table id: " + item.getId() + "(Personnes: " +item.getPersonNumber()+ ", Position: " + item.getLocation() + ".");
+        viewholder.textView.setText("Table n°: " + item.getLocation() + "(P.: " +item.getPersonNumber() +")");
 
         long id = item.getId();
         int nbPerson = item.getPersonNumber();

@@ -37,7 +37,7 @@
 //               showAddItemDialog(MainTableActivity.this, R.style.AddingTableDialog);
 //
 //                final Dialog dialog = new Dialog(context);
-//                dialog.setContentView(R.layout.activity_tableadd_dialog);
+//                dialog.setContentView(R.layout.activity_table_edit);
 //                dialog.setTitle("Add Table");
 //
 //                final EditText numero = (EditText) dialog.findViewById(R.id.inputnumtable);

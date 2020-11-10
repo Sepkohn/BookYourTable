@@ -1,11 +1,15 @@
 package project.bookyourtable.ui.table;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -66,14 +70,13 @@ public class TableActivity  extends AppCompatActivity {
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + tables.get(position).getId());
 
-                //ICI POUR OUVRIR LE DETAIL DE LA TABLE QUENTIN ACCOUNT BALANCE DANS LA DEMO CHANGER MainBookingActivity.class
-//                Intent intent = new Intent(TableActivity.this, MainBookingActivity.class);
-//                intent.setFlags(
-//                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
-//                                Intent.FLAG_ACTIVITY_NO_HISTORY
-//                );
-//                intent.putExtra("tableId", tables.get(position).getId());
-//                startActivity(intent);
+                Intent intent = new Intent(TableActivity.this, EditTableActivity.class);
+                intent.setFlags(
+                        Intent.FLAG_ACTIVITY_NO_ANIMATION |
+                                Intent.FLAG_ACTIVITY_NO_HISTORY
+                );
+                intent.putExtra("tableId", tables.get(position).getId());
+                startActivity(intent);
             }
 
 
@@ -91,7 +94,7 @@ public class TableActivity  extends AppCompatActivity {
                 getApplication());
 
         viewModel = ViewModelProviders.of(this, factory).get(TableListViewModel.class);
-        viewModel.getOwnAccounts().observe(this, tableEntities -> {
+        viewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
                 tables = tableEntities;
                 adapter.setData(tables);
@@ -116,6 +119,8 @@ public class TableActivity  extends AppCompatActivity {
 //    }
 
     private void createDeleteDialog(final int position) {
+
+
         final TableEntity table = tables.get(position);
         LayoutInflater inflater = LayoutInflater.from(this);
         final View view = inflater.inflate(R.layout.row_delete_item, null);

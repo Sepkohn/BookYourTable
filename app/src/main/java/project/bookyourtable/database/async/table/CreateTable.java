@@ -11,9 +11,6 @@ import project.bookyourtable.util.OnAsyncEventListener;
 
 public class CreateTable extends AsyncTask<TableEntity, Void, Void>{
 
-//    private AppDatabase database;
-//    private Exception exception;
-//    private OnAsyncEventListener callback;
 
     private Context context;
     private OnAsyncEventListener callback;

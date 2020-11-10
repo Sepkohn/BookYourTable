@@ -10,6 +10,8 @@ import java.util.List;
 
 import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.async.table.CreateTable;
+import project.bookyourtable.database.async.table.DeleteTable;
+import project.bookyourtable.database.async.table.UpdateTable;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.database.entity.TableEntity;
 
@@ -57,12 +59,12 @@ public class TableRepository {
 
     public void update(final TableEntity table, OnAsyncEventListener callback,
                        Context context) {
-        new CreateTable(context, callback).execute(table);
+        new UpdateTable((Application) context, callback).execute(table);
     }
 
     public void delete(final TableEntity table, OnAsyncEventListener callback,
                        Context context) {
-        new CreateTable(context, callback).execute(table);
+        new DeleteTable(context, callback).execute(table);
     }
 
 
