@@ -71,7 +71,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         EditText message = findViewById(R.id.commentHint);
         String clientMessage = message.getText().toString();
 
-        if(clientName!=""&&clientPhoneNumber!=""){
+        if(!clientName.equals("")&&!clientPhoneNumber.equals("")){
             //entity.setTableNumber();
             entity.setName(clientName);
             entity.setTelephoneNumber(clientPhoneNumber);
