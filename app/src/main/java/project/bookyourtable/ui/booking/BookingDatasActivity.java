@@ -46,7 +46,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.entity = (BookingEntity) intent.getSerializableExtra(MainBookingActivity.MY_ENTITY);
 
-        CreateBookingViewModel.Factory factory = new CreateBookingViewModel.Factory((BaseApp) getApplication());
+        CreateBookingViewModel.Factory factory = new CreateBookingViewModel.Factory(getApplication());
         createBookingViewModel = new ViewModelProvider(this, factory).get(CreateBookingViewModel.class);
 
         //>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RAJOUTE QUENTIN
@@ -79,7 +79,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         TableListViewModel.Factory factory2 = new TableListViewModel.Factory(
                 getApplication());
 
-        viewModel = ViewModelProviders.of(this, factory2).get(TableListViewModel.class);
+        viewModel = new ViewModelProvider(this, factory2).get(TableListViewModel.class);
         viewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
                 tables = tableEntities;

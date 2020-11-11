@@ -12,7 +12,7 @@
     <string name="selectDate">Select a date</string>
     <string name="next">Next</string>
     <string name="midday">Midday</string>
-    <string name="night">Night</string>
+    <string name="evening">Evening</string>
     <string name="selectTable">Select a table</string>
     <string name="name">Enter your name</string>
     <string name="nameHint">Name</string>
@@ -31,6 +31,19 @@
     <string name="delete">Delete</string>
     <string name="selectReservation">Select a Reservation</string>
     <string name="manageTables">Manage Tables</string>
+    <string name="modifyBooking">Select the reservation you want to change</string>
+
+    <string name="midday1">11:30</string>
+    <string name="midday2">12:00</string>
+    <string name="midday3">12:30</string>
+    <string name="midday4">13:00</string>
+    <string name="midday5">13:30</string>
+
+    <string name="evening1">19:30</string>
+    <string name="evening2">20:00</string>
+    <string name="evening3">20:30</string>
+    <string name="evening4">21:00</string>
+    <string name="evening5">21:30</string>
 
     <string name="Ajouter">Ajouter</string>
     <string name="Supprimer">Supprimer</string>
@@ -39,7 +52,7 @@
     <string name="btn_okDialogue">Ok</string>
     <string name="num_ro_de_table">Numéro de table:</string>
     <string name="table_delete_msg">Do you want delete Table ?</string>
-    @string/
+
 
 
 

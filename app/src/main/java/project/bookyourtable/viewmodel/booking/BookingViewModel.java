@@ -48,20 +48,20 @@ public class BookingViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final long tableId;
+        private final long bookingId;
 
         private final BookingRepository repository;
 
-        public Factory(@NonNull Application application, long tableId) {
+        public Factory(@NonNull Application application, long bookingId) {
             this.application = application;
-            this.tableId = tableId;
+            this.bookingId = bookingId;
             repository = BookingRepository.getInstance();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new BookingViewModel(application, tableId, repository);
+            return (T) new BookingViewModel(application, bookingId, repository);
         }
     }
 
@@ -71,7 +71,7 @@ public class BookingViewModel extends AndroidViewModel {
 
 
 
-    public LiveData<BookingEntity> getTable() {
+    public LiveData<BookingEntity> getBooking() {
         return observableBooking;
     }
 
