@@ -62,6 +62,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="18dp"
+        android:onClick="addPerson"
         android:text="@string/plusButton"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber"
         app:layout_constraintTop_toBottomOf="@+id/numberOfPersons" />
@@ -72,6 +73,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="18dp"
+        android:onClick="decreasePerson"
         android:text="@string/minusButton"
         app:layout_constraintStart_toEndOf="@+id/plusButton"
         app:layout_constraintTop_toBottomOf="@+id/numberOfPersons" />
@@ -121,6 +123,7 @@
 
         <com.google.android.material.chip.Chip
             android:id="@+id/midday"
+            style="@style/timeSlotChip"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:width="80dp"
@@ -130,14 +133,15 @@
             android:text="@string/midday" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/night"
+            android:id="@+id/evening"
+            style="@style/timeSlotChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="80dp"
             android:checkable="true"
             android:clickable="true"
             android:minWidth="80dp"
-            android:text="@string/night" />
+            android:text="@string/evening" />
     </com.google.android.material.chip.ChipGroup>
 
     <com.google.android.material.chip.ChipGroup
@@ -153,53 +157,53 @@
 
         <com.google.android.material.chip.Chip
             android:id="@+id/slot1"
+            style="@style/timeSlotChip"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:width="80dp"
             android:checkable="true"
             android:clickable="true"
-            android:minWidth="50dp"
-            android:text="11:30" />
+            android:minWidth="50dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/slot2"
+            style="@style/timeSlotChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="80dp"
             android:checkable="true"
             android:clickable="true"
-            android:minWidth="50dp"
-            android:text="12:00" />
+            android:minWidth="50dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/slot3"
+            style="@style/timeSlotChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="80dp"
             android:checkable="true"
             android:clickable="true"
-            android:minWidth="50dp"
-            android:text="12:30" />
+            android:minWidth="50dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/slot4"
+            style="@style/timeSlotChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="80dp"
             android:checkable="true"
             android:clickable="true"
-            android:minWidth="50dp"
-            android:text="13:00" />
+            android:minWidth="50dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/slot5"
+            style="@style/timeSlotChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="80dp"
             android:checkable="true"
             android:clickable="true"
-            android:minWidth="50dp"
-            android:text="13:30" />
+            android:minWidth="50dp" />
     </com.google.android.material.chip.ChipGroup>
 
     <Button

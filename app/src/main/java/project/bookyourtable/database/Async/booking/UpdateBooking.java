@@ -18,10 +18,6 @@ public class UpdateBooking extends AsyncTask<BookingEntity, Void, Void> {
         this.callBack = callBack;
     }
 
-
-    public void execute(BookingEntity bookingEntity) {
-    }
-
     @Override
     protected Void doInBackground(BookingEntity... bookingEntities) {
         try{
