@@ -52,6 +52,7 @@
     <string name="btn_okDialogue">Ok</string>
     <string name="num_ro_de_table">Numéro de table:</string>
     <string name="table_delete_msg">Do you want delete Table ?</string>
+    <string name="availability">Availability</string>
 
 
 
