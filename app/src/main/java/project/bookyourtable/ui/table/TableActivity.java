@@ -59,9 +59,9 @@ public class TableActivity  extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                LinearLayoutManager.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+//                LinearLayoutManager.HORIZONTAL);
+       // recyclerView.addItemDecoration(dividerItemDecoration);
 
         tables = new ArrayList<>();
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
@@ -105,19 +105,6 @@ public class TableActivity  extends AppCompatActivity {
         adapter.notifyDataSetChanged(); //ajouté par Quentin
     }
 
-//
-//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == BaseActivity.position) {
-//            drawerLayout.closeDrawer(GravityCompat.START);
-//            return false;
-//        }
-//        /*
-//        The activity has to be finished manually in order to guarantee the navigation hierarchy working.
-//        */
-//        finish();
-//        return super.onNavigationItemSelected(item);
-//    }
-
     private void createDeleteDialog(final int position) {
 
 
@@ -129,7 +116,7 @@ public class TableActivity  extends AppCompatActivity {
         alertDialog.setCancelable(false);
 
         final TextView deleteMessage = view.findViewById(R.id.tv_delete_item);
-       // deleteMessage.setText(String.format("Do you want delete Table ?"), account.getLocation()); //Quentin
+
         deleteMessage.setText(String.format("Do you want delete Table ?", table.getLocation()));
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Execute", (dialog, which) -> {

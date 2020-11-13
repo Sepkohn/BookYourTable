@@ -92,12 +92,12 @@ public class EditTableActivity extends AppCompatActivity {
 
 
 
-    private void saveChanges(String numberTable, String personNumber) {
+    private void saveChanges(String location, String personNumber) {
         if (isEditMode) {
 
-            if(!"".equals(numberTable)) {
+            if(!"".equals(location) && !"".equals(personNumber)) {
                 tableEntity.setPersonNumber(Integer.parseInt(personNumber));
-                tableEntity.setLocation(Integer.parseInt(numberTable));
+                tableEntity.setLocation(Integer.parseInt(location));
                 
                 tableViewModel.updateTable(tableEntity, new OnAsyncEventListener() {
                     @Override
@@ -115,7 +115,7 @@ public class EditTableActivity extends AppCompatActivity {
             TableEntity newTableEntity = new TableEntity();
             newTableEntity.setPersonNumber(Integer.parseInt(personNumber));
             newTableEntity.setAvailability(true);
-            newTableEntity.setLocation(Integer.parseInt(numberTable));
+            newTableEntity.setLocation(Integer.parseInt(location));
 
             tableViewModel.createTable(newTableEntity, new OnAsyncEventListener() {
                 @Override
