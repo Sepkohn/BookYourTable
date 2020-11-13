@@ -130,13 +130,14 @@ public class MainBookingActivity extends AppCompatActivity {
         EditText numberPersons = findViewById(R.id.editTextNumber);
         int number = parseInt(numberPersons.getText().toString().trim());
 
-        Date today = new Date();
+        Date yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
 
 
 
         boolean isATimeSlot = verifyTimeSlot();
 
-        if(number>0&&isATimeSlot&&bookingdate.compareTo(today)>=0){
+        if(number>0&&isATimeSlot&&!bookingdate.before(yesterday)){
            return createEntity(number);
         }
 
@@ -158,6 +159,8 @@ public class MainBookingActivity extends AppCompatActivity {
 
         BookingEntity entity = new BookingEntity();
         entity.setNumberPersons(number);
+        if(bookingdate==null)
+            bookingdate=new Date();
         entity.setDate(bookingdate);
         entity.setTime(time);
 

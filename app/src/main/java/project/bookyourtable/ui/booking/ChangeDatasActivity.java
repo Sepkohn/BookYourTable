@@ -159,9 +159,10 @@ public class ChangeDatasActivity extends AppCompatActivity {
         String name = customerName.getText().toString();
         int number = parseInt(numberPersons.getText().toString());
         int time = timeSlot.getCheckedChipId();
-        Date today = new Date();
+        Date yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
 
-        if(!name.equals("")&&number>0&&bookingdate.after(today)&&time!=-1) {
+        if(!name.equals("")&&number>0&&!bookingdate.before(yesterday)&&time!=-1) {
             entity.setName(name);
             entity.setDate(bookingdate);
             Chip chip = findViewById(time);

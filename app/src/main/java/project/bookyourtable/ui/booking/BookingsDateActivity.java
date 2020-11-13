@@ -33,6 +33,8 @@ public class BookingsDateActivity extends AppCompatActivity {
     public void getReservationsList(View view){
         Intent intent = new Intent(this, ReservationsListActivity.class);
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        if(bookingdate==null)
+            bookingdate=new Date();
         intent.putExtra(MY_DATE, df.format(bookingdate));
 
 
