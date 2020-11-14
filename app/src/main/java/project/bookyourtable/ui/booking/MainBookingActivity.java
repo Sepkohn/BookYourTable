@@ -50,8 +50,10 @@ public class MainBookingActivity extends AppCompatActivity {
         view.setOnDateChangeListener((arg0, year, month, date) -> bookingdate = new Date(year-1900, month, date));
 
         timeSlot = findViewById(R.id.timeSlots);
+
         midday = findViewById(R.id.midday);
         evening = findViewById(R.id.evening);
+
         slot1 = findViewById(R.id.slot1);
         slot2 = findViewById(R.id.slot2);
         slot3 = findViewById(R.id.slot3);
