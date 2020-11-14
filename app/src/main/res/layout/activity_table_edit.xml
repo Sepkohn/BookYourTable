@@ -1,94 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/NumTableTitle1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="392dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="35dp"
-        android:text="Numéro de table"/>
-
-    <EditText
-        android:id="@+id/inputnumtable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="54dp"
-        android:ems="10"
-        android:inputType="number"
-        android:hint="1"/>
-
-    <TextView
-        android:id="@+id/NumTableTitle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="105dp"
-        android:text="Nombre de personnes" />
-
-    <EditText
-        android:id="@+id/intputnumberperson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="124dp"
-        android:ems="10"
-        android:inputType="number"
-        android:hint="2,4,6"/>
-
-    <Button
-        android:id="@+id/btn_cancelDialogue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/intputnumberperson"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="118dp"
-        android:layout_toEndOf="@+id/btn_okDialogue"
-        android:text="@string/btn_cancelDialogue" />
-
-    <Button
-        android:id="@+id/btn_okDialogue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/intputnumberperson"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="119dp"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="@string/btn_okDialogue" />
-
-    <Switch
-        android:id="@+id/swAvailability"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/intputnumberperson"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="59dp"
-        android:layout_marginEnd="224dp"
-        android:text="Switch" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="193dp"
-        android:text="@string/availability" />
+        android:orientation="vertical">
 
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/NumTableTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TtableNumber"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/intputnumberperson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="2,4,6"
+            android:inputType="number"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/NumTableTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/Tnumberofperson"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/inputnumtable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="1"
+            android:inputType="number"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/Tavailability"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+
+        <Switch
+            android:id="@+id/swAvailability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancelDialogue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/btn_cancelDialogue" />
+
+            <Button
+                android:id="@+id/btn_okDialogue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/btn_okDialogue" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

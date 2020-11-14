@@ -1,6 +1,7 @@
 package project.bookyourtable.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,12 +67,15 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
     public void onBindViewHolder(@NonNull ViewHolder viewholder, int position) {
 
         TableEntity item = mdata.get(position);
-        //viewholder.textView.setText("Table id: " + item.getId() + "(Personnes: " +item.getPersonNumber()+ ", Position: " + item.getLocation() + ".");
         viewholder.textView.setText("T" + item.getLocation() + "(p: " +item.getPersonNumber() +")");
 
         long id = item.getId();
         int nbPerson = item.getPersonNumber();
         int numLocation = item.getLocation();
+        boolean availability = item.getAvailability();
+        if(availability==false){
+            viewholder.textView.setTextColor(Color.parseColor("#cccccc"));
+        }
 
         //ceci est à utiliser seulement quand on passe dans des objets présents dans le layout voir vidéo et la méthode setData s'y rapportant pour l'exemple
         //viewholder.setData(id,nbPerson,numlocation);

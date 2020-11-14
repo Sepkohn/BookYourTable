@@ -1,15 +1,11 @@
 package project.bookyourtable.ui.table;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -37,7 +33,7 @@ public class TableActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_table_management);
+        setContentView(R.layout.activity_main_table);
 
         // BUTTON ADD
         Button addingTable = findViewById(R.id.buttonAdd);
@@ -106,18 +102,16 @@ public class TableActivity  extends AppCompatActivity {
     }
 
     private void createDeleteDialog(final int position) {
-
-
         final TableEntity table = tables.get(position);
         LayoutInflater inflater = LayoutInflater.from(this);
         final View view = inflater.inflate(R.layout.row_delete_item, null);
+
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Delete Table");
         alertDialog.setCancelable(false);
 
         final TextView deleteMessage = view.findViewById(R.id.tv_delete_item);
 
-        deleteMessage.setText(String.format("Do you want delete Table ?", table.getLocation()));
+        deleteMessage.setText(String.format("Do you want delete Table " +  table.getLocation() + " ?"));
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Execute", (dialog, which) -> {
             Toast toast = Toast.makeText(this, "Table deleted", Toast.LENGTH_SHORT);
