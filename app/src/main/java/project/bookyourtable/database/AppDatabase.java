@@ -19,7 +19,7 @@ import project.bookyourtable.database.dao.TableDao;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 
-@Database(entities = {BookingEntity.class, TableEntity.class}, version = 4)
+@Database(entities = {BookingEntity.class, TableEntity.class}, version = 5)
 public abstract class AppDatabase extends RoomDatabase  {
     private static final String TAG = "AppDatabase";
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.util.RecyclerViewItemClickListener;
 import project.bookyourtable.viewmodel.booking.CreateBookingViewModel;
+import project.bookyourtable.viewmodel.table.AvailableTableListViewModel;
 import project.bookyourtable.viewmodel.table.TableListViewModel;
 
 public class BookingDatasActivity extends AppCompatActivity {
@@ -30,12 +32,14 @@ public class BookingDatasActivity extends AppCompatActivity {
     private static final String TAG = "BookingDatasActivity";
     BookingEntity entity;
     CreateBookingViewModel createBookingViewModel;
+    long tableNo;
 
 
     //><<<<<<<<<<<<<<<<<<<<<<<<<< RAJOUTE QUENTIN
-    private TableListViewModel viewModel;
+    private AvailableTableListViewModel viewModel;
     private List<TableEntity> tables;
     private RecyclerAdapter<TableEntity> adapter;
+
     //><<<<<<<<<<<<<<<<<<<<<<<<<< RAJOUTE QUENTIN
 
     @Override
@@ -61,13 +65,8 @@ public class BookingDatasActivity extends AppCompatActivity {
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + tables.get(position).getId());
 
-
-                if(tables.get(position).getAvailability()==true){
-                    tables.get(position).setAvailability(false);
-                }else{
-                    tables.get(position).setAvailability(true);
-                }
-                Log.d(TAG, "Availability:" + tables.get(position).getAvailability());
+                Toast.makeText(BookingDatasActivity.this," table No "+ tables.get(position).getId() + " selected", Toast.LENGTH_LONG).show();
+                tableNo = tables.get(position).getId();
             }
 
             @Override
@@ -76,10 +75,10 @@ public class BookingDatasActivity extends AppCompatActivity {
             }
         });
 
-        TableListViewModel.Factory factory2 = new TableListViewModel.Factory(
-                getApplication());
+        AvailableTableListViewModel.Factory factory2 = new AvailableTableListViewModel.Factory(
+                getApplication(),entity.getNumberPersons());
 
-        viewModel = new ViewModelProvider(this, factory2).get(TableListViewModel.class);
+        viewModel = new ViewModelProvider(this, factory2).get(AvailableTableListViewModel.class);
         viewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
                 tables = tableEntities;
@@ -114,8 +113,8 @@ public class BookingDatasActivity extends AppCompatActivity {
 
         }
         else{
-            Toast toast = Toast.makeText(this,"Please select a table and fill your name and number",Toast.LENGTH_LONG);
-            toast.show();
+            Toast.makeText(this,"Please select a table and fill your name and number",Toast.LENGTH_LONG).show();
+
         }
     }
 
@@ -131,8 +130,8 @@ public class BookingDatasActivity extends AppCompatActivity {
         EditText message = findViewById(R.id.commentHint);
         String clientMessage = message.getText().toString();
 
-        if(!clientName.equals("")&&!clientPhoneNumber.equals("")){
-            //entity.setTableNumber();
+        if(!clientName.equals("")&&!clientPhoneNumber.equals("")&&tableNo!=0){
+            entity.setTableNumber(tableNo);
             entity.setName(clientName);
             entity.setTelephoneNumber(clientPhoneNumber);
             entity.setMessage(clientMessage);
