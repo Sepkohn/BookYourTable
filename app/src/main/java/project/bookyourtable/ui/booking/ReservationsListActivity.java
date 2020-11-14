@@ -1,19 +1,20 @@
 package project.bookyourtable.ui.booking;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,12 +25,12 @@ import java.util.List;
 
 import project.bookyourtable.BaseApp;
 import project.bookyourtable.R;
+import project.bookyourtable.adapter.BookingsRecyclerAdapter;
 import project.bookyourtable.database.entity.BookingEntity;
-import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.database.repository.BookingRepository;
-import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.ui.MainActivity;
 import project.bookyourtable.util.OnAsyncEventListener;
+import project.bookyourtable.util.RecyclerViewItemClickListener;
 import project.bookyourtable.viewmodel.booking.BookingViewModel;
 
 public class ReservationsListActivity extends AppCompatActivity {
@@ -37,7 +38,10 @@ public class ReservationsListActivity extends AppCompatActivity {
     private Date date;
     private BookingRepository repository;
     private LiveData<List<BookingEntity>> bookings;
-    private ChipGroup cg;
+
+    private List<BookingEntity> displayBookings;
+    private BookingsRecyclerAdapter<BookingEntity> adapter;
+
     private BookingViewModel viewModel;
     private BookingViewModel.Factory factory;
     private BookingEntity selectedEntity;
@@ -53,57 +57,73 @@ public class ReservationsListActivity extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
         try {
-            date = (Date) df.parse(intent.getStringExtra(BookingsDateActivity.MY_DATE));
+            date = df.parse(intent.getStringExtra(BookingsDateActivity.MY_DATE));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        getBookings();
-        displayBookings();
-    }
+        RecyclerView recyclerView = findViewById(R.id.tableRecyclerView3);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
-    private void getBookings() {
-        repository = ((BaseApp) getApplication()).getBookingRepository();
-        bookings =  repository.getBookingsByDate(date, getApplication());
-    }
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                LinearLayoutManager.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
-    private void displayBookings() {
-        cg = findViewById(R.id.reservationChips);
-        cg.setVerticalScrollBarEnabled(true);
-        bookings.observe(this, bookingEntities -> {
-            if (bookingEntities != null) {
-                System.out.println("The  list is not null");
-                for (BookingEntity entity : bookingEntities) {
-                    createChip(entity);
-                }
-            } else
-                System.out.println("The list is null");
+        displayBookings = new ArrayList<>();
+        this.adapter = new BookingsRecyclerAdapter<>(new RecyclerViewItemClickListener() {
 
+            public void onItemClick(View v, int position) {
+
+                Toast.makeText(ReservationsListActivity.this, " booking No " + displayBookings.get(position).getId() + " selected", Toast.LENGTH_LONG).show();
+                selectedEntity = displayBookings.get(position);
+            }
+
+            @Override
+            public void onItemLongClick(View v, int position) {
+                dialogCustomerDetails(position);
+            }
         });
+
+
+
+        repository = ((BaseApp) getApplication()).getBookingRepository();
+        repository.getBookingsByDate(date, getApplication()).observe(this, new Observer<List<BookingEntity>>() {
+            @Override
+            public void onChanged(List<BookingEntity> bookingEntities) {
+                displayBookings = bookingEntities;
+                adapter.setData(displayBookings);
+            }
+        });
+
+        recyclerView.setAdapter(adapter); // refresh l'adaptater, toutes les vues dans le recycler sont rafraichies
+        adapter.notifyDataSetChanged();
+
     }
 
+    private void dialogCustomerDetails(final int position) {
+        final BookingEntity bookingEntity = displayBookings.get(position);
+        LayoutInflater inflater = LayoutInflater.from(this);
 
-    private void createChip(BookingEntity entity) {
-        String name = entity.getName();
-        String comment = entity.getMessage();
-        String time = entity.getTime();
+        final View view = inflater.inflate(R.layout.row_delete_item, null);
 
-        String basis = name+ " " + " à " +time+", table n";
-        if(!comment.equals("")){
-            basis+=", comment : " + comment;
-        }
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setCancelable(false);
 
-        //TableEntity table = TableRepository.getInstance().getTableById(entity.getTableNumber(),this).getValue();
+        final TextView customerDetails = view.findViewById(R.id.tv_delete_item);
 
-        Chip chip = new Chip(this);
-        chip.setText(basis);
-        chip.setId(entity.getId().intValue());
-        chip.setCheckable(true);
-        chip.setChipBackgroundColorResource(R.color.colorAccent);
-        cg.addView(chip);
+        String text = "Name :" +  bookingEntity.getName() + "\n"
+                + "Telephone number : " + bookingEntity.getTelephoneNumber();
+
+        if(!bookingEntity.getMessage().equals(null))
+            text = text + "\n" + "Comment : " + bookingEntity.getMessage();
+        customerDetails.setText(String.format(text));
+        customerDetails.setTextSize(15);
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Close", (dialog, which) -> alertDialog.dismiss());
+        alertDialog.setView(view);
+        alertDialog.show();
     }
-
-
 
     public void backToMenu(View view){
         Intent intent = new Intent(this, MainActivity.class);
@@ -144,8 +164,8 @@ public class ReservationsListActivity extends AppCompatActivity {
     }
 
     private synchronized void initialiseViewModel(String state){
-        int id = cg.getCheckedChipId();
-        if(id!=-1){
+        if(selectedEntity!=null){
+            long id  = selectedEntity.getId();
             factory = new BookingViewModel.Factory(getApplication(), id);
             viewModel = new ViewModelProvider(this,factory).get(BookingViewModel.class);
             viewModel.getBooking().observe(this, bookingEntity -> {
