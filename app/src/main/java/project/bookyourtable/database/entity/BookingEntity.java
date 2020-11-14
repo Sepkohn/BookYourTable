@@ -48,21 +48,25 @@ public class BookingEntity implements Serializable {
     @ColumnInfo(name = "message")
     private String message;
 
+    @ColumnInfo(name = "numberPersons")
+    private int numberPersons;
+
     @ColumnInfo(name = "tableNumber")
     private Long tableNumber;
 
-    @Ignore
-    private int numberPersons;
+
+
 
     @Ignore
     public BookingEntity(){}
 
-    public BookingEntity(Date date,String time, String name, String telephoneNumber, String message, Long tableNumber){
+    public BookingEntity(Date date,String time, String name, String telephoneNumber, String message,int numberPersons, Long tableNumber){
         this.date = date;
         this.time = time;
         this.name = name;
         this.telephoneNumber = telephoneNumber;
         this.message = message;
+        this.numberPersons = numberPersons;
         this.tableNumber = tableNumber;
     }
 
@@ -95,8 +99,6 @@ public class BookingEntity implements Serializable {
 
     public Long getTableNumber(){return tableNumber; }
     public void setTableNumber(Long tableNumber){ this.tableNumber=tableNumber; }
-
-
 
     public int getNumberPersons() {
         return numberPersons;

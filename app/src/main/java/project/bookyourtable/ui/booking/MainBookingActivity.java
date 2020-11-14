@@ -22,15 +22,16 @@ import static java.lang.Integer.parseInt;
 
 public class MainBookingActivity extends AppCompatActivity {
 
-    Date bookingdate;
-    ChipGroup timeSlot;
-    Chip midday;
-    Chip evening;
-    Chip slot1;
-    Chip slot2;
-    Chip slot3;
-    Chip slot4;
-    Chip slot5;
+    private Date bookingdate;
+    private ChipGroup timeSlot;
+    private Chip midday;
+    private Chip evening;
+    private Chip slot1;
+    private Chip slot2;
+    private Chip slot3;
+    private Chip slot4;
+    private Chip slot5;
+    private EditText numberPersons;
 
     public static final String MY_ENTITY = ".project.bookyourtable.ui.booking.ENTITY";
 
@@ -59,6 +60,8 @@ public class MainBookingActivity extends AppCompatActivity {
         slot3 = findViewById(R.id.slot3);
         slot4 = findViewById(R.id.slot4);
         slot5 = findViewById(R.id.slot5);
+
+        numberPersons  = findViewById(R.id.editTextNumber);
 
         setDefaultValues();
 
@@ -129,16 +132,19 @@ public class MainBookingActivity extends AppCompatActivity {
 
     private BookingEntity verifyInformations() {
 
-        EditText numberPersons = findViewById(R.id.editTextNumber);
+
         int number = parseInt(numberPersons.getText().toString().trim());
 
-        Date today = new Date();
+        Date yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
 
 
 
         boolean isATimeSlot = verifyTimeSlot();
+        if(bookingdate==null)
+            bookingdate=new Date();
 
-        if(number>0&&isATimeSlot&&bookingdate.compareTo(today)>=0){
+        if(number>0&&isATimeSlot&&!bookingdate.before(yesterday)){
            return createEntity(number);
         }
 
@@ -160,6 +166,8 @@ public class MainBookingActivity extends AppCompatActivity {
 
         BookingEntity entity = new BookingEntity();
         entity.setNumberPersons(number);
+        if(bookingdate==null)
+            bookingdate=new Date();
         entity.setDate(bookingdate);
         entity.setTime(time);
 

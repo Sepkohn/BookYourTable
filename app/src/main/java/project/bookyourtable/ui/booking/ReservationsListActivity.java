@@ -69,6 +69,7 @@ public class ReservationsListActivity extends AppCompatActivity {
 
     private void displayBookings() {
         cg = findViewById(R.id.reservationChips);
+        cg.setVerticalScrollBarEnabled(true);
         bookings.observe(this, bookingEntities -> {
             if (bookingEntities != null) {
                 System.out.println("The  list is not null");
@@ -87,9 +88,9 @@ public class ReservationsListActivity extends AppCompatActivity {
         String comment = entity.getMessage();
         String time = entity.getTime();
 
-        String basis = name+ " " + "pour n personne à " +time+", table n";
+        String basis = name+ " " + " à " +time+", table n";
         if(!comment.equals("")){
-            basis+="\n" + comment;
+            basis+=", comment : " + comment;
         }
 
         //TableEntity table = TableRepository.getInstance().getTableById(entity.getTableNumber(),this).getValue();

@@ -22,7 +22,7 @@ public class UpdateBooking extends AsyncTask<BookingEntity, Void, Void> {
     protected Void doInBackground(BookingEntity... bookingEntities) {
         try{
             for(BookingEntity booking : bookingEntities)
-                database.bookingDao().delete(booking);
+                database.bookingDao().update(booking);
         }
         catch (Exception e){
             exception = e;
