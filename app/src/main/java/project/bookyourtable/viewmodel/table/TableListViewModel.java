@@ -14,6 +14,7 @@ import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 
+//ViewModel for TableActivity
 public class TableListViewModel extends AndroidViewModel {
 
     private final MediatorLiveData<List<TableEntity>> observableOwnTables;
