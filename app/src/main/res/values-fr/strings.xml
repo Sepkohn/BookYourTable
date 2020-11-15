@@ -19,7 +19,7 @@
     <string name="comment">Entrez un commentaire si nécessaire</string>
     <string name="commentHint">Chaise bébé, Végétarien, Allergies, ...</string>
     <string name="validate">Valider</string>
-    <string name="validationText">La réservation a été enregistrée</string>
+    <string name="validationText">La réservation est terminée, retournez au menu</string>
     <string name="backToMenu">Retour au menu</string>
     <string name="newReservationMenu">Enregistrer une nouvelle réservation</string>
     <string name="manageBooking">Gérer les réservations</string>
@@ -51,4 +51,5 @@
     <string name="emptyTable">Veuillez sélectionner une table</string>
     <string name="selectedTable">La table no %1$s est sélectionnée</string>
     <string name="selectAll">Veuillez entrer toutes les valeures pour continuer</string>
+    <string name="createError">La table sélectionnée est déjà occupée, veuillez réessayer</string>
 </resources>
