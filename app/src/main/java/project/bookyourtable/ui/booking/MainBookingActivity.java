@@ -15,8 +15,10 @@ import com.google.android.material.chip.ChipGroup;
 
 import java.util.Date;
 
+import project.bookyourtable.BaseApp;
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
+import project.bookyourtable.util.LanguageManager;
 
 import static java.lang.Integer.parseInt;
 
@@ -38,7 +40,6 @@ public class MainBookingActivity extends AppCompatActivity {
 
 
     public MainBookingActivity(){
-
     }
 
     @Override
@@ -99,7 +100,7 @@ public class MainBookingActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else{
-            Toast toast = Toast.makeText(this,"Please select all values to continue",Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, R.string.selectAll,Toast.LENGTH_LONG);
             toast.show();
         }
     }
