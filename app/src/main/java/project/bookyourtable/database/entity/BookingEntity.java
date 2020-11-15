@@ -55,8 +55,6 @@ public class BookingEntity implements Serializable {
     private Long tableNumber;
 
 
-
-
     @Ignore
     public BookingEntity(){}
 

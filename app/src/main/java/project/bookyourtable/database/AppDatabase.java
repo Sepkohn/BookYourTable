@@ -32,22 +32,6 @@ public abstract class AppDatabase extends RoomDatabase  {
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
-    //Valentin
-//    public static AppDatabase getInstance(final Context context) {
-//        if (instance == null) {
-//            synchronized (AppDatabase.class) {
-//                if (instance == null) {
-//                    instance = Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class, "AppDataBase")
-//                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
-//                            .build();
-//                    instance.updateDatabaseCreated(context.getApplicationContext());
-//                }
-//            }
-//        }
-//        return instance;
-//    }
-
-    //Quentin
     public static AppDatabase getInstance(final Context context) {
         if (instance == null) {
             synchronized (AppDatabase.class) {

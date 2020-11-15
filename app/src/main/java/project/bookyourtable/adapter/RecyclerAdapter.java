@@ -1,19 +1,14 @@
 package project.bookyourtable.adapter;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 import java.util.Objects;
-
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.util.RecyclerViewItemClickListener;
@@ -21,24 +16,14 @@ import project.bookyourtable.util.RecyclerViewItemClickListener;
 public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private List<TableEntity> mdata;
-
-    public RecyclerAdapter(List<TableEntity> mdata) {
-        this.mdata = mdata;
-    }
-
     private RecyclerViewItemClickListener listener;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         TextView textView;
         ViewHolder(TextView textView) {
             super(textView);
             this.textView = textView;
         }
-
     }
 
 
@@ -46,8 +31,9 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         this.listener = listener;
     }
 
-    /*Maintenant, il ne nous reste plus qu'à lier tout cela ensemble grâce à un Adapter. Ainsi, dans le package Views de notre application, nous allons créer un Adapter*/
-    //VIA CA ON AJOUTE LES COMPORTEMENTS CLIC LONG ET CLICK A LA LISTE
+  /** The new ViewHolder will be used to display items of the adapter using onBindViewHolder(ViewHolder, int, List).
+   * Since it will be re-used to display different items in the data set, it is a good idea to cache references to sub views of the View to avoid
+   * unnecessary View.findViewById(int) calls*/
     @Override
     public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 //ici on décrit ou on insuffle les données
@@ -55,7 +41,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
                 .inflate(R.layout.recycler_view, viewGroup, false);
 
         final ViewHolder viewHolder = new ViewHolder(v);
-        v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));         //Créer le layout recycleView pour l'affichage des tables
+        v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));
         v.setOnLongClickListener(view -> {
             listener.onItemLongClick(view, viewHolder.getAdapterPosition());
             return true;
@@ -63,6 +49,8 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         return viewHolder;
     }
 
+    /**
+     * */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewholder, int position) {
 
@@ -73,18 +61,11 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         if(availability==false){
             viewholder.textView.setTextColor(Color.parseColor("#cccccc"));
         }
-
-        //ceci est à utiliser seulement quand on passe dans des objets présents dans le layout voir vidéo et la méthode setData s'y rapportant pour l'exemple
-        //viewholder.setData(id,nbPerson,numlocation);
     }
-//voir méthode onBindViewHolder pour la raison
-//    public void setData(long id, int nbPerson, int numLocation){
-//        this.id=id;
-//        this.nbPerson=nbPerson;
-//        this.numLocation=numLocation;
-//    }
 
-    /*Cette méthode permet de retourner la taille de notre liste d'objet, et ainsi indiquer à l'Adapter le nombre de lignes que peut contenir la RecyclerView.*/
+    /**
+     * This method return size of a data list and notify adapter numbers rows which can contain RecyclerView
+     * */
     @Override
     public int getItemCount() {
         if (mdata != null) {
@@ -113,7 +94,6 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-
                     if (data instanceof TableEntity) {
                         return ((TableEntity) data.get(oldItemPosition)).getId().equals(((TableEntity) data.get(newItemPosition)).getId());
                     }

@@ -59,7 +59,7 @@
     <Button
         android:id="@+id/plusButton"
         android:layout_width="57dp"
-        android:layout_height="34dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginTop="18dp"
         android:onClick="addPerson"
@@ -70,7 +70,7 @@
     <Button
         android:id="@+id/minusButton"
         android:layout_width="57dp"
-        android:layout_height="34dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="18dp"
         android:onClick="decreasePerson"
