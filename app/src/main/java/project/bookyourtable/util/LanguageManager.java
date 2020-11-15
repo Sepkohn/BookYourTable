@@ -26,14 +26,8 @@ public class LanguageManager {
         Locale locale = new Locale(local);
 
         Locale.setDefault(locale);
-        Resources res;
+        Resources res = activity.getResources();
 
-        try{
-            res = activity.getResources();
-        }
-        catch (NullPointerException e){
-            res = Resources.getSystem();
-        }
         Configuration config = res.getConfiguration();
         config.setLocale(locale);
         res.updateConfiguration(config,res.getDisplayMetrics());

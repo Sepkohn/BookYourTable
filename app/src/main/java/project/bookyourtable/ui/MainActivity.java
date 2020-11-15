@@ -1,9 +1,12 @@
 package project.bookyourtable.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.Application;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 
@@ -24,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         LanguageManager.setLocale(this,"fr");
         setContentView(R.layout.activity_main);
 
-
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     public void createBooking(View view){

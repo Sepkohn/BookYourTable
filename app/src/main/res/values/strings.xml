@@ -23,7 +23,7 @@
     <string name="comment">Enter a comment if needed</string>
     <string name="commentHint">Baby chair, Vegetarian, Allergy</string>
     <string name="validate">Validate</string>
-    <string name="validationText">The booking has been registered</string>
+    <string name="validationText">The booking is done, return to menu</string>
     <string name="backToMenu">Back to menu</string>
     <string name="newReservationMenu">Register a new reservation</string>
     <string name="manageBooking">Manage reservations</string>
@@ -73,4 +73,5 @@
     <string name="emptyTable">Please select a table</string>
     <string name="selectedTable">table no %1$s selected</string>
     <string name="selectAll">Please select all values to continue</string>
+
 </resources>

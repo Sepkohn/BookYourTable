@@ -65,7 +65,6 @@ public class BookingsRecyclerAdapter<T> extends RecyclerView.Adapter<BookingsRec
     public void onBindViewHolder(@NonNull ViewHolder viewholder, int position) {
 
         BookingEntity item = mdata.get(position);
-        //viewholder.textView.setText("Table id: " + item.getId() + "(Personnes: " +item.getPersonNumber()+ ", Position: " + item.getLocation() + ".");
         String text  = item.getName() + " at " + item.getTime() + " for " + item.getNumberPersons() + " persons " +"\n" +"at emplacement : " + item.getTableNumber();
         viewholder.textView.setText(text);
 
