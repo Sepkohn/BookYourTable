@@ -52,7 +52,7 @@
     <TextView
         android:id="@+id/timeSelect"
         style="@style/helpString"
-        android:layout_width="143dp"
+        android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
@@ -96,16 +96,18 @@
         app:layout_constraintStart_toEndOf="@+id/plusButton"
         app:layout_constraintTop_toBottomOf="@+id/numberOfPersons" />
 
+
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/period"
-        android:layout_width="0dp"
+        android:layout_width="168dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/timeSlots"
-        app:layout_constraintStart_toEndOf="@+id/timeSelect"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeSelect"
+        app:layout_constraintVertical_bias="1.0"
         app:singleLine="true"
         app:singleSelection="true">
 
@@ -132,7 +134,6 @@
             android:text="@string/evening" />
     </com.google.android.material.chip.ChipGroup>
 
-
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/timeSlots"
         android:layout_width="0dp"
@@ -142,8 +143,10 @@
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/next"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeSelect"
+        app:layout_constraintVertical_bias="0.984"
         app:singleLine="true"
         app:singleSelection="true">
 
