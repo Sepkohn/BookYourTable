@@ -52,17 +52,24 @@
     <string name="num_ro_de_table">Numéro de table:</string>
     <string name="table_delete_msg">Do you want delete Table ?</string>
 
+    <string name="tableNumber">Table Number :</string>
+    <string name="numberTableErr">Specify number of table</string>
+    <string name="numberPersonErr">Specify number of person</string>
 
-
-    <!-- Table Edit EN -->
-    <string name="TtableNumber">Table Number :</string>
-    <string name="Tnumberofperson">Number of person :</string>
-    <string name="Tavailability">Availability :</string>
-    <string name="btn_cancelDialogue">Cancel</string>
+    <string name="numberofperson">Number of person :</string>
+    <string name="availability">Availability :</string>
+    <string name="cancel">Cancel</string>
     <string name="btn_okDialogue">Ok</string>
 
+    <string name="createTable">Create Table</string>
+    <string name="createTable2">Table created</string>
 
+    <string name="editTable">Edit Table</string>
+    <string name="editTable2">Table edited</string>
 
-
-
+    <string name="addChange">Add Changes</string>
+    <string name="execute">Execute</string>
+    <string name="deleteMessage">Do you want delete Table </string>
+    <string name="tabledeleted">Table deleted</string>
+    <string name="tabledeleted2">Table deleted</string>
 </resources>

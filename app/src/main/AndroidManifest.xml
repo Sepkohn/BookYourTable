@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".ui.booking.ChangeDatasActivity"
+            android:screenOrientation="portrait"
             android:label="@string/modifyAReservation"
             android:parentActivityName=".ui.booking.ReservationsListActivity">
         <meta-data
@@ -20,6 +21,7 @@
         </activity>
 
         <activity android:name=".ui.booking.ReservationsListActivity"
+            android:screenOrientation="portrait"
             android:label="@string/manageBooking"
             android:parentActivityName=".ui.booking.BookingsDateActivity">
         <meta-data
@@ -28,6 +30,7 @@
         </activity>
 
         <activity android:name=".ui.booking.BookingsDateActivity"
+            android:screenOrientation="portrait"
             android:label="@string/manageBooking"
             android:parentActivityName=".ui.MainActivity">
         <meta-data
@@ -36,6 +39,7 @@
         </activity>
 
         <activity android:name=".ui.table.TableActivity"
+            android:screenOrientation="portrait"
             android:label="@string/manageTables"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
@@ -44,6 +48,7 @@
         </activity>
 
         <activity android:name=".ui.table.EditTableActivity"
+            android:screenOrientation="portrait"
             android:label="Edit Tables"
             android:parentActivityName=".ui.table.TableActivity">
             <meta-data
@@ -51,10 +56,12 @@
                 android:value=".ui.table.TableActivity"/>
         </activity>
 
-        <activity android:name=".ui.booking.ConfirmationActivity" />
+        <activity android:name=".ui.booking.ConfirmationActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.booking.BookingDatasActivity"
+            android:screenOrientation="portrait"
             android:label="@string/newReservationMenu"
             android:parentActivityName=".ui.booking.MainBookingActivity">
             <meta-data
@@ -64,6 +71,7 @@
 
         <activity
             android:name=".ui.booking.MainBookingActivity"
+            android:screenOrientation="portrait"
             android:label="@string/newReservationMenu"
             android:parentActivityName=".ui.MainActivity">
             <meta-data
@@ -71,12 +79,14 @@
                 android:value=".ui.MainActivity" />
         </activity>
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

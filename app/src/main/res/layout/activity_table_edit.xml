@@ -16,11 +16,11 @@
             android:id="@+id/NumTableTitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/TtableNumber"
+            android:text="@string/tableNumber"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/intputnumberperson"
+            android:id="@+id/inputnumtable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -33,11 +33,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/Tnumberofperson"
+            android:text="@string/numberofperson"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/inputnumtable"
+            android:id="@+id/intputnumberperson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/Tavailability"
+            android:text="@string/availability"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textSize="18sp" />
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/btn_cancelDialogue" />
+                android:text="@string/cancel" />
 
             <Button
                 android:id="@+id/btn_okDialogue"

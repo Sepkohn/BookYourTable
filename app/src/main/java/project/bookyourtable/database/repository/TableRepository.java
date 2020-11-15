@@ -66,6 +66,4 @@ public class TableRepository {
                        Context context) {
         new DeleteTable(context, callback).execute(table);
     }
-
-
 }

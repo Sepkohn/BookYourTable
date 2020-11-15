@@ -75,11 +75,7 @@ public abstract class AppDatabase extends RoomDatabase  {
                         super.onCreate(db);
                         Executors.newSingleThreadExecutor().execute(() -> {
                             AppDatabase database = AppDatabase.getInstance(appContext);
-
-
-                            //DatabaseInitializer.populateDatabase(database); //Q
-                            initializeDemoData(database); //Q
-
+                            initializeDemoData(database);
                             // notify that the database was created and it's ready to be used
                             database.setDatabaseCreated();
                         });
@@ -89,20 +85,6 @@ public abstract class AppDatabase extends RoomDatabase  {
                 .build();
     }
 
-//    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-//        @Override
-//        public void migrate(SupportSQLiteDatabase database) {
-//            // Since we didn't alter the table, there's nothing else to do here.
-//        }
-//    };
-//
-//    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
-//        @Override
-//        public void migrate(SupportSQLiteDatabase database) {
-//            database.execSQL("ALTER TABLE bookings "
-//                    + " ADD COLUMN time String");
-//        }
-//    };
 
 
     public static void initializeDemoData(final AppDatabase database) {

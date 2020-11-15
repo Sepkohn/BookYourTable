@@ -69,9 +69,6 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         TableEntity item = mdata.get(position);
         viewholder.textView.setText("T" + item.getLocation() + "(p: " +item.getPersonNumber() +")");
 
-        long id = item.getId();
-        int nbPerson = item.getPersonNumber();
-        int numLocation = item.getLocation();
         boolean availability = item.getAvailability();
         if(availability==false){
             viewholder.textView.setTextColor(Color.parseColor("#cccccc"));
