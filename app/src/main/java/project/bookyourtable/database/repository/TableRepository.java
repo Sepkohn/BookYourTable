@@ -40,8 +40,8 @@ public class TableRepository {
         return ((BaseApp) context).getDatabase().tableDao().getAll();
     }
 
-    public LiveData<List<TableEntity>> getByAvailabilitx(boolean state, Context context) {
-        return ((BaseApp) context).getDatabase().tableDao().getByAvailability (state);
+    public LiveData<List<TableEntity>> getByAvailability(boolean state,int nbrePersons, Context context) {
+        return ((BaseApp) context).getDatabase().tableDao().getByAvailability (state, nbrePersons);
     }
 
     public LiveData<List<TableEntity>> getBypersonNumber(int number, Context context) {

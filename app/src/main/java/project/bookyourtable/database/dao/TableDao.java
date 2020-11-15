@@ -20,8 +20,8 @@ public interface TableDao {
     @Query("SELECT * FROM Btables")
     LiveData<List<TableEntity>> getAll();
 
-    @Query("SELECT * FROM Btables WHERE availability = :state")
-    LiveData<List<TableEntity>> getByAvailability(boolean state);
+    @Query("SELECT * FROM Btables WHERE availability = :state AND personNumber >= :nbrePersons")
+    LiveData<List<TableEntity>> getByAvailability(boolean state, int nbrePersons);
 
     @Query("SELECT * FROM Btables WHERE personNumber = :number")
     LiveData<List<TableEntity>> getBypersonNumber(int number);

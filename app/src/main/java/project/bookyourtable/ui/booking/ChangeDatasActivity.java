@@ -1,6 +1,7 @@
 package project.bookyourtable.ui.booking;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 
@@ -22,6 +23,8 @@ import java.util.Date;
 
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
+import project.bookyourtable.database.entity.TableEntity;
+import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.viewmodel.booking.BookingViewModel;
 
@@ -159,11 +162,13 @@ public class ChangeDatasActivity extends AppCompatActivity {
         String name = customerName.getText().toString();
         int number = parseInt(numberPersons.getText().toString());
         int time = timeSlot.getCheckedChipId();
-        Date today = new Date();
+        Date yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
 
-        if(!name.equals("")&&number>0&&bookingdate.after(today)&&time!=-1) {
+        if(!name.equals("")&&number>0&&!bookingdate.before(yesterday)&&time!=-1) {
             entity.setName(name);
             entity.setDate(bookingdate);
+            entity.setNumberPersons(number);
             Chip chip = findViewById(time);
             entity.setTime(chip.getText().toString());
             return true;
