@@ -56,8 +56,9 @@ public class BookingDatasActivity extends AppCompatActivity {
             public void onItemClick(View v, int position) {
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + tables.get(position).getId());
-                adapter.onBindViewHolder();
-                tables.get(position).setBackgroundColor(Color.parseColor("#cccccc"));
+
+//                adapter.onBindViewHolder();
+//                tables.get(position).setBackgroundColor(Color.parseColor("#cccccc"));
 
                 Toast.makeText(BookingDatasActivity.this," table No "+ tables.get(position).getId() + " selected", Toast.LENGTH_LONG).show();
                 tableNo = tables.get(position).getId();
