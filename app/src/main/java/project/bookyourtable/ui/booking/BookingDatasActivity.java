@@ -1,6 +1,7 @@
 package project.bookyourtable.ui.booking;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,6 +56,8 @@ public class BookingDatasActivity extends AppCompatActivity {
             public void onItemClick(View v, int position) {
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + tables.get(position).getId());
+                adapter.onBindViewHolder();
+                tables.get(position).setBackgroundColor(Color.parseColor("#cccccc"));
 
                 Toast.makeText(BookingDatasActivity.this," table No "+ tables.get(position).getId() + " selected", Toast.LENGTH_LONG).show();
                 tableNo = tables.get(position).getId();
@@ -62,7 +65,8 @@ public class BookingDatasActivity extends AppCompatActivity {
 
             @Override
             public void onItemLongClick(View v, int position) {
-                //no action
+
+
             }
         });
 
