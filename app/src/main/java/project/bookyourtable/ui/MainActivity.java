@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import project.bookyourtable.R;
 import project.bookyourtable.ui.booking.BookingsDateActivity;
@@ -24,17 +23,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
+    /** Inflate the menu; this adds items to the action bar if it is present.*/
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
+/**     Handle action bar item clicks here. The action bar will
+ automatically handle clicks on the Home/Up button, so long
+ as you specify a parent activity in AndroidManifest.xml.*/
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         switch(id) {
@@ -51,12 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-
-
-
     }
-
-
 
     public void createBooking(View view){
         Intent intent = new Intent(this, MainBookingActivity.class);

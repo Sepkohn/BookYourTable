@@ -23,8 +23,7 @@ public class TableEntity {
 
     public TableEntity(){}
 
-    public TableEntity(int personNumber, boolean availability, int location)
-    {
+    public TableEntity(int personNumber, boolean availability, int location){
         this.personNumber=personNumber;
         this.availability=availability;
         this.location=location;

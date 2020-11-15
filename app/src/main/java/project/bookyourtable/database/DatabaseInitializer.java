@@ -22,11 +22,7 @@ public class DatabaseInitializer {
     }
 
     private static void populateWithTestData(AppDatabase db) {
-        db.tableDao().deleteAll();
-        addTable(db, 4, true, 1);
-        addTable(db, 2, true, 2);
-        addTable(db, 1, true, 3);
-        addTable(db, 6, false, 4);
+
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {

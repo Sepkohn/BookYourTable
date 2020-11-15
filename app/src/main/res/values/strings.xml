@@ -73,4 +73,5 @@
     <string name="tabledeleted">Table deleted</string>
     <string name="tabledeleted2">Table deleted</string>
     <string name="action_about">About</string>
+    <string name="textAbout">Cette application permet de faire des réservations de table selon un agenda. \n\n Développé par Valentin et Quentin</string>
 </resources>

@@ -1,11 +1,8 @@
 package project.bookyourtable.database.async.table;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
-
 import project.bookyourtable.BaseApp;
-import project.bookyourtable.database.AppDatabase;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.util.OnAsyncEventListener;
 

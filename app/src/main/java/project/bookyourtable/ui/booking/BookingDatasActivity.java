@@ -113,8 +113,6 @@ public class BookingDatasActivity extends AppCompatActivity {
     }
 
     private boolean verifyInformations() {
-        //vérfifier les tables
-
         EditText name = findViewById(R.id.nameHint);
         String clientName = validateName(name);
 
