@@ -1,4 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:locale="es">
+
     <string name="app_name">BookYourTable</string>
     <string name="bookingButton">Reservation</string>
     <string name="bookingManagement">Manage a registration</string>
@@ -6,8 +8,8 @@
     <string name="title_activity_main_table_management">MainTableManagement</string>
     <string name="previous">Previous</string>
     <string name="numberOfPersons">Select the number of persons</string>
-    <string name="plusButton">+</string>
-    <string name="minusButton">-</string>
+    <string name="plusButton" translatable="false">+</string>
+    <string name="minusButton" translatable="false">-</string>
     <string name="timeSelect">Select a time slot</string>
     <string name="selectDate">Select a date</string>
     <string name="next">Next</string>
@@ -17,11 +19,11 @@
     <string name="name">Enter your name</string>
     <string name="nameHint">Name</string>
     <string name="telephoneNumber">Enter your telephone number</string>
-    <string name="telephoneHint">079/797.79.79</string>
+    <string name="telephoneHint" translatable="false">079/797.79.79</string>
     <string name="comment">Enter a comment if needed</string>
     <string name="commentHint">Baby chair, Vegetarian, Allergy</string>
     <string name="validate">Validate</string>
-    <string name="validationText">The booking has been registered</string>
+    <string name="validationText">The booking is done, return to menu</string>
     <string name="backToMenu">Back to menu</string>
     <string name="newReservationMenu">Register a new reservation</string>
     <string name="manageBooking">Manage reservations</string>
@@ -31,30 +33,25 @@
     <string name="delete">Delete</string>
     <string name="selectReservation">Select a Reservation</string>
     <string name="manageTables">Manage Tables</string>
-    <string name="modifyBooking">Select the reservation you want to change</string>
+    <string name="modifyBooking">Select the reservation to change</string>
 
-    <string name="midday1">11:30</string>
-    <string name="midday2">12:00</string>
-    <string name="midday3">12:30</string>
-    <string name="midday4">13:00</string>
-    <string name="midday5">13:30</string>
+    <string name="midday1" translatable="false">11:30</string>
+    <string name="midday2" translatable="false">12:00</string>
+    <string name="midday3" translatable="false">12:30</string>
+    <string name="midday4" translatable="false">13:00</string>
+    <string name="midday5" translatable="false">13:30</string>
 
-    <string name="evening1">19:30</string>
-    <string name="evening2">20:00</string>
-    <string name="evening3">20:30</string>
-    <string name="evening4">21:00</string>
-    <string name="evening5">21:30</string>
+    <string name="evening1" translatable="false">19:30</string>
+    <string name="evening2" translatable="false">20:00</string>
+    <string name="evening3" translatable="false">20:30</string>
+    <string name="evening4" translatable="false">21:00</string>
+    <string name="evening5" translatable="false">21:30</string>
 
-    <string name="Ajouter">Ajouter</string>
-    <string name="Supprimer">Supprimer</string>
-    <string name="Desactiver">Désactiver</string>
-
-    <string name="num_ro_de_table">Numéro de table:</string>
-    <string name="table_delete_msg">Do you want delete Table ?</string>
+    <string name="Add">Add</string>
 
     <string name="tableNumber">Table Number :</string>
-    <string name="numberTableErr">Specify number of table</string>
-    <string name="numberPersonErr">Specify number of person</string>
+    <string name="numberTableErr">Specify table\'s number</string>
+    <string name="numberPersonErr">Specify person\'s number</string>
 
     <string name="numberofperson">Number of person :</string>
     <string name="availability">Availability :</string>
@@ -71,7 +68,15 @@
     <string name="execute">Execute</string>
     <string name="deleteMessage">Do you want delete Table </string>
     <string name="tabledeleted">Table deleted</string>
-    <string name="tabledeleted2">Table deleted</string>
+
     <string name="action_about">About</string>
     <string name="textAbout">Cette application permet de faire des réservations de table selon un agenda. \n\n Développé par Valentin et Quentin</string>
+
+    <string name="emptyName">Please enter your name</string>
+    <string name="emptyTelephone">Please enter your phone number</string>
+    <string name="emptyTable">Please select a table</string>
+    <string name="selectedTable">table no %1$s selected</string>
+    <string name="selectAll">Please select all values to continue</string>
+
+
 </resources>
