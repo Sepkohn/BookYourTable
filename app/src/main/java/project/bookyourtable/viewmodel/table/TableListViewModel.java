@@ -9,7 +9,6 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 

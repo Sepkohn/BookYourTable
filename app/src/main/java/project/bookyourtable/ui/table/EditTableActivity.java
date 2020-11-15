@@ -7,12 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
-
-import java.text.NumberFormat;
-
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.util.OnAsyncEventListener;
@@ -21,11 +17,10 @@ import project.bookyourtable.viewmodel.table.TableViewModel;
 public class EditTableActivity extends AppCompatActivity {
 
     private static final String TAG = "EditTableActivity";
-
     private TableEntity tableEntity;
-    private NumberFormat defaultFormat;
     private boolean isEditMode;
     private Toast toast;
+
     private EditText etnumtable;
     private EditText etnumberperson;
 
@@ -38,39 +33,31 @@ public class EditTableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getLayoutInflater().inflate(R.layout.activity_edit_account, frameLayout);
         setContentView(R.layout.activity_table_edit);
-//
-//        navigationView.setCheckedItem(position);
-//
-//        SharedPreferences settings = getSharedPreferences(BaseActivity.PREFS_NAME, 0);
-//        owner = settings.getString(BaseActivity.PREFS_USER, null);
 
-        etnumtable= findViewById(R.id.inputnumtable);
+        etnumtable = findViewById(R.id.inputnumtable);
         etnumtable.requestFocus();
-        etnumberperson= findViewById(R.id.intputnumberperson);
 
-        swBtn=findViewById(R.id.swAvailability);
+        etnumberperson = findViewById(R.id.intputnumberperson);
+
+        swBtn = findViewById(R.id.swAvailability);
         swBtn.setText("");
-
-
         swBtn.setOnClickListener(view -> {
-                if (swBtn.isChecked()) {
-                    statusSwitch = true;
-                }else{
-                    statusSwitch =  false;
-                }
-                Toast.makeText(getApplicationContext(), "Switch1 :" + statusSwitch, Toast.LENGTH_LONG).show(); // display the current state for switch's
+            if (swBtn.isChecked()) {
+                statusSwitch = true;
+
+            }else{
+                statusSwitch = false;
+            }
         });
-
-
 
         Button saveBtn = findViewById(R.id.btn_okDialogue);
         saveBtn.setOnClickListener(view -> {
-            saveChanges(etnumtable.getText().toString(),etnumberperson.getText().toString(), statusSwitch);
-            Log.d(TAG, etnumtable.getText().toString());
-            onBackPressed();
-            toast.show();
+            if (verifyInformations()) {
+                saveChanges(etnumtable.getText().toString(), etnumberperson.getText().toString(),statusSwitch);
+               onBackPressed();
+                toast.show();
+            }
         });
 
         Button cancelBtn = findViewById(R.id.btn_cancelDialogue);
@@ -82,14 +69,14 @@ public class EditTableActivity extends AppCompatActivity {
 
         Long tableId = getIntent().getLongExtra("tableId", 0L);
         if (tableId == 0L) {
-            setTitle("Create Table");
-            toast = Toast.makeText(this, "Table created", Toast.LENGTH_LONG);
+            setTitle(getString(R.string.createTable));
+            toast = Toast.makeText(this, getString(R.string.createTable2), Toast.LENGTH_LONG);
             isEditMode = false;
         } else {
-            setTitle("Edit Table");
-            saveBtn.setText("Add Changes");
-            cancelBtn.setText("Cancel");
-            toast = Toast.makeText(this, "Table edited", Toast.LENGTH_LONG);
+            setTitle(getString(R.string.editTable));
+            saveBtn.setText(getString(R.string.addChange));
+            cancelBtn.setText(getString(R.string.cancel));
+            toast = Toast.makeText(this, getString(R.string.editTable2), Toast.LENGTH_LONG);
             isEditMode = true;
         }
 
@@ -103,22 +90,39 @@ public class EditTableActivity extends AppCompatActivity {
                     tableEntity = tableE;
                     etnumtable.setText("" + tableEntity.getLocation());
                     etnumberperson.setText("" + tableEntity.getPersonNumber());
-                    boolean status = tableEntity.getAvailability();
+                    statusSwitch = tableEntity.getAvailability();
                     swBtn.setChecked(tableEntity.getAvailability());
-                    Log.d(TAG, "clicked position:" + status);
                 }
             });
         }
     }
 
-    private void saveChanges(String location, String personNumber, boolean state) {
-        if (isEditMode) {
 
-            if(!"".equals(location) && !"".equals(personNumber)) {
+    private boolean verifyInformations() {
+        String stringetnumtable = etnumtable.getText().toString();
+        String stringetnumberperson = etnumberperson.getText().toString();
+
+        if (stringetnumtable.isEmpty()) {
+            etnumtable.setError(getString(R.string.numberTableErr));
+            etnumtable.requestFocus();
+            return false;
+        } else if (stringetnumberperson.isEmpty()) {
+            etnumberperson.setError(getString(R.string.numberPersonErr));
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    private void saveChanges(String location, String personNumber, boolean state) {
+
+        if (isEditMode) {
+            if (!"".equals(location) && !"".equals(personNumber) && !"".equals(state)) {
                 tableEntity.setPersonNumber(Integer.parseInt(personNumber));
                 tableEntity.setLocation(Integer.parseInt(location));
                 tableEntity.setAvailability(state);
-
+                Log.d(TAG, "!!!!!Dans le save" + state);
                 tableViewModel.updateTable(tableEntity, new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
@@ -134,7 +138,7 @@ public class EditTableActivity extends AppCompatActivity {
         } else {
             TableEntity newTableEntity = new TableEntity();
             newTableEntity.setPersonNumber(Integer.parseInt(personNumber));
-            newTableEntity.setAvailability(true);
+            newTableEntity.setAvailability(state);
             newTableEntity.setLocation(Integer.parseInt(location));
 
             tableViewModel.createTable(newTableEntity, new OnAsyncEventListener() {
@@ -150,4 +154,5 @@ public class EditTableActivity extends AppCompatActivity {
             });
         }
     }
+
 }

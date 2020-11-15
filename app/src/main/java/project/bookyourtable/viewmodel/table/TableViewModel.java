@@ -26,12 +26,8 @@ public class TableViewModel extends AndroidViewModel {
     public TableViewModel(@NonNull Application application,
                            final long tableId, TableRepository tableRepository) {
         super(application);
-
         this.application = application;
-
         repository = tableRepository;
-
-
 
         observableTable = new MediatorLiveData<>();
         // set by default null, until we get data from the database.

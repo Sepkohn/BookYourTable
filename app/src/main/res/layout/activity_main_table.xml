@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="171dp"
-        android:layout_height="159dp"
+        android:layout_width="173dp"
+        android:layout_height="49dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,26 +23,12 @@
             android:text="@string/Ajouter" />
 
 
-        <Button
-            android:id="@+id/buttonDelete"
-            style="@style/buttonsManagementTable"
-            android:text="@string/Supprimer" />
-
-        <Button
-            android:id="@+id/buttonDesactivate"
-            style="@style/buttonsManagementTable"
-            android:text="@string/Desactiver" />
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tableRecyclerView"
-        android:layout_width="352dp"
-        android:layout_height="485dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="411dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
