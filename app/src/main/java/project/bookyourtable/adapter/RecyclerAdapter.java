@@ -55,7 +55,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
                 .inflate(R.layout.recycler_view, viewGroup, false);
 
         final ViewHolder viewHolder = new ViewHolder(v);
-        v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));         //Créer le layout recycleView pour l'affichage des tables
+        v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));
         v.setOnLongClickListener(view -> {
             listener.onItemLongClick(view, viewHolder.getAdapterPosition());
             return true;
