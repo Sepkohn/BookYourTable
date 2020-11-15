@@ -57,8 +57,6 @@ public class BookingDatasActivity extends AppCompatActivity {
                 Log.d(TAG, "clicked position:" + position);
                 Log.d(TAG, "clicked on: " + tables.get(position).getId());
 
-//                adapter.onBindViewHolder();
-//                tables.get(position).setBackgroundColor(Color.parseColor("#cccccc"));
 
                 Toast.makeText(BookingDatasActivity.this," table No "+ tables.get(position).getId() + " selected", Toast.LENGTH_LONG).show();
                 tableNo = tables.get(position).getId();
@@ -67,6 +65,7 @@ public class BookingDatasActivity extends AppCompatActivity {
             @Override
             public void onItemLongClick(View v, int position) {
 
+                //no action
 
             }
         });
