@@ -54,11 +54,9 @@ public class BookingDatasActivity extends AppCompatActivity {
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
 
             public void onItemClick(View v, int position) {
-                Log.d(TAG, "clicked position:" + position);
-                Log.d(TAG, "clicked on: " + tables.get(position).getId());
 
 
-                Toast.makeText(BookingDatasActivity.this," table No "+ tables.get(position).getId() + " selected", Toast.LENGTH_LONG).show();
+                Toast.makeText(BookingDatasActivity.this,getString(R.string.selectedTable,""+tables.get(position).getId()), Toast.LENGTH_LONG).show();
                 tableNo = tables.get(position).getId();
             }
 
@@ -107,7 +105,7 @@ public class BookingDatasActivity extends AppCompatActivity {
 
         }
         else{
-            Toast.makeText(this,"Please select a table",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.emptyTable,Toast.LENGTH_LONG).show();
 
         }
     }
@@ -139,7 +137,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         if (!stringNumber.isEmpty()) {
             return stringNumber;
         } else {
-            phoneNumber.setError("Please enter your phone number");
+            phoneNumber.setError(getString(R.string.emptyTelephone));
             phoneNumber.requestFocus();
             return "";
         }
@@ -150,7 +148,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         if (!stringName.isEmpty()) {
             return stringName;
         } else {
-            name.setError("Please enter your name");
+            name.setError(getString(R.string.emptyName));
             name.requestFocus();
             return "";
         }

@@ -20,7 +20,7 @@
         <Button
             android:id="@+id/buttonAdd"
             style="@style/buttonsManagementTable"
-            android:text="@string/Ajouter" />
+            android:text="@string/Add" />
 
 
     </LinearLayout>

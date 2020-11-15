@@ -2,14 +2,17 @@ package project.bookyourtable.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import project.bookyourtable.BaseApp;
 import project.bookyourtable.R;
 import project.bookyourtable.ui.booking.BookingsDateActivity;
 import project.bookyourtable.ui.booking.MainBookingActivity;
 import project.bookyourtable.ui.table.TableActivity;
+import project.bookyourtable.util.LanguageManager;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -17,7 +20,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //LanguageManager.setLocale(this,"es");
+        LanguageManager.setLocale(this,"fr");
         setContentView(R.layout.activity_main);
+
+
     }
 
     public void createBooking(View view){
