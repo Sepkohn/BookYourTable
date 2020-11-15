@@ -27,6 +27,8 @@ import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.util.RecyclerViewItemClickListener;
 import project.bookyourtable.viewmodel.table.TableListViewModel;
 
+/**
+ * A management table screen that offers a view of tables created, delete one item with longclick and modify it with a simple clic and give the possibility to adding a new table with button*/
 public class TableActivity extends AppCompatActivity {
 
     private static final String TAG = "TableActivity";
@@ -49,11 +51,12 @@ public class TableActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
         );
-
+        // Implement recyclerView and set a linear layout
         RecyclerView recyclerView = findViewById(R.id.tableRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        // Adding decoration to recycler
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
                 LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
@@ -76,10 +79,11 @@ public class TableActivity extends AppCompatActivity {
             }
         });
         adapterInstance();
-        // refresh l'adaptater, toutes les vues dans le recycler sont rafraichies
+        // refresh adaptater
 
     }
-
+/**
+ * Implement adapter and parameter OnClick, give a Extra information about id of table selected through the intent*/
     private void adapterInstance() {
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
 
@@ -94,11 +98,12 @@ public class TableActivity extends AppCompatActivity {
             }
 
             public void onItemLongClick(View v, int position) {
-                createDeleteDialog(position);
+                createDeleteDialog(position); //method to create dialog for deleting item
             }
         });
     }
-
+        /**
+         * That method create a AlertDialog to ask if user are certain that the item can be deleted */
     private void createDeleteDialog(final int position) {
         final TableEntity table = tables.get(position);
         LayoutInflater inflater = LayoutInflater.from(this);

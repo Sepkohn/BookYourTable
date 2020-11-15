@@ -1,8 +1,6 @@
 package project.bookyourtable.viewmodel.table;
 
 import android.app.Application;
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -14,6 +12,7 @@ import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 
+//ViewModel for EditTableActivity
 public class TableViewModel extends AndroidViewModel {
 
     private TableRepository repository;

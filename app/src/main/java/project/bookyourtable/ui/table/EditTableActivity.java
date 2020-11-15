@@ -20,6 +20,8 @@ import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.viewmodel.table.TableViewModel;
 
+/**
+ * Adding or Edit table screen that offer to change/create number location and number person per table*/
 public class EditTableActivity extends AppCompatActivity {
 
     private static final String TAG = "EditTableActivity";
@@ -66,7 +68,7 @@ public class EditTableActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
+        //Get if table ID exist for editing or not for adding mode
         Long tableId = getIntent().getLongExtra("tableId", 0L);
 
         if (tableId == 0L) {
@@ -98,22 +100,8 @@ public class EditTableActivity extends AppCompatActivity {
         }
     }
 
-//
-//    private boolean checklocation(int location) {
-//        TableRepository.getInstance().getTables(getApplicationContext()).observe(this, new Observer<List<TableEntity>>() {
-//            @Override
-//            public void onChanged(List<TableEntity> tableEntities) {
-//                for (TableEntity item : tableEntities) {
-//                    if (item.getLocation() == location) {
-//                        uniqueTable = false;
-//                    }
-//                }
-//                uniqueTable = true;
-//            }
-//        });
-//        return uniqueTable;
-//    }
-
+    /**
+     * Method to verrify if all field are fill before adding of save a table's modification*/
     private boolean verifyInformations() {
         String stringetnumtable = etnumtable.getText().toString();
         String stringetnumberperson = etnumberperson.getText().toString();
@@ -130,6 +118,8 @@ public class EditTableActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to set all information in tableEntity that offer an distinction between adding mode or edit mode*/
     private void saveChanges(int location, int personNumber, boolean state) {
         if (isEditMode) {
             tableEntity.setPersonNumber(personNumber);
