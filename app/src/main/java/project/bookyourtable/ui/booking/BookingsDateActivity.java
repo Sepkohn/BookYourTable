@@ -18,6 +18,10 @@ public class BookingsDateActivity extends AppCompatActivity {
     Date bookingdate;
     public static final String MY_DATE = ".project.bookyourtable.ui.booking.Date";
 
+    /**
+     * Create a new Calendar and initialize the listener
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -30,6 +34,10 @@ public class BookingsDateActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Get the chosen date and continue to the next activity
+     * @param view
+     */
     public void getReservationsList(View view){
         Intent intent = new Intent(this, ReservationsListActivity.class);
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");

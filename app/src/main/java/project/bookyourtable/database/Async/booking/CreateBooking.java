@@ -15,7 +15,12 @@ public class CreateBooking extends AsyncTask<BookingEntity, Void, Void>{
         private Exception exception;
         private OnAsyncEventListener callBack;
 
-        public CreateBooking(Context context, OnAsyncEventListener callBack) {
+    /**
+     * Asynchronous method called to create a BookingEntity in the database
+     * @param context = Application
+     * @param callBack = Transmitted message
+     */
+    public CreateBooking(Context context, OnAsyncEventListener callBack) {
             database = ((BaseApp) context).getDatabase().getInstance((BaseApp) context);
             this.callBack = callBack;
         }

@@ -11,6 +11,10 @@ import project.bookyourtable.ui.MainActivity;
 
 public class ConfirmationActivity extends AppCompatActivity {
 
+    /**
+     * Create the screen with text
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -13,6 +13,12 @@ public class DeleteBooking extends AsyncTask<BookingEntity, Void, Void> {
     private Exception exception;
     private OnAsyncEventListener callBack;
 
+    /**
+     * Asynchronous method called to delete a BookingEntity in the database
+     * @param context = Application
+     * @param callBack = Transmitted message
+     */
+
     public DeleteBooking(Context context, OnAsyncEventListener callBack) {
         database = AppDatabase.getInstance(context);
         this.callBack = callBack;

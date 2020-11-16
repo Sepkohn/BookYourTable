@@ -13,6 +13,11 @@ public class UpdateBooking extends AsyncTask<BookingEntity, Void, Void> {
     private Exception exception;
     private OnAsyncEventListener callBack;
 
+    /**
+     * Asynchronous method called to modify a BookingEntity in the database
+     * @param context = Application
+     * @param callBack = Transmitted message
+     */
     public UpdateBooking(Context context, OnAsyncEventListener callBack) {
         database = AppDatabase.getInstance(context);
         this.callBack = callBack;

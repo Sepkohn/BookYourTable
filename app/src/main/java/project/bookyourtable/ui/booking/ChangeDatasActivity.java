@@ -1,30 +1,22 @@
 package project.bookyourtable.ui.booking;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
-import project.bookyourtable.database.entity.TableEntity;
-import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.viewmodel.booking.BookingViewModel;
 
@@ -53,8 +45,10 @@ public class ChangeDatasActivity extends AppCompatActivity {
     Date bookingdate;
 
 
-
-
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +67,9 @@ public class ChangeDatasActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Get the different fields and initialize the ChipGroup action Listener
+     */
     private void getElements() {
         customerName = findViewById(R.id.nameHint);
         numberPersons = findViewById(R.id.editTextNumber);
@@ -107,6 +104,9 @@ public class ChangeDatasActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Get values from database and put in the fields
+     */
     private void setValues(){
         customerName.setText(entity.getName());
         numberPersons.setText(""+entity.getNumberPersons());
@@ -117,6 +117,9 @@ public class ChangeDatasActivity extends AppCompatActivity {
         setPeriod();
     }
 
+    /**
+     *Check the corresponding period slot
+     */
     private void setPeriod(){
         int hour = Integer.parseInt(entity.getTime().split(":")[0]);
 
@@ -129,6 +132,9 @@ public class ChangeDatasActivity extends AppCompatActivity {
         setTime();
     }
 
+    /**
+     * Check the corresponding time slot
+     */
     private void setTime(){
         for(int i = 0; i<timeSlot.getChildCount();i++){
             Chip slot = (Chip)timeSlot.getChildAt(i);
@@ -140,6 +146,10 @@ public class ChangeDatasActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Method to validate the modifying. We still have to check the informations before continuing.
+     * @param view
+     */
     public void validateBooking(View view){
         if(checkInformations()) {
             viewModel.updateBooking(entity, new OnAsyncEventListener() {
@@ -158,6 +168,10 @@ public class ChangeDatasActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Check all the input informations
+     * @return true if inputs are correct
+     */
     private boolean checkInformations(){
         String name = customerName.getText().toString();
         int number = parseInt(numberPersons.getText().toString());
@@ -179,6 +193,10 @@ public class ChangeDatasActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Increase the number of perons in the editText
+     * @param view
+     */
     public void addPerson(View view){
 
         int number = parseInt(numberPersons.getText().toString().trim());
@@ -186,10 +204,18 @@ public class ChangeDatasActivity extends AppCompatActivity {
         displayNumbrePersons(number);
     }
 
+    /**
+     * Set the value in the editText
+     * @param i = number
+     */
     private void displayNumbrePersons(int i) {
         numberPersons.setText("" + i);
     }
 
+    /**
+     * Decrease the number of perons in the editText
+     * @param view
+     */
     public void decreasePerson(View view){
 
         int number = parseInt(numberPersons.getText().toString().trim());

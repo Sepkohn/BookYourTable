@@ -1,12 +1,12 @@
 package project.bookyourtable.ui.booking;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +35,11 @@ public class BookingDatasActivity extends AppCompatActivity {
     private List<TableEntity> tables;
     private RecyclerAdapter<TableEntity> adapter;
 
+    /**
+     * Creation of the BookingDatasActivity
+     * We link the screen's fields and create the recycler to get the tables
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +89,10 @@ public class BookingDatasActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method to continue the booking. We still have to check the informations before continuing.
+     * @param view
+     */
     public void validateBooking(View view){
         if(verifyInformations()) {
             createBookingViewModel.createBooking(entity, new OnAsyncEventListener() {
@@ -110,6 +119,10 @@ public class BookingDatasActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Check all the input informations
+     * @return true if inputs are correct
+     */
     private boolean verifyInformations() {
         EditText name = findViewById(R.id.nameHint);
         String clientName = validateName(name);
@@ -130,6 +143,11 @@ public class BookingDatasActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * check the input telephoneNumber and put error message if is empty
+     * @param phoneNumber = editText field
+     * @return the input if not empty
+     */
     private String validateNumber(EditText phoneNumber) {
         String stringNumber = phoneNumber.getText().toString();
         if (!stringNumber.isEmpty()) {
@@ -141,6 +159,11 @@ public class BookingDatasActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * check the input name and put error message if is empty
+     * @param name  = editText field
+     * @return the input if not empty
+     */
     private String validateName(EditText name) {
         String stringName = name.getText().toString();
         if (!stringName.isEmpty()) {

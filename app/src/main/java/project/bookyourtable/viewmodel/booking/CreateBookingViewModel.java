@@ -27,6 +27,9 @@ public class CreateBookingViewModel extends AndroidViewModel {
         applicationContext = application.getApplicationContext();
     }
 
+    /**
+     * A creator is used to inject the account id into the ViewModel
+     */
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
 
         @NonNull

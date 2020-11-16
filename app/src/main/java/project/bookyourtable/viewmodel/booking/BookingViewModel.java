@@ -20,6 +20,12 @@ public class BookingViewModel extends AndroidViewModel {
     private final MediatorLiveData<BookingEntity>  observableBooking;
     private Context applicationContext;
 
+    /**
+     * Store a BookingEntity that we get from the database due to @param bookingId
+     * @param application
+     * @param bookingId
+     * @param repository
+     */
     public BookingViewModel(
             @NonNull Application application,
             final long bookingId,
@@ -64,11 +70,6 @@ public class BookingViewModel extends AndroidViewModel {
             return (T) new BookingViewModel(application, bookingId, repository);
         }
     }
-
-
-
-
-
 
 
     public LiveData<BookingEntity> getBooking() {

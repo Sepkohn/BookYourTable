@@ -1,20 +1,19 @@
 package project.bookyourtable.ui.booking;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -37,7 +36,6 @@ public class ReservationsListActivity extends AppCompatActivity {
 
     private Date date;
     private BookingRepository repository;
-    private LiveData<List<BookingEntity>> bookings;
 
     private List<BookingEntity> displayBookings;
     private BookingsRecyclerAdapter<BookingEntity> adapter;
@@ -48,6 +46,11 @@ public class ReservationsListActivity extends AppCompatActivity {
 
     public static final String MODIFY_ENTITY = ".project.bookyourtable.ui.booking.MODIFYENTITY";
 
+    /**
+     * Creation of the Reservation list.
+     * We get the date of the last activity to get all the bookings from this date
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,22 +88,23 @@ public class ReservationsListActivity extends AppCompatActivity {
             }
         });
 
-
-
         repository = ((BaseApp) getApplication()).getBookingRepository();
         repository.getBookingsByDate(date, getApplication()).observe(this, new Observer<List<BookingEntity>>() {
             @Override
             public void onChanged(List<BookingEntity> bookingEntities) {
                 displayBookings = bookingEntities;
                 adapter.setData(displayBookings);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
         });
 
-        recyclerView.setAdapter(adapter); // refresh l'adaptater, toutes les vues dans le recycler sont rafraichies
-        adapter.notifyDataSetChanged();
-
     }
 
+    /**
+     * Get the BookingEntity's person information to display in a dialog
+     * @param position
+     */
     private void dialogCustomerDetails(final int position) {
         final BookingEntity bookingEntity = displayBookings.get(position);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -125,24 +129,37 @@ public class ReservationsListActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /**
+     * return to the MainActivity
+     * @param view
+     */
     public void backToMenu(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+
     public void modifyReservation(View view){
         initialiseViewModel("modify");
     }
 
+    /**
+     * Start the ChangeDatasActivity with the selected BookingEntity
+     */
     private void modifySelectedBooking() {
         Intent intent = new Intent(this, ChangeDatasActivity.class);
         intent.putExtra(MODIFY_ENTITY, selectedEntity);
         startActivity(intent);
     }
 
-    public void deleteReservation(View view) throws InterruptedException {
+
+    public void deleteReservation(View view) {
         initialiseViewModel("delete");
     }
+
+    /**
+     * Delete the selected entity from the database
+     */
     private void deleteSelectedBooking(){
         if(selectedEntity!=null) {
             viewModel.deleteBooking(selectedEntity, new OnAsyncEventListener() {
@@ -163,6 +180,10 @@ public class ReservationsListActivity extends AppCompatActivity {
         else Toast.makeText(getApplication(),"The entity selected is not valid", Toast.LENGTH_LONG);
     }
 
+    /**
+     * Initialize the view model to modify or delete depending on the state
+     * @param state = delete or modify
+     */
     private synchronized void initialiseViewModel(String state){
         if(selectedEntity!=null){
             long id  = selectedEntity.getId();
