@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,10 +14,8 @@ import com.google.android.material.chip.ChipGroup;
 
 import java.util.Date;
 
-import project.bookyourtable.BaseApp;
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
-import project.bookyourtable.util.LanguageManager;
 
 import static java.lang.Integer.parseInt;
 
@@ -37,11 +34,11 @@ public class MainBookingActivity extends AppCompatActivity {
 
     public static final String MY_ENTITY = ".project.bookyourtable.ui.booking.ENTITY";
 
-
-
-    public MainBookingActivity(){
-    }
-
+    /**
+     * Creation of the MainBookingActivity
+     * We link the screen's fields and initialize the Calender Listener
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +65,9 @@ public class MainBookingActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * initialise the period's check listener and set a default value
+     */
     public void setDefaultValues(){
         midday.setOnCheckedChangeListener((buttonView, isChecked) -> {
            if(isChecked) {
@@ -92,6 +92,10 @@ public class MainBookingActivity extends AppCompatActivity {
         midday.setChecked(true);
     }
 
+    /**
+     * Method to continue the booking. We still have to check the informations before continuing.
+     * @param view
+     */
     public void continueBooking(View view){
         BookingEntity entity;
         if((entity=verifyInformations()) !=null) {
@@ -105,32 +109,47 @@ public class MainBookingActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Increase the number of perons in the editText
+     * @param view
+     */
     public void addPerson(View view){
 
-        EditText numberPersons = (EditText)findViewById(R.id.editTextNumber);
+        EditText numberPersons = findViewById(R.id.editTextNumber);
         int number = parseInt(numberPersons.getText().toString().trim());
         number = number +1;
-        displayNumbrePersons(numberPersons, number);
+        displayNumberPersons(numberPersons, number);
     }
 
-    private void displayNumbrePersons(EditText numberPersons, int i) {
+    /**
+     * Set the value in the editText
+     * @param i = number
+     */
+    private void displayNumberPersons(EditText numberPersons, int i) {
         numberPersons.setText("" + i);
     }
 
+    /**
+     * Decrease the number of perons in the editText
+     * @param view
+     */
     public void decreasePerson(View view){
 
         EditText numberPersons = findViewById(R.id.editTextNumber);
         int number = parseInt(numberPersons.getText().toString().trim());
 
         if(number<=1){
-            displayNumbrePersons(numberPersons, 1);
+            displayNumberPersons(numberPersons, 1);
         }
         else
-            displayNumbrePersons(numberPersons,number-1);
+            displayNumberPersons(numberPersons,number-1);
 
     }
 
+    /**
+     * Check all the input informations
+     * @return true if inputs are correct
+     */
     private BookingEntity verifyInformations() {
 
 
@@ -152,14 +171,21 @@ public class MainBookingActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Check if a timeSlot is checked
+     * @return true if a timeSlot is checked
+     */
     private boolean verifyTimeSlot() {
-
-
         int c = timeSlot.getCheckedChipId();
 
         return c != -1;
     }
 
+    /**
+     * Create a BookingEntity with the basics informations
+     * @param number
+     * @return a new BookingEntity
+     */
     private BookingEntity createEntity(int number){
         Chip chip = findViewById(timeSlot.getCheckedChipId());
 

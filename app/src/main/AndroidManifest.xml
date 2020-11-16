@@ -14,10 +14,10 @@
         <activity android:name=".ui.booking.ChangeDatasActivity"
             android:screenOrientation="portrait"
             android:label="@string/modifyAReservation"
-            android:parentActivityName=".ui.booking.ReservationsListActivity">
+            android:parentActivityName=".ui.booking.BookingsDateActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".ui.booking.ReservationsListActivity"/>
+            android:value=".ui.booking.BookingsDateActivity"/>
         </activity>
 
         <activity android:name=".ui.booking.ReservationsListActivity"

@@ -48,7 +48,8 @@ public class BookingsRecyclerAdapter<T> extends RecyclerView.Adapter<BookingsRec
     //VIA CA ON AJOUTE LES COMPORTEMENTS CLIC LONG ET CLICK A LA LISTE
     @Override
     public BookingsRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-//ici on décrit ou on insuffle les données
+
+        //ici on décrit ou on insuffle les données
         TextView v = (TextView) LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.booking_recycler_view, viewGroup, false);
 
@@ -70,7 +71,9 @@ public class BookingsRecyclerAdapter<T> extends RecyclerView.Adapter<BookingsRec
 
     }
 
-    /*Cette méthode permet de retourner la taille de notre liste d'objet, et ainsi indiquer à l'Adapter le nombre de lignes que peut contenir la RecyclerView.*/
+    /**
+     * This method return size of a data list and notify adapter numbers rows which can contain RecyclerView
+     * */
     @Override
     public int getItemCount() {
         if (mdata != null) {
@@ -81,6 +84,10 @@ public class BookingsRecyclerAdapter<T> extends RecyclerView.Adapter<BookingsRec
     }
 
 
+    /**
+     * Define the datas to display in the Recycler view
+     * @param data = list of components to display
+     */
     public void setData(final List<BookingEntity> data) {
         if (mdata == null) {
             mdata = data;
@@ -101,7 +108,7 @@ public class BookingsRecyclerAdapter<T> extends RecyclerView.Adapter<BookingsRec
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
 
                     if (data instanceof TableEntity) {
-                        return ((BookingEntity) data.get(oldItemPosition)).getId().equals(((BookingEntity) data.get(newItemPosition)).getId());
+                        return (data.get(oldItemPosition)).getId().equals((data.get(newItemPosition)).getId());
                     }
                     return false;
                 }

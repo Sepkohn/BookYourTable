@@ -1,16 +1,14 @@
 package project.bookyourtable.database.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
+
+import java.io.Serializable;
+import java.util.Date;
 
 
 @Entity(tableName = "bookings",
@@ -19,12 +17,7 @@ import androidx.room.TypeConverters;
                entity = TableEntity.class,
                parentColumns = "tableId",
                childColumns = "tableNumber",
-               onDelete = ForeignKey.NO_ACTION),
-      indices = {
-               @Index(
-                       value = {"tableNumber"}, unique = true // remarque: est ce que cela ne va pas bloquer la réservation de la table pour un autre jour si on met unique ?
-                )
-     }
+               onDelete = ForeignKey.NO_ACTION)
 )
 public class BookingEntity implements Serializable {
 

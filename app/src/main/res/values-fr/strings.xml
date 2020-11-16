@@ -51,5 +51,15 @@
     <string name="emptyTable">Veuillez sélectionner une table</string>
     <string name="selectedTable">La table no %1$s est sélectionnée</string>
     <string name="selectAll">Veuillez entrer toutes les valeures pour continuer</string>
-    <string name="createError">La table sélectionnée est déjà occupée, veuillez réessayer</string>
+    <string name="action_about">A propos</string>
+    <string name="textAbout">Cours 644-1 – Automne Semestre 2020-2021 \n\n
+        Le but de cette application est de développer une application mobile qui permet à l"'"utilisateur d"'"enregister des réservations dans un restaurant. \n
+        Dans cette application, vous pouvez ajouter, modifier, supprimer et désactiver les différentes tables de ce restaurant. \n
+        Vous pouvez aussi créer une réservation et l"'"attribuer à une table. Vous pouvez ensuite conuslter, modifier et supprimer ces réservations. \n
+        En options, vous pouvaez changer la langue et activer/désactiver le dark mode \n\n
+        Cette application a été développée par Quentin and Valentin.
+        </string>
+    <string name="language">Changer la langue</string>
+    <string name="english">Anglais</string>
+    <string name="french">Francais</string>
 </resources>

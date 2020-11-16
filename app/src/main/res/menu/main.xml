@@ -8,20 +8,20 @@
         android:title="@string/action_about"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/item2"
-        android:title="Item 2"
+        android:id="@+id/DarkMode"
+        android:title="@string/darkMode"
         app:showAsAction="never" />
     <item
         android:id="@+id/item3"
-        android:title="Item 3"
+        android:title="@string/language"
         app:showAsAction="never">
         <menu>
             <item
-                android:id="@+id/subitem1"
-                android:title="Sub Item 1" />
+                android:id="@+id/englishLanguage"
+                android:title="@string/english" />
             <item
-                android:id="@+id/subitem2"
-                android:title="Sub Item " />
+                android:id="@+id/frenchLanguage"
+                android:title="@string/french" />
         </menu>
     </item>
 
