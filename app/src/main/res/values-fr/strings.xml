@@ -44,7 +44,7 @@
     <string name="editTable2">Table éditée</string>
     <string name="addChange">Ajouter les changements</string>
     <string name="execute">Exécuter</string>
-    <string name="deleteMessage">"Voulez vous supprimer la table "</string>
+    <string name="deleteMessage">"Voulez vous supprimer la table %1$s ?"</string>
     <string name="tabledeleted">Table supprimée</string>
     <string name="emptyName">Veuillez entrer un nom</string>
     <string name="emptyTelephone">Veuillez entrer un numéro de téléphone</string>
@@ -53,7 +53,7 @@
     <string name="selectAll">Veuillez entrer toutes les valeures pour continuer</string>
     <string name="action_about">A propos</string>
     <string name="textAbout">Cours 644-1 – Automne Semestre 2020-2021 \n\n
-        Le but de cette application est de développer une application mobile qui permet à l"'"utilisateur d"'"enregister des réservations dans un restaurant. \n
+        Le but de cette application est de développer une application mobile qui permet à l"'"utilisateur d"'"enregistrer des réservations dans un restaurant. \n
         Dans cette application, vous pouvez ajouter, modifier, supprimer et désactiver les différentes tables de ce restaurant. \n
         Vous pouvez aussi créer une réservation et l"'"attribuer à une table. Vous pouvez ensuite conuslter, modifier et supprimer ces réservations. \n
         En options, vous pouvaez changer la langue et activer/désactiver le dark mode \n\n

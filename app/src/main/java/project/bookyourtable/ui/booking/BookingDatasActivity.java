@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,6 +56,10 @@ public class BookingDatasActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                LinearLayoutManager.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         tables = new ArrayList<>();
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
 
@@ -81,11 +86,12 @@ public class BookingDatasActivity extends AppCompatActivity {
             if (tableEntities != null) {
                 tables = tableEntities;
                 adapter.setData(tables);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
         });
 
-        recyclerView.setAdapter(adapter); // refresh l'adaptater, toutes les vues dans le recycler sont rafraichies
-        adapter.notifyDataSetChanged();
+
 
     }
 
@@ -151,8 +157,17 @@ public class BookingDatasActivity extends AppCompatActivity {
     private String validateNumber(EditText phoneNumber) {
         String stringNumber = phoneNumber.getText().toString();
         if (!stringNumber.isEmpty()) {
+
+            if(stringNumber.length()<11)
+            {
+                phoneNumber.setError("The format is incorrect, please try again");
+                phoneNumber.requestFocus();
+                return "";
+            }
+
             return stringNumber;
-        } else {
+        }
+        else{
             phoneNumber.setError(getString(R.string.emptyTelephone));
             phoneNumber.requestFocus();
             return "";
