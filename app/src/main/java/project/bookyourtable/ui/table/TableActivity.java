@@ -113,7 +113,7 @@ public class TableActivity extends AppCompatActivity {
         alertDialog.setCancelable(false);
 
         final TextView deleteMessage = view.findViewById(R.id.tv_delete_item);
-        deleteMessage.setText(getString(R.string.deleteMessage) + table.getLocation() + " ?");
+        deleteMessage.setText(getString(R.string.deleteMessage, ""+table.getLocation()));
         deleteMessage.setTextSize(20);
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.execute), (dialog, which) -> {
