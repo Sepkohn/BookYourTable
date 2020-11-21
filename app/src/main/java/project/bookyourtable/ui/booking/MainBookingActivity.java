@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import project.bookyourtable.R;
@@ -96,7 +99,7 @@ public class MainBookingActivity extends AppCompatActivity {
      * Method to continue the booking. We still have to check the informations before continuing.
      * @param view
      */
-    public void continueBooking(View view){
+    public void continueBooking(View view) throws ParseException {
         BookingEntity entity;
         if((entity=verifyInformations()) !=null) {
             Intent intent = new Intent(this, BookingDatasActivity.class);
@@ -150,7 +153,7 @@ public class MainBookingActivity extends AppCompatActivity {
      * Check all the input informations
      * @return true if inputs are correct
      */
-    private BookingEntity verifyInformations() {
+    private BookingEntity verifyInformations() throws ParseException {
 
 
         int number = parseInt(numberPersons.getText().toString().trim());
@@ -161,9 +164,10 @@ public class MainBookingActivity extends AppCompatActivity {
 
 
         boolean isATimeSlot = verifyTimeSlot();
-        if(bookingdate==null)
-            bookingdate=new Date();
-
+        if(bookingdate==null) {
+            DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            bookingdate = df.parse(df.format(new Date()));
+        }
         if(number>0&&isATimeSlot&&!bookingdate.before(yesterday)){
            return createEntity(number);
         }
@@ -186,15 +190,15 @@ public class MainBookingActivity extends AppCompatActivity {
      * @param number
      * @return a new BookingEntity
      */
-    private BookingEntity createEntity(int number){
+    private BookingEntity createEntity(int number) {
         Chip chip = findViewById(timeSlot.getCheckedChipId());
 
         String time = chip.getText().toString();
 
         BookingEntity entity = new BookingEntity();
         entity.setNumberPersons(number);
-        if(bookingdate==null)
-            bookingdate=new Date();
+
+
         entity.setDate(bookingdate);
         entity.setTime(time);
 

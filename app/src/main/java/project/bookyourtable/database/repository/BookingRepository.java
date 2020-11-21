@@ -45,7 +45,7 @@ public class BookingRepository {
         return ((BaseApp) context).getDatabase().bookingDao().getBookingsByDate(date);
     }
 
-    public LiveData<List<Long>> getBookingsByDateTime(final Date date, final String time, Context context) {
+    public LiveData<List<BookingEntity>> getBookingsByDateTime(final Date date, final String time, Context context) {
         return ((BaseApp) context).getDatabase().bookingDao().getBookingsByDateTime(date, time);
     }
 
