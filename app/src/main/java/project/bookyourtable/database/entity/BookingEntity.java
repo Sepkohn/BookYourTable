@@ -7,8 +7,12 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Entity(tableName = "bookings",
@@ -63,8 +67,22 @@ public class BookingEntity implements Serializable {
 
 
 
+    @Exclude
     public Long getId(){return id;}
     public void setId(Long id){this.id = id; }
+
+    @Exclude
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("time", time);
+        result.put("name", name);
+        result.put("telephoneNumber", telephoneNumber);
+        result.put("message", message);
+        result.put("numberPersons", numberPersons);
+        result.put("tableNumber", tableNumber);
+
+        return result;
+    }
 
     public void setDate(Date date) {
         this.date = date;

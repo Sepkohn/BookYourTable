@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "469743946965",
+    "firebase_url": "https://bookyourtable-7f788.firebaseio.com",
+    "project_id": "bookyourtable-7f788",
+    "storage_bucket": "bookyourtable-7f788.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469743946965:android:c6fa4c5437dbd17a2ce65c",
+        "android_client_info": {
+          "package_name": "project.bookyourtable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469743946965-0kh22larsaj6d53mco34galj6g5o73sm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY-toquJ1pDFz8CCC5to_a_zogbztQGzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469743946965-0kh22larsaj6d53mco34galj6g5o73sm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
