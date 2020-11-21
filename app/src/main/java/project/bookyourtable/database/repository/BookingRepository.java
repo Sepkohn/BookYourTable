@@ -45,6 +45,10 @@ public class BookingRepository {
         return ((BaseApp) context).getDatabase().bookingDao().getBookingsByDate(date);
     }
 
+    public LiveData<List<Long>> getBookingsByDateTime(final Date date, final String time, Context context) {
+        return ((BaseApp) context).getDatabase().bookingDao().getBookingsByDateTime(date, time);
+    }
+
     public void insert(final BookingEntity bookingEntity, OnAsyncEventListener callBack, Context context){
         new CreateBooking(context, callBack).execute(bookingEntity);
     }

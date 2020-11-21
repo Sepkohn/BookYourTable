@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import project.bookyourtable.R;
 import project.bookyourtable.adapter.RecyclerAdapter;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
+import project.bookyourtable.database.repository.BookingRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.util.RecyclerViewItemClickListener;
 import project.bookyourtable.viewmodel.booking.CreateBookingViewModel;
@@ -84,10 +86,22 @@ public class BookingDatasActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, factory2).get(AvailableTableListViewModel.class);
         viewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
-                tables = tableEntities;
-                adapter.setData(tables);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                BookingRepository repository = BookingRepository.getInstance();
+                repository.getBookingsByDateTime(entity.getDate(),entity.getTime(),getApplication()).observe(this, new Observer<List<Long>>() {
+                    @Override
+                    public void onChanged(List<Long> tableNumber) {
+                        if(tableNumber!=null){
+                            for (long table:tableNumber) {
+                                tableEntities.remove(table);
+                            }
+                        }
+                        tables = tableEntities;
+                        adapter.setData(tables);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
             }
         });
 
