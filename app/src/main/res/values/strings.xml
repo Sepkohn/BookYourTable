@@ -19,7 +19,7 @@
     <string name="name">Enter your name</string>
     <string name="nameHint">Name</string>
     <string name="telephoneNumber">Enter your telephone number</string>
-    <string name="telephoneHint" translatable="false">079/797.79.79</string>
+    <string name="telephoneHint" translatable="false">079.7977979</string>
     <string name="comment">Enter a comment if needed</string>
     <string name="commentHint">Baby chair, Vegetarian, Allergy</string>
     <string name="validate">Validate</string>
@@ -66,7 +66,7 @@
 
     <string name="addChange">Add Changes</string>
     <string name="execute">Execute</string>
-    <string name="deleteMessage">Do you want delete Table </string>
+    <string name="deleteMessage">Do you want delete Table %1$s ?</string>
     <string name="tabledeleted">Table deleted</string>
 
     <string name="action_about">About</string>

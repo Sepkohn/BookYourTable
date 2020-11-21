@@ -8,7 +8,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +21,8 @@ import project.bookyourtable.R;
 import project.bookyourtable.adapter.RecyclerAdapter;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
+import project.bookyourtable.database.repository.BookingRepository;
+import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.util.RecyclerViewItemClickListener;
 import project.bookyourtable.viewmodel.booking.CreateBookingViewModel;
@@ -34,6 +38,7 @@ public class BookingDatasActivity extends AppCompatActivity {
     private AvailableTableListViewModel viewModel;
     private List<TableEntity> tables;
     private RecyclerAdapter<TableEntity> adapter;
+    private  RecyclerView recyclerView;
 
     /**
      * Creation of the BookingDatasActivity
@@ -51,9 +56,13 @@ public class BookingDatasActivity extends AppCompatActivity {
         CreateBookingViewModel.Factory factory = new CreateBookingViewModel.Factory(getApplication());
         createBookingViewModel = new ViewModelProvider(this, factory).get(CreateBookingViewModel.class);
 
-        RecyclerView recyclerView = findViewById(R.id.tableRecyclerView3);
+        recyclerView= findViewById(R.id.tableRecyclerView3);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                LinearLayoutManager.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         tables = new ArrayList<>();
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
@@ -79,14 +88,33 @@ public class BookingDatasActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, factory2).get(AvailableTableListViewModel.class);
         viewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
-                tables = tableEntities;
-                adapter.setData(tables);
+                BookingRepository.getInstance().getBookingsByDateTime(entity.getDate(), entity.getTime(), getApplication()).observe(this, bookingEntities -> {
+                    if(bookingEntities.size()>0) {
+                        for (BookingEntity entity : bookingEntities) {
+                            for(int i = 0; i<tableEntities.size();i++){
+                                if(tableEntities.get(i).getId() != entity.getTableNumber()){
+                                    tables.add(tableEntities.get(i));
+                                }
+                            }
+                        }
+                        displayTables();
+                    }
+                    else {
+                        tables = tableEntities;
+                        displayTables();
+                    }
+                });
             }
         });
 
-        recyclerView.setAdapter(adapter); // refresh l'adaptater, toutes les vues dans le recycler sont rafraichies
-        adapter.notifyDataSetChanged();
 
+
+    }
+
+    private void displayTables() {
+        adapter.setData(tables);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -151,8 +179,17 @@ public class BookingDatasActivity extends AppCompatActivity {
     private String validateNumber(EditText phoneNumber) {
         String stringNumber = phoneNumber.getText().toString();
         if (!stringNumber.isEmpty()) {
+
+            if(stringNumber.length()<11)
+            {
+                phoneNumber.setError("The format is incorrect, please try again");
+                phoneNumber.requestFocus();
+                return "";
+            }
+
             return stringNumber;
-        } else {
+        }
+        else{
             phoneNumber.setError(getString(R.string.emptyTelephone));
             phoneNumber.requestFocus();
             return "";
