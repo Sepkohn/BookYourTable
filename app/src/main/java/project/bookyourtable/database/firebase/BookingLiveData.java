@@ -10,15 +10,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 
-public class TableLiveData extends LiveData<TableEntity> {
-    private static final String TAG = "AccountLiveData";
+public class BookingLiveData extends LiveData<BookingEntity> {
+    private static final String TAG = "BookingLiveData";
 
     private final DatabaseReference reference;
-    private final TableLiveData.MyValueEventListener listener = new TableLiveData.MyValueEventListener();
 
-    public TableLiveData(DatabaseReference ref) {
+    private final BookingLiveData.MyValueEventListener listener = new BookingLiveData.MyValueEventListener();
+
+    public BookingLiveData(DatabaseReference ref) {
         reference = ref;
     }
 
@@ -36,7 +38,7 @@ public class TableLiveData extends LiveData<TableEntity> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            TableEntity entity = dataSnapshot.getValue(TableEntity.class);
+            BookingEntity entity = dataSnapshot.getValue(BookingEntity.class);
             entity.setId(dataSnapshot.getKey());
             setValue(entity);
         }

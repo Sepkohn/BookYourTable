@@ -19,15 +19,13 @@ public class TableListLiveData extends LiveData<List<TableEntity>> {
     private static final String TAG = "TableListLiveData";
 
     private final DatabaseReference reference;
-    private  final boolean availability;
-    private  final int nbrePersons;
+
 
     private final MyValueEventListener listener = new MyValueEventListener();
 
-    public TableListLiveData(DatabaseReference ref, boolean availability, int nbrePersons) {
+
+    public TableListLiveData(DatabaseReference ref) {
         reference = ref;
-        this.availability = availability;
-        this.nbrePersons = nbrePersons;
     }
 
     @Override
@@ -58,11 +56,8 @@ public class TableListLiveData extends LiveData<List<TableEntity>> {
 
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             TableEntity entity = childSnapshot.getValue(TableEntity.class);
-
-            if(entity.getPersonNumber()== nbrePersons && entity.getAvailability() == true) {
-                entity.setId(Long.parseLong(childSnapshot.getKey()));
-                tables.add(entity);
-            }
+            entity.setId(childSnapshot.getKey());
+            tables.add(entity);
         }
         return tables;
     }

@@ -103,7 +103,7 @@ public class MainBookingActivity extends AppCompatActivity {
         BookingEntity entity;
         if((entity=verifyInformations()) !=null) {
             Intent intent = new Intent(this, BookingDatasActivity.class);
-            intent.putExtra(MY_ENTITY, entity);
+        //    intent.putExtra(MY_ENTITY, entity);
             startActivity(intent);
         }
         else{

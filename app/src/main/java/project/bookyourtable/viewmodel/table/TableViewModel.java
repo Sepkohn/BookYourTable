@@ -8,6 +8,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
@@ -25,7 +26,7 @@ public class TableViewModel extends AndroidViewModel {
     private final MediatorLiveData<TableEntity> observableTable;
 
     public TableViewModel(@NonNull Application application,
-                           final long tableId, TableRepository tableRepository) {
+                           final String tableId, TableRepository tableRepository) {
         super(application);
         this.application = application;
         repository = tableRepository;
@@ -33,7 +34,7 @@ public class TableViewModel extends AndroidViewModel {
         observableTable = new MediatorLiveData<>();
         observableTable.setValue(null);
 
-        LiveData<TableEntity> table = repository.getTableById(tableId, application);
+        LiveData<TableEntity> table = repository.getTableById(tableId);
 
         observableTable.addSource(table, observableTable::setValue);
     }
@@ -46,11 +47,11 @@ public class TableViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final long id;
+        private final String id;
 
         private final TableRepository repository;
 
-        public Factory(@NonNull Application application, long tableId) {
+        public Factory(@NonNull Application application, String tableId) {
             this.application = application;
             this.id = tableId;
             repository = TableRepository.getInstance();
@@ -70,15 +71,15 @@ public class TableViewModel extends AndroidViewModel {
     }
 
     public void createTable(TableEntity table, OnAsyncEventListener callback) {
-        repository.insert(table, callback, application);
+        ((BaseApp) getApplication()).getTableRepository()
+                .insert(table, callback);
     }
-
     public void updateTable(TableEntity table, OnAsyncEventListener callback) {
-        repository.update(table, callback, application);
+        ((BaseApp) getApplication()).getTableRepository()
+                .update(table, callback);
     }
-
     public void deleteTable(TableEntity table, OnAsyncEventListener callback) {
-        repository.delete(table, callback, application);
-
+        ((BaseApp) getApplication()).getTableRepository()
+                .delete(table, callback);
     }
 }

@@ -11,9 +11,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-import project.bookyourtable.database.async.table.CreateTable;
-import project.bookyourtable.database.async.table.DeleteTable;
-import project.bookyourtable.database.async.table.UpdateTable;
 import project.bookyourtable.database.firebase.TableListLiveData;
 import project.bookyourtable.database.firebase.TableLiveData;
 import project.bookyourtable.util.OnAsyncEventListener;
@@ -36,61 +33,61 @@ public class TableRepository {
         return instance;
     }
 
-//    public LiveData<TableEntity> getTableById(final Long tableId, Context context) {
-//        return ((BaseApp) context).getDatabase().tableDao().getTableById(tableId);
-//    }
-
-    public LiveData<TableEntity> getTableById(final Long tableId, Context context){
+    public LiveData<TableEntity> getTableById(final String tableId){
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("tables")
-                .child(tableId.toString());
+                .getReference("tables");
+//                .child(tableId);
         return new TableLiveData(reference);
     }
-//    public LiveData<List<TableEntity>> getTables(Context context) {
-//        return ((BaseApp) context).getDatabase().tableDao().getAll();
-//    }
 
-    public LiveData<List<TableEntity>> getByAvailability(boolean state,int nbrePersons, Context context) {
+    public LiveData<List<TableEntity>> getByAvailability(boolean state,int nbrePersons) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("tables");
+        return new TableListLiveData(reference);
+    }
+
+    public LiveData<List<TableEntity>> getByOwner() {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("tables");
+        return new TableListLiveData(reference);
+    }
+
+    public void insert(final TableEntity table, OnAsyncEventListener callback) {
+        String id = FirebaseDatabase.getInstance().getReference("tables").push().getKey();
+        FirebaseDatabase.getInstance()
                 .getReference("tables")
-                .child("" + nbrePersons)
-                .child("" + state);
-        return new TableListLiveData(reference, state, nbrePersons);
-    }
-//    public LiveData<List<TableEntity>> getByAvailability(boolean state,int nbrePersons, Context context) {
-//        return ((BaseApp) context).getDatabase().tableDao().getByAvailability (state, nbrePersons);
-//    }
-
-//    public LiveData<List<TableEntity>> getBypersonNumber(int number, Context context) {
-//        return ((BaseApp) context).getDatabase().tableDao().getBypersonNumber(number);
-//    }
-
-
-    public LiveData<List<TableEntity>> getByOwner(Context context) {
-        DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("clients")
-                .child()
-                .child("accounts");
-        return new AccountListLiveData(reference, owner);
+                .child(id)
+                .setValue(table, (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 
-
-//    public LiveData<List<TableEntity>> getByOwner(Context context) {
-//        return ((BaseApp) context).getDatabase().tableDao().getAll();
-//    }
-
-    public void insert(final TableEntity table, OnAsyncEventListener callback,
-                       Context context) {
-        new CreateTable(context, callback).execute(table);
+    public void update(final TableEntity table, OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("tables")
+                .child(table.getId())
+                .updateChildren(table.toMap(), (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
-
-    public void update(final TableEntity table, OnAsyncEventListener callback,
-                       Context context) {
-        new UpdateTable((Application) context, callback).execute(table);
-    }
-
-    public void delete(final TableEntity table, OnAsyncEventListener callback,
-                       Context context) {
-        new DeleteTable(context, callback).execute(table);
+    public void delete(final TableEntity table, OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("tables")
+                .child(table.getId())
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 }

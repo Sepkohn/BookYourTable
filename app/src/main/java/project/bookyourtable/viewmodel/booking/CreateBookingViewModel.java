@@ -50,6 +50,7 @@ public class CreateBookingViewModel extends AndroidViewModel {
     }
 
     public void createBooking(BookingEntity booking, OnAsyncEventListener callback) {
-        repository.insert(booking, callback, applicationContext);
+        ((BaseApp) getApplication()).getBookingRepository()
+                .insert(booking, callback);
     }
 }

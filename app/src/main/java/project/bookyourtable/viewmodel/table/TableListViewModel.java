@@ -31,7 +31,7 @@ public class TableListViewModel extends AndroidViewModel {
         observableOwnTables = new MediatorLiveData<>();
         observableOwnTables.setValue(null);
 
-        LiveData<List<TableEntity>> ownAccounts = repository.getByOwner(application);
+        LiveData<List<TableEntity>> ownAccounts = repository.getByOwner();
         observableOwnTables.addSource(ownAccounts, observableOwnTables::setValue);
     }
 
@@ -43,7 +43,7 @@ public class TableListViewModel extends AndroidViewModel {
     }
 
     public void deleteTable(TableEntity table, OnAsyncEventListener callback) {
-        repository.delete(table, callback, application);
+        repository.delete(table, callback);
     }
 
     /**
