@@ -1,5 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools"
-    tools:locale="es">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es">
 
     <string name="app_name">BookYourTable</string>
     <string name="bookingButton">Reservation</string>
