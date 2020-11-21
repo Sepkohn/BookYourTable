@@ -51,10 +51,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.frenchLanguage:
                 SettingsManager.setLocale(MainActivity.this,"fr");
-                MainActivity.this.onResume();
+                MainActivity.this.recreate();
                 return true;
             case R.id.englishLanguage:
                 SettingsManager.setLocale(MainActivity.this,"es");
+                MainActivity.this.recreate();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
