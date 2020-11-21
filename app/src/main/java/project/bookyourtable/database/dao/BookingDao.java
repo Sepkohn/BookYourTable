@@ -23,9 +23,14 @@ public interface BookingDao {
     @Query("SELECT * FROM bookings")
     LiveData<List<BookingEntity>> getAllBookings();
 
+
     @Query("SELECT * FROM bookings WHERE date = :date")
     @TypeConverters({DataTypeConverter.class})
     LiveData<List<BookingEntity>> getBookingsByDate(Date date);
+
+    @Query("SELECT * FROM bookings WHERE date = :date AND time = :time")
+    @TypeConverters({DataTypeConverter.class})
+    LiveData<List<BookingEntity>> getBookingsByDateTime(Date date, String time);
 
     @Query("SELECT * FROM bookings WHERE bookingId = :id")
     LiveData<BookingEntity> getBookingsById(long id);
