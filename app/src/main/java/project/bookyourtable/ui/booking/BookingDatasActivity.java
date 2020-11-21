@@ -38,7 +38,7 @@ public class BookingDatasActivity extends AppCompatActivity {
     private AvailableTableListViewModel viewModel;
     private List<TableEntity> tables;
     private RecyclerAdapter<TableEntity> adapter;
-    private  RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
     /**
      * Creation of the BookingDatasActivity

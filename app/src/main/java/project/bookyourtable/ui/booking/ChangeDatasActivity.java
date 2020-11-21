@@ -42,8 +42,11 @@ public class ChangeDatasActivity extends AppCompatActivity {
 
     private BookingViewModel viewModel;
     private BookingViewModel.Factory factory;
-    Date bookingdate;
+    private Date bookingDate;
 
+    private boolean haveToChangedTable = false;
+
+    public static final String GET_ENTITY_ID = ".project.bookyourtable.ui.booking.GETENTITYID";
 
     /**
      *
@@ -60,7 +63,7 @@ public class ChangeDatasActivity extends AppCompatActivity {
 
         getElements();
         setValues();
-        calendar.setOnDateChangeListener((arg0, year, month, date) -> bookingdate = new Date(year-1900, month, date));
+        calendar.setOnDateChangeListener((arg0, year, month, date) -> bookingDate = new Date(year-1900, month, date));
 
         factory = new BookingViewModel.Factory(getApplication(), entity.getId());
         viewModel = new ViewModelProvider(this,factory).get(BookingViewModel.class);
@@ -111,7 +114,7 @@ public class ChangeDatasActivity extends AppCompatActivity {
         customerName.setText(entity.getName());
         numberPersons.setText(""+entity.getNumberPersons());
         calendar.setDate(entity.getDate().getTime());
-        bookingdate = entity.getDate();
+        bookingDate = entity.getDate();
 
         System.out.println();
         setPeriod();
@@ -152,19 +155,27 @@ public class ChangeDatasActivity extends AppCompatActivity {
      */
     public void validateBooking(View view){
         if(checkInformations()) {
-            viewModel.updateBooking(entity, new OnAsyncEventListener() {
-                @Override
-                public void onSuccess() {
-                    System.out.println("Customer's booking correctly updated");
-                }
+                viewModel.updateBooking(entity, new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {
+                        System.out.println("Customer's booking correctly updated");
+                    }
 
-                @Override
-                public void onFailure(Exception e) {
-                    System.out.println("ERROR ON UPDATE");
-                }
-            });
-            Intent intent = new Intent(this, ConfirmationActivity.class);
-            startActivity(intent);
+                    @Override
+                    public void onFailure(Exception e) {
+                        System.out.println("ERROR ON UPDATE");
+                    }
+                });
+            if(haveToChangedTable){
+                entity.setTableNumber(null);
+                Intent intent = new Intent(this, ChangeTableActivity.class);
+                intent.putExtra(GET_ENTITY_ID,entity);
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(this, ConfirmationActivity.class);
+                startActivity(intent);
+            }
         }
     }
 
@@ -179,12 +190,16 @@ public class ChangeDatasActivity extends AppCompatActivity {
         Date yesterday = new Date();
         yesterday.setDate(yesterday.getDate()-1);
 
-        if(!name.equals("")&&number>0&&!bookingdate.before(yesterday)&&time!=-1) {
+        if(!name.equals("")&&number>0&&!bookingDate.before(yesterday)&&time!=-1) {
+            if(number!=entity.getNumberPersons()){
+                haveToChangedTable = true;
+            }
             entity.setName(name);
-            entity.setDate(bookingdate);
+            entity.setDate(bookingDate);
             entity.setNumberPersons(number);
             Chip chip = findViewById(time);
             entity.setTime(chip.getText().toString());
+
             return true;
         }
         else{
