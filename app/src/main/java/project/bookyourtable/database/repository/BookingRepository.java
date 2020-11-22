@@ -7,10 +7,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
-import project.bookyourtable.database.firebase.BookingListLiveData;
+import project.bookyourtable.database.firebase.BookingListLiveDateTime;
+import project.bookyourtable.database.firebase.BookingListTimeLiveData;
 import project.bookyourtable.database.firebase.BookingLiveData;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.database.entity.BookingEntity;
@@ -43,23 +43,36 @@ public class BookingRepository {
     public LiveData<List<BookingEntity>> getBookingsByDate(final LocalDate date) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("bookings");
-        return new BookingListLiveData(reference, date);
+        return new BookingListLiveDateTime(reference, date);
     }
 
     public LiveData<List<BookingEntity>> getBookingsByDateTime(final LocalDate date, final String time) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("booking");
-        return new BookingListLiveData(reference, date, time);
+        return new BookingListTimeLiveData(reference, date, time);
 
     }
 
     public void insert(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
-        DatabaseReference myDatabase = FirebaseDatabase.getInstance().getReference("bookings");
-        String id = myDatabase.push().getKey();
+//        DatabaseReference myDatabase = FirebaseDatabase.getInstance().getReference("bookings");
+//        String id = myDatabase.push().getKey();
+//
+//        myDatabase
+//                .child(bookingEntity.getDate().toString())
+//                .child(bookingEntity.getId())
+//                .setValue(bookingEntity, (databaseError, databaseReference) -> {
+//                    if (databaseError != null) {
+//                        callback.onFailure(databaseError.toException());
+//                    } else {
+//                        callback.onSuccess();
+//                    }
+//                });
 
-        myDatabase
-                .child(bookingEntity.getDate().toString())
-                .child(bookingEntity.getId())
+        String id = FirebaseDatabase.getInstance().getReference("bookings").push().getKey();
+
+        FirebaseDatabase.getInstance()
+                .getReference("bookings")
+                .child(id)
                 .setValue(bookingEntity, (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
@@ -67,6 +80,7 @@ public class BookingRepository {
                         callback.onSuccess();
                     }
                 });
+
     }
 
     public void update(final BookingEntity bookingEntity, OnAsyncEventListener callback) {

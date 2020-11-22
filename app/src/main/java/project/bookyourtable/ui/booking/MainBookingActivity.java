@@ -7,10 +7,16 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -50,7 +56,7 @@ public class MainBookingActivity extends AppCompatActivity {
 
         CalendarView view = findViewById(R.id.calendarView);
 
-        view.setOnDateChangeListener((arg0, year, month, date) -> bookingdate = LocalDate.of(year-1900, month, date));
+        view.setOnDateChangeListener((arg0, year, month, date) -> bookingdate = LocalDate.of(year, month+1, date));
 
         timeSlot = findViewById(R.id.timeSlots);
 
@@ -113,6 +119,7 @@ public class MainBookingActivity extends AppCompatActivity {
         }
     }
 
+
     /**
      * Increase the number of perons in the editText
      * @param view
@@ -156,7 +163,7 @@ public class MainBookingActivity extends AppCompatActivity {
      */
     private BookingEntity verifyInformations(){
 
-        int number = parseInt(numberPersons.getText().toString().trim());
+        int number = Integer.parseInt(numberPersons.getText().toString());
 
         LocalDate today = LocalDate.now();
 
@@ -193,8 +200,6 @@ public class MainBookingActivity extends AppCompatActivity {
 
         BookingEntity entity = new BookingEntity();
         entity.setNumberPersons(number);
-
-
         entity.setDate(bookingdate);
         entity.setTime(time);
 

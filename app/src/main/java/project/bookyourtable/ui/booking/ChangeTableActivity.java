@@ -109,7 +109,7 @@ public class ChangeTableActivity extends AppCompatActivity {
 
     private void validateTable() {
         if(tableNo!=0){
-            bookingEntity.setTableNumber(""+tableNo);
+            bookingEntity.setTableNumber(String.valueOf(tableNo));
             bookingViewModel.updateBooking(bookingEntity, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {

@@ -30,9 +30,9 @@ import project.bookyourtable.viewmodel.table.AvailableTableListViewModel;
 public class BookingDatasActivity extends AppCompatActivity {
 
     private static final String TAG = "BookingDatasActivity";
-    BookingEntity entity;
-    CreateBookingViewModel createBookingViewModel;
-    String tableNo;
+    private BookingEntity entity;
+    private CreateBookingViewModel createBookingViewModel;
+    private String tableNo;
 
     private AvailableTableListViewModel viewModel;
     private List<TableEntity> tables;
@@ -50,7 +50,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booking_datas);
 
         Intent intent = getIntent();
-        this.entity = (BookingEntity) intent.getSerializableExtra(MainBookingActivity.MY_ENTITY);
+        entity = (BookingEntity) intent.getSerializableExtra(MainBookingActivity.MY_ENTITY);
 
         CreateBookingViewModel.Factory factory = new CreateBookingViewModel.Factory(getApplication());
         createBookingViewModel = new ViewModelProvider(this, factory).get(CreateBookingViewModel.class);
@@ -67,8 +67,6 @@ public class BookingDatasActivity extends AppCompatActivity {
         adapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
 
             public void onItemClick(View v, int position) {
-
-
                 Toast.makeText(BookingDatasActivity.this,getString(R.string.selectedTable,""+tables.get(position).getId()), Toast.LENGTH_LONG).show();
                 tableNo = tables.get(position).getId();
             }
@@ -87,7 +85,7 @@ public class BookingDatasActivity extends AppCompatActivity {
                     if(bookingEntities.size()>0) {
                         for (BookingEntity entity : bookingEntities) {
                             for(int i = 0; i<tableEntities.size();i++){
-                                if(tableEntities.get(i).getId() != entity.getTableNumber()){
+                                if(!tableEntities.get(i).getId().equals(entity.getTableNumber())){
                                     tables.add(tableEntities.get(i));
                                 }
                             }
@@ -118,7 +116,15 @@ public class BookingDatasActivity extends AppCompatActivity {
      */
     public void validateBooking(View view){
         if(verifyInformations()) {
-            createBookingViewModel.createBooking(entity, new OnAsyncEventListener() {
+
+             BookingEntity newBookingEntity = new BookingEntity();
+            newBookingEntity.setTableNumber(tableNo);
+            newBookingEntity.setName("clientName");
+            newBookingEntity.setTelephoneNumber("clientPhoneNumber");
+            newBookingEntity.setMessage("clientMessage");
+
+
+            createBookingViewModel.createBooking(newBookingEntity, new OnAsyncEventListener() {
 
                 @Override
                 public void onSuccess() {
@@ -156,7 +162,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         EditText message = findViewById(R.id.commentHint);
         String clientMessage = message.getText().toString();
 
-        if(!clientName.equals("")&&!clientPhoneNumber.equals("")&&tableNo!=null){
+        if(!clientName.equals("")&&!clientPhoneNumber.equals("")&&!tableNo.equals("")){
             entity.setTableNumber(tableNo);
             entity.setName(clientName);
             entity.setTelephoneNumber(clientPhoneNumber);

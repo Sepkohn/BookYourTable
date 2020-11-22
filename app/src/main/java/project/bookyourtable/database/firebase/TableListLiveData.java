@@ -54,10 +54,8 @@ public class TableListLiveData extends LiveData<List<TableEntity>> {
 
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             TableEntity entity = childSnapshot.getValue(TableEntity.class);
-            if(String.valueOf(entity.getPersonNumber()).equals("2")) {
-                entity.setId(childSnapshot.getKey());
-                tables.add(entity);
-            }
+            entity.setId(childSnapshot.getKey());
+            tables.add(entity);
         }
         return tables;
     }
