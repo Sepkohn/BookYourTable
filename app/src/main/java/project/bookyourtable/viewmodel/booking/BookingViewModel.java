@@ -10,6 +10,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.repository.BookingRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
@@ -28,7 +29,7 @@ public class BookingViewModel extends AndroidViewModel {
      */
     public BookingViewModel(
             @NonNull Application application,
-            final long bookingId,
+            final String bookingId,
             BookingRepository repository){
         super(application);
 
@@ -40,7 +41,7 @@ public class BookingViewModel extends AndroidViewModel {
 
         observableBooking.setValue(null);
 
-        LiveData<BookingEntity> booking = repository.getBookingById(bookingId, applicationContext);
+        LiveData<BookingEntity> booking = repository.getBookingById(bookingId);
 
         observableBooking.addSource(booking, observableBooking::setValue);
 
@@ -54,11 +55,11 @@ public class BookingViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final long bookingId;
+        private final String bookingId;
 
         private final BookingRepository repository;
 
-        public Factory(@NonNull Application application, long bookingId) {
+        public Factory(@NonNull Application application, String bookingId) {
             this.application = application;
             this.bookingId = bookingId;
             repository = BookingRepository.getInstance();
@@ -77,10 +78,12 @@ public class BookingViewModel extends AndroidViewModel {
     }
 
     public void updateBooking(BookingEntity booking, OnAsyncEventListener callback) {
-        repository.update(booking, callback, applicationContext);
+        ((BaseApp) getApplication()).getBookingRepository()
+                .update(booking, callback);
     }
 
     public void deleteBooking(BookingEntity booking, OnAsyncEventListener callback) {
-        repository.delete(booking, callback, applicationContext);
+        ((BaseApp) getApplication()).getBookingRepository()
+                .delete(booking, callback);
     }
 }

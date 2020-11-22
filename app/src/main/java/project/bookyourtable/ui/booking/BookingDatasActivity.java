@@ -22,7 +22,6 @@ import project.bookyourtable.adapter.RecyclerAdapter;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.database.repository.BookingRepository;
-import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.util.RecyclerViewItemClickListener;
 import project.bookyourtable.viewmodel.booking.CreateBookingViewModel;
@@ -33,7 +32,7 @@ public class BookingDatasActivity extends AppCompatActivity {
     private static final String TAG = "BookingDatasActivity";
     BookingEntity entity;
     CreateBookingViewModel createBookingViewModel;
-    long tableNo;
+    String tableNo;
 
     private AvailableTableListViewModel viewModel;
     private List<TableEntity> tables;
@@ -76,9 +75,6 @@ public class BookingDatasActivity extends AppCompatActivity {
 
             @Override
             public void onItemLongClick(View v, int position) {
-
-                //no action
-
             }
         });
 
@@ -88,7 +84,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, factory2).get(AvailableTableListViewModel.class);
         viewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
-                BookingRepository.getInstance().getBookingsByDateTime(entity.getDate(), entity.getTime(), getApplication()).observe(this, bookingEntities -> {
+                BookingRepository.getInstance().getBookingsByDateTime(entity.getDate(), entity.getTime()).observe(this, bookingEntities -> {
                     if(bookingEntities.size()>0) {
                         for (BookingEntity entity : bookingEntities) {
                             for(int i = 0; i<tableEntities.size();i++){
@@ -161,7 +157,7 @@ public class BookingDatasActivity extends AppCompatActivity {
         EditText message = findViewById(R.id.commentHint);
         String clientMessage = message.getText().toString();
 
-        if(!clientName.equals("")&&!clientPhoneNumber.equals("")&&tableNo!=0){
+        if(!clientName.equals("")&&!clientPhoneNumber.equals("")&&tableNo!=null){
             entity.setTableNumber(tableNo);
             entity.setName(clientName);
             entity.setTelephoneNumber(clientPhoneNumber);

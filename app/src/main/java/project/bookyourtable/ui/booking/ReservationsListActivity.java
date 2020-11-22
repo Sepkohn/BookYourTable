@@ -89,7 +89,7 @@ public class ReservationsListActivity extends AppCompatActivity {
         });
 
         repository = ((BaseApp) getApplication()).getBookingRepository();
-        repository.getBookingsByDate(date, getApplication()).observe(this, new Observer<List<BookingEntity>>() {
+        repository.getBookingsByDate(date).observe(this, new Observer<List<BookingEntity>>() {
             @Override
             public void onChanged(List<BookingEntity> bookingEntities) {
                 displayBookings = bookingEntities;
@@ -148,7 +148,7 @@ public class ReservationsListActivity extends AppCompatActivity {
      */
     private void modifySelectedBooking() {
         Intent intent = new Intent(this, ChangeDatasActivity.class);
-        intent.putExtra(MODIFY_ENTITY, selectedEntity);
+        //intent.putExtra(MODIFY_ENTITY, selectedEntity);
         startActivity(intent);
     }
 
@@ -186,7 +186,7 @@ public class ReservationsListActivity extends AppCompatActivity {
      */
     private synchronized void initialiseViewModel(String state){
         if(selectedEntity!=null){
-            long id  = selectedEntity.getId();
+            String id  = selectedEntity.getId();
             factory = new BookingViewModel.Factory(getApplication(), id);
             viewModel = new ViewModelProvider(this,factory).get(BookingViewModel.class);
             viewModel.getBooking().observe(this, bookingEntity -> {

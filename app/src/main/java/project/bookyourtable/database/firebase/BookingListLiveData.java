@@ -10,15 +10,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 
-public class TableLiveData extends LiveData<TableEntity> {
-    private static final String TAG = "AccountLiveData";
+public class BookingListLiveData extends LiveData<List<BookingEntity>> {
+    private static final String TAG = "BookingListLiveData";
 
     private final DatabaseReference reference;
-    private final TableLiveData.MyValueEventListener listener = new TableLiveData.MyValueEventListener();
 
-    public TableLiveData(DatabaseReference ref) {
+
+    private final BookingListLiveData.MyValueEventListener listener = new BookingListLiveData.MyValueEventListener();
+
+
+    public BookingListLiveData(DatabaseReference ref, Date date) {
         reference = ref;
     }
 
@@ -36,14 +44,23 @@ public class TableLiveData extends LiveData<TableEntity> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            TableEntity entity = dataSnapshot.getValue(TableEntity.class);
-            entity.setId(dataSnapshot.getKey());
-            setValue(entity);
+            setValue(toAccounts(dataSnapshot));
         }
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
             Log.e(TAG, "Can't listen to query " + reference, databaseError.toException());
         }
+    }
+
+    private List<BookingEntity> toAccounts(DataSnapshot snapshot) {
+        List<BookingEntity> tables = new ArrayList<>();
+
+        for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+            BookingEntity entity = childSnapshot.getValue(BookingEntity.class);
+            entity.setId(childSnapshot.getKey());
+            tables.add(entity);
+        }
+        return tables;
     }
 }

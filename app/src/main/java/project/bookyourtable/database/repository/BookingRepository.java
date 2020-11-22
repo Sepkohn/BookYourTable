@@ -1,17 +1,16 @@
 package project.bookyourtable.database.repository;
 
 
-import android.content.Context;
-
 import androidx.lifecycle.LiveData;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
 import java.util.List;
 
-import project.bookyourtable.BaseApp;
-import project.bookyourtable.database.async.booking.CreateBooking;
-import project.bookyourtable.database.async.booking.DeleteBooking;
-import project.bookyourtable.database.async.booking.UpdateBooking;
+import project.bookyourtable.database.firebase.BookingListLiveData;
+import project.bookyourtable.database.firebase.BookingLiveData;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.database.entity.BookingEntity;
 
@@ -33,34 +32,62 @@ public class BookingRepository {
         return instance;
     }
 
-    public LiveData<BookingEntity> getBookingById(final long accountId, Context context) {
-        return ((BaseApp) context).getDatabase().bookingDao().getBookingsById(accountId);
+    public LiveData<BookingEntity> getBookingById(final String accountId) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("booking")
+                .child(accountId);
+        return new BookingLiveData(reference);
     }
 
-    public LiveData<List<BookingEntity>> getBookings(Context context) {
-        return ((BaseApp) context).getDatabase().bookingDao().getAllBookings();
+    public LiveData<List<BookingEntity>> getBookingsByDate(final Date date) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("booking");
+        return new BookingListLiveData(reference, date);
     }
 
-    public LiveData<List<BookingEntity>> getBookingsByDate(final Date date, Context context) {
-        return ((BaseApp) context).getDatabase().bookingDao().getBookingsByDate(date);
+    public LiveData<List<BookingEntity>> getBookingsByDateTime(final Date date, final String time) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("booking");
+        return new BookingListLiveData(reference, date);
     }
 
-    public LiveData<List<BookingEntity>> getBookingsByDateTime(final Date date, final String time, Context context) {
-        return ((BaseApp) context).getDatabase().bookingDao().getBookingsByDateTime(date, time);
+    public void insert(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
+        String id = FirebaseDatabase.getInstance().getReference("booking").push().getKey();
+        FirebaseDatabase.getInstance()
+                .getReference("booking")
+                .child(id)
+                .setValue(bookingEntity, (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 
-    public void insert(final BookingEntity bookingEntity, OnAsyncEventListener callBack, Context context){
-        new CreateBooking(context, callBack).execute(bookingEntity);
+    public void update(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("booking")
+                .child(bookingEntity.getId())
+                .updateChildren(bookingEntity.toMap(), (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 
-    public void update(final BookingEntity bookingEntity, OnAsyncEventListener callBack, Context context) {
-        new UpdateBooking(context, callBack).execute(bookingEntity);
+    public void delete(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("booking")
+                .child(bookingEntity.getId())
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
-
-    public void delete(final BookingEntity bookingEntity, OnAsyncEventListener callBack, Context context) {
-        new DeleteBooking(context, callBack).execute(bookingEntity);
-    }
-
-
-
 }

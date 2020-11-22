@@ -69,9 +69,9 @@ public class EditTableActivity extends AppCompatActivity {
         });
 
         //Get if table ID exist for editing or not for adding mode
-        Long tableId = getIntent().getLongExtra("tableId", 0L);
 
-        if (tableId == 0L) {
+        String tableId = getIntent().getStringExtra("tableId");
+        if (tableId == null) {
             setTitle(getString(R.string.createTable));
             toast = Toast.makeText(this, getString(R.string.createTable2), Toast.LENGTH_LONG);
             isEditMode = false;
