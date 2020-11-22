@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import project.bookyourtable.R;
@@ -42,7 +43,7 @@ public class ChangeDatasActivity extends AppCompatActivity {
 
     private BookingViewModel viewModel;
     private BookingViewModel.Factory factory;
-    private Date bookingDate;
+    private LocalDate bookingDate;
 
     private boolean haveToChangedTable = false;
 
@@ -63,7 +64,7 @@ public class ChangeDatasActivity extends AppCompatActivity {
 
         getElements();
         setValues();
-        calendar.setOnDateChangeListener((arg0, year, month, date) -> bookingDate = new Date(year-1900, month, date));
+        calendar.setOnDateChangeListener((arg0, year, month, date) -> bookingDate = LocalDate.of(year-1900, month, date));
 
         factory = new BookingViewModel.Factory(getApplication(), entity.getId());
         viewModel = new ViewModelProvider(this,factory).get(BookingViewModel.class);
@@ -113,7 +114,8 @@ public class ChangeDatasActivity extends AppCompatActivity {
     private void setValues(){
         customerName.setText(entity.getName());
         numberPersons.setText(""+entity.getNumberPersons());
-        calendar.setDate(entity.getDate().getTime());
+        LocalDate myDate = entity.getDate();
+        calendar.setDate(Long.parseLong(new Date(myDate.getYear(), myDate.getMonthValue(), myDate.getDayOfYear()).toString()));
         bookingDate = entity.getDate();
 
         System.out.println();
@@ -187,10 +189,9 @@ public class ChangeDatasActivity extends AppCompatActivity {
         String name = customerName.getText().toString();
         int number = parseInt(numberPersons.getText().toString());
         int time = timeSlot.getCheckedChipId();
-        Date yesterday = new Date();
-        yesterday.setDate(yesterday.getDate()-1);
+        LocalDate today = LocalDate.now();
 
-        if(!name.equals("")&&number>0&&!bookingDate.before(yesterday)&&time!=-1) {
+        if(!name.equals("")&&number>0&&!bookingDate.isBefore(today)&&time!=-1) {
             if(number!=entity.getNumberPersons()){
                 haveToChangedTable = true;
             }

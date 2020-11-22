@@ -15,6 +15,7 @@ import com.google.android.material.chip.ChipGroup;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import project.bookyourtable.R;
@@ -24,7 +25,7 @@ import static java.lang.Integer.parseInt;
 
 public class MainBookingActivity extends AppCompatActivity {
 
-    private Date bookingdate;
+    private LocalDate bookingdate;
     private ChipGroup timeSlot;
     private Chip midday;
     private Chip evening;
@@ -49,7 +50,7 @@ public class MainBookingActivity extends AppCompatActivity {
 
         CalendarView view = findViewById(R.id.calendarView);
 
-        view.setOnDateChangeListener((arg0, year, month, date) -> bookingdate = new Date(year-1900, month, date));
+        view.setOnDateChangeListener((arg0, year, month, date) -> bookingdate = LocalDate.of(year-1900, month, date));
 
         timeSlot = findViewById(R.id.timeSlots);
 
@@ -158,17 +159,16 @@ public class MainBookingActivity extends AppCompatActivity {
 
         int number = parseInt(numberPersons.getText().toString().trim());
 
-        Date yesterday = new Date();
-        yesterday.setDate(yesterday.getDate()-1);
+        LocalDate today = LocalDate.now();
+
 
 
 
         boolean isATimeSlot = verifyTimeSlot();
         if(bookingdate==null) {
-            DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-            bookingdate = df.parse(df.format(new Date()));
+           bookingdate = LocalDate.now();
         }
-        if(number>0&&isATimeSlot&&!bookingdate.before(yesterday)){
+        if(number>0&&isATimeSlot&&!bookingdate.isBefore(today)){
            return createEntity(number);
         }
 

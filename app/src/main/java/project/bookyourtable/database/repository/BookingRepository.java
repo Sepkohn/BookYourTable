@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -39,16 +40,17 @@ public class BookingRepository {
         return new BookingLiveData(reference);
     }
 
-    public LiveData<List<BookingEntity>> getBookingsByDate(final Date date) {
+    public LiveData<List<BookingEntity>> getBookingsByDate(final LocalDate date) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("booking");
         return new BookingListLiveData(reference, date);
     }
 
-    public LiveData<List<BookingEntity>> getBookingsByDateTime(final Date date, final String time) {
+    public LiveData<List<BookingEntity>> getBookingsByDateTime(final LocalDate date, final String time) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("booking");
-        return new BookingListLiveData(reference, date); // <<< ICI manque le time retiré en attendant
+        return new BookingListLiveData(reference, date, time);
+
     }
 
     public void insert(final BookingEntity bookingEntity, OnAsyncEventListener callback) {

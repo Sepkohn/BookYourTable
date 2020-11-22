@@ -70,7 +70,7 @@ public class ChangeTableActivity extends AppCompatActivity {
             public void onItemClick(View v, int position) {
 
             Toast.makeText(ChangeTableActivity.this,getString(R.string.selectedTable,""+tables.get(position).getId()), Toast.LENGTH_LONG).show();
-            tableNo = tables.get(position).getId();
+            tableNo = Long.parseLong(tables.get(position).getId());
 
             }
 
@@ -86,7 +86,7 @@ public class ChangeTableActivity extends AppCompatActivity {
         tableViewModel = new ViewModelProvider(this, factory2).get(AvailableTableListViewModel.class);
         tableViewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
-                BookingRepository.getInstance().getBookingsByDateTime(bookingEntity.getDate(), bookingEntity.getTime(), getApplication()).observe(this, bookingEntities -> {
+                BookingRepository.getInstance().getBookingsByDateTime(bookingEntity.getDate(), bookingEntity.getTime()).observe(this, bookingEntities -> {
                     if(bookingEntities.size()>0) {
                         for (BookingEntity entity : bookingEntities) {
                             for(int i = 0; i<tableEntities.size();i++){
@@ -109,7 +109,7 @@ public class ChangeTableActivity extends AppCompatActivity {
 
     private void validateTable() {
         if(tableNo!=0){
-            bookingEntity.setTableNumber(tableNo);
+            bookingEntity.setTableNumber(""+tableNo);
             bookingViewModel.updateBooking(bookingEntity, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {

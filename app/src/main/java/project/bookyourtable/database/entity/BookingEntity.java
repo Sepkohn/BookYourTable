@@ -2,14 +2,15 @@ package project.bookyourtable.database.entity;
 
 import com.google.firebase.database.Exclude;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class BookingEntity {
+public class BookingEntity implements Serializable {
     private String id;
-    private Date date;
+    private LocalDate date;
     private String time;
     private String name;
     private String telephoneNumber;
@@ -20,7 +21,7 @@ public class BookingEntity {
 
     public BookingEntity(){}
 
-    public BookingEntity(Date date,String time, String name, String telephoneNumber, String message,int numberPersons, String tableNumber){
+    public BookingEntity(LocalDate date, String time, String name, String telephoneNumber, String message, int numberPersons, String tableNumber){
         this.date = date;
         this.time = time;
         this.name = name;
@@ -47,10 +48,10 @@ public class BookingEntity {
         return result;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
-    public Date getDate(){return date;}
+    public LocalDate getDate(){return date;}
 
     public String getTime() {
         return time;

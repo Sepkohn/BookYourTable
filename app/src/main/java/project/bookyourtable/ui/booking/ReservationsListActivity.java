@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +35,7 @@ import project.bookyourtable.viewmodel.booking.BookingViewModel;
 
 public class ReservationsListActivity extends AppCompatActivity {
 
-    private Date date;
+    private LocalDate date;
     private BookingRepository repository;
 
     private List<BookingEntity> displayBookings;
@@ -57,13 +58,8 @@ public class ReservationsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reservations_list);
 
         Intent intent = getIntent();
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
-        try {
-            date = df.parse(intent.getStringExtra(BookingsDateActivity.MY_DATE));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        date = LocalDate.parse(intent.getStringExtra(BookingsDateActivity.MY_DATE));
 
         RecyclerView recyclerView = findViewById(R.id.tableRecyclerView3);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -148,7 +144,7 @@ public class ReservationsListActivity extends AppCompatActivity {
      */
     private void modifySelectedBooking() {
         Intent intent = new Intent(this, ChangeDatasActivity.class);
-        //intent.putExtra(MODIFY_ENTITY, selectedEntity);
+        intent.putExtra(MODIFY_ENTITY, selectedEntity);
         startActivity(intent);
     }
 
