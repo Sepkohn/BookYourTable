@@ -50,6 +50,7 @@ public class BookingRepository {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("booking");
         return new BookingListLiveData(reference, date, time);
+
     }
 
     public void insert(final BookingEntity bookingEntity, OnAsyncEventListener callback) {

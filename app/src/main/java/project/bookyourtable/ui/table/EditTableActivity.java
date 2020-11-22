@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.List;
 
 import project.bookyourtable.R;
@@ -34,6 +36,7 @@ public class EditTableActivity extends AppCompatActivity {
     private boolean statusSwitch;
     private boolean uniqueTable = true;
     private TableViewModel tableViewModel;
+    private DatabaseReference rootDatabaseref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

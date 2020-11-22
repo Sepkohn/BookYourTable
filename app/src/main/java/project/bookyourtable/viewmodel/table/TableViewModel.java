@@ -28,15 +28,19 @@ public class TableViewModel extends AndroidViewModel {
     public TableViewModel(@NonNull Application application,
                            final String tableId, TableRepository tableRepository) {
         super(application);
-        this.application = application;
+
         repository = tableRepository;
 
         observableTable = new MediatorLiveData<>();
+        // set by default null, until we get data from the database.
         observableTable.setValue(null);
 
-        LiveData<TableEntity> table = repository.getTableById(tableId);
+        if(tableId != null){
+            LiveData<TableEntity> table = repository.getTableById(tableId);
+            // observe the changes of the table entity from the database and forward them
+            observableTable.addSource(table, observableTable::setValue);
+        }
 
-        observableTable.addSource(table, observableTable::setValue);
     }
 
     /**
@@ -71,15 +75,9 @@ public class TableViewModel extends AndroidViewModel {
     }
 
     public void createTable(TableEntity table, OnAsyncEventListener callback) {
-        ((BaseApp) getApplication()).getTableRepository()
-                .insert(table, callback);
+        TableRepository.getInstance().insert(table, callback);
     }
     public void updateTable(TableEntity table, OnAsyncEventListener callback) {
-        ((BaseApp) getApplication()).getTableRepository()
-                .update(table, callback);
-    }
-    public void deleteTable(TableEntity table, OnAsyncEventListener callback) {
-        ((BaseApp) getApplication()).getTableRepository()
-                .delete(table, callback);
+        repository.update(table, callback);
     }
 }
