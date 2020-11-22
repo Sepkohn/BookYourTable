@@ -78,12 +78,10 @@ public class BookingViewModel extends AndroidViewModel {
     }
 
     public void updateBooking(BookingEntity booking, OnAsyncEventListener callback) {
-        ((BaseApp) getApplication()).getBookingRepository()
-                .update(booking, callback);
+        repository.update(booking, callback);
     }
 
     public void deleteBooking(BookingEntity booking, OnAsyncEventListener callback) {
-        ((BaseApp) getApplication()).getBookingRepository()
-                .delete(booking, callback);
+        repository.delete(booking, callback);
     }
 }

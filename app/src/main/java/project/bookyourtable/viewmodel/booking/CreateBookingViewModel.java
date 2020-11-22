@@ -5,11 +5,9 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.repository.BookingRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
@@ -50,7 +48,6 @@ public class CreateBookingViewModel extends AndroidViewModel {
     }
 
     public void createBooking(BookingEntity booking, OnAsyncEventListener callback) {
-        ((BaseApp) getApplication()).getBookingRepository()
-                .insert(booking, callback);
+        BookingRepository.getInstance().insert(booking, callback);
     }
 }

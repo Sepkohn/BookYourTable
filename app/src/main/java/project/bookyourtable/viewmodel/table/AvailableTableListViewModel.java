@@ -59,7 +59,7 @@ public class AvailableTableListViewModel extends AndroidViewModel {
 
         public Factory(@NonNull Application application, int nbrePersons) {
             this.application = application;
-            tableRepository = ((BaseApp) application).getTableRepository();
+            tableRepository = TableRepository.getInstance();
             this.nbrePersons = nbrePersons;
         }
 

@@ -78,8 +78,7 @@ public class BookingDatasActivity extends AppCompatActivity {
             }
         });
 
-        AvailableTableListViewModel.Factory factory2 = new AvailableTableListViewModel.Factory(
-                getApplication(),entity.getNumberPersons());
+        AvailableTableListViewModel.Factory factory2 = new AvailableTableListViewModel.Factory(getApplication(),entity.getNumberPersons());
 
         viewModel = new ViewModelProvider(this, factory2).get(AvailableTableListViewModel.class);
         viewModel.getOwnTables().observe(this, tableEntities -> {

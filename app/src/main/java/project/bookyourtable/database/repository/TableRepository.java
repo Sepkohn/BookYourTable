@@ -35,14 +35,16 @@ public class TableRepository {
 
     public LiveData<TableEntity> getTableById(final String tableId){
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("tables");
-//                .child(tableId);
+                .getReference("tables")
+                .child(tableId);
         return new TableLiveData(reference);
     }
 
     public LiveData<List<TableEntity>> getByAvailability(boolean state,int nbrePersons) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("tables");
+                .getReference("tables")
+                .child(String.valueOf(state))
+                .child(String.valueOf(nbrePersons));
         return new TableListLiveData(reference);
     }
 
@@ -54,9 +56,10 @@ public class TableRepository {
 
     public void insert(final TableEntity table, OnAsyncEventListener callback) {
         String id = FirebaseDatabase.getInstance().getReference("tables").push().getKey();
+
         FirebaseDatabase.getInstance()
                 .getReference("tables")
-                .child(id)
+                .child(String.valueOf(table.getLocation()))
                 .setValue(table, (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
@@ -64,12 +67,13 @@ public class TableRepository {
                         callback.onSuccess();
                     }
                 });
+
     }
 
     public void update(final TableEntity table, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("tables")
-                .child(table.getId())
+                .child(String.valueOf(table.getId()))
                 .updateChildren(table.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
