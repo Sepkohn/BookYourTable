@@ -41,11 +41,7 @@ public class TableRepository {
 
     public LiveData<List<TableEntity>> getByAvailability(boolean state,int nbrePersons) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("tables")
-                .child(String.valueOf(state))
-                .child(String.valueOf(nbrePersons));
-
-
+                .getReference("tables");
         return new TableListAvailableLiveData(reference, String.valueOf(state), String.valueOf(nbrePersons));
     }
 

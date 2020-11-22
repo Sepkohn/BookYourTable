@@ -71,9 +71,7 @@ public class ReservationsListActivity extends AppCompatActivity {
 
         displayBookings = new ArrayList<>();
         this.adapter = new BookingsRecyclerAdapter<>(new RecyclerViewItemClickListener() {
-
             public void onItemClick(View v, int position) {
-
                 Toast.makeText(ReservationsListActivity.this, " booking No " + displayBookings.get(position).getId() + " selected", Toast.LENGTH_LONG).show();
                 selectedEntity = displayBookings.get(position);
             }

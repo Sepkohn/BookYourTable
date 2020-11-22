@@ -39,7 +39,7 @@ public class AvailableTableListViewModel extends AndroidViewModel {
         observableOwnTables.setValue(null);
 
 
-        LiveData<List<TableEntity>> availableTables = repository.getByOwner();
+        LiveData<List<TableEntity>> availableTables = repository.getByAvailability(true, nbrePersons);
 
         // observe the changes of the entities from the database and forward them
 

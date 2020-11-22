@@ -1,6 +1,5 @@
 package project.bookyourtable.database.firebase;
 
-import android.icu.util.LocaleData;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -13,29 +12,25 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import project.bookyourtable.database.entity.BookingEntity;
-import project.bookyourtable.database.entity.TableEntity;
 
-public class BookingListLiveData extends LiveData<List<BookingEntity>> {
-    private static final String TAG = "BookingListLiveData";
+public class BookingListLiveDateTime extends LiveData<List<BookingEntity>> {
+    private static final String TAG = "BookingListLiveDateTime";
 
     private final DatabaseReference reference;
+    private final LocalDate date;
 
 
-    private final BookingListLiveData.MyValueEventListener listener = new BookingListLiveData.MyValueEventListener();
+    private final BookingListLiveDateTime.MyValueEventListener listener = new BookingListLiveDateTime.MyValueEventListener();
 
 
-    public BookingListLiveData(DatabaseReference ref, LocalDate date) {
+    public BookingListLiveDateTime(DatabaseReference ref, LocalDate date) {
         reference = ref;
+        this.date=date;
     }
 
-    public BookingListLiveData(DatabaseReference ref, LocalDate date, String time) {
-        reference = ref;
-    }
 
     @Override
     protected void onActive() {
@@ -65,7 +60,8 @@ public class BookingListLiveData extends LiveData<List<BookingEntity>> {
 
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             BookingEntity entity = childSnapshot.getValue(BookingEntity.class);
-            entity.setId(childSnapshot.getKey());
+            if(String.valueOf(entity.getDate()).equals(date))
+                entity.setId(childSnapshot.getKey());
             tables.add(entity);
         }
         return tables;

@@ -64,7 +64,7 @@ public class ChangeDatasActivity extends AppCompatActivity {
 
         getElements();
         setValues();
-        calendar.setOnDateChangeListener((arg0, year, month, date) -> bookingDate = LocalDate.of(year-1900, month, date));
+        calendar.setOnDateChangeListener((arg0, year, month, date) -> bookingDate = LocalDate.of(year, month-1, date));
 
         factory = new BookingViewModel.Factory(getApplication(), entity.getId());
         viewModel = new ViewModelProvider(this,factory).get(BookingViewModel.class);

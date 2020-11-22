@@ -10,23 +10,26 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.bookyourtable.database.entity.TableEntity;
+import project.bookyourtable.database.entity.BookingEntity;
 
-public class TableListAvailableLiveData extends LiveData<List<TableEntity>> {
-    private static final String TAG = "TableListAvailableLiveData";
+public class BookingListTimeLiveData extends LiveData<List<BookingEntity>> {
+    private static final String TAG = "BookingListLiveDateTime";
 
     private final DatabaseReference reference;
-    private final MyValueEventListener listener = new MyValueEventListener();
-    private final String state;
-    private final String nbrPersons;
+    private final LocalDate date;
+    private final String time;
 
-    public TableListAvailableLiveData(DatabaseReference ref, String state, String nbrPersons) {
+
+    private final BookingListTimeLiveData.MyValueEventListener listener = new BookingListTimeLiveData.MyValueEventListener();
+
+    public BookingListTimeLiveData(DatabaseReference ref, LocalDate date, String time) {
         reference = ref;
-        this.state = state;
-        this.nbrPersons = nbrPersons;
+        this.date=date;
+        this.time=time;
     }
 
     @Override
@@ -43,8 +46,7 @@ public class TableListAvailableLiveData extends LiveData<List<TableEntity>> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            Iterable<DataSnapshot> mData = dataSnapshot.getChildren();
-                setValue(toTablesList(dataSnapshot));
+            setValue(toAccounts(dataSnapshot));
         }
 
         @Override
@@ -53,15 +55,14 @@ public class TableListAvailableLiveData extends LiveData<List<TableEntity>> {
         }
     }
 
-    private List<TableEntity> toTablesList(DataSnapshot snapshot) {
-        List<TableEntity> tables = new ArrayList<>();
+    private List<BookingEntity> toAccounts(DataSnapshot snapshot) {
+        List<BookingEntity> tables = new ArrayList<>();
 
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-            TableEntity entity = childSnapshot.getValue(TableEntity.class);
-            if(entity.getPersonNumber()>=Integer.parseInt(nbrPersons) && String.valueOf(entity.getAvailability()).equals(state)) {
-                entity.setId(childSnapshot.getKey());
-                tables.add(entity);
-            }
+            BookingEntity entity = childSnapshot.getValue(BookingEntity.class);
+            if(String.valueOf(entity.getDate()).equals(date) &&  String.valueOf(entity.getDate()).equals(time))
+            entity.setId(childSnapshot.getKey());
+            tables.add(entity);
         }
         return tables;
     }
