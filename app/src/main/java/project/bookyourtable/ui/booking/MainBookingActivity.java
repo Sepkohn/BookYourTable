@@ -154,15 +154,11 @@ public class MainBookingActivity extends AppCompatActivity {
      * Check all the input informations
      * @return true if inputs are correct
      */
-    private BookingEntity verifyInformations() throws ParseException {
-
+    private BookingEntity verifyInformations(){
 
         int number = parseInt(numberPersons.getText().toString().trim());
 
         LocalDate today = LocalDate.now();
-
-
-
 
         boolean isATimeSlot = verifyTimeSlot();
         if(bookingdate==null) {
