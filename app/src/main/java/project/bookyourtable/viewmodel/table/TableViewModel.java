@@ -80,4 +80,7 @@ public class TableViewModel extends AndroidViewModel {
     public void updateTable(TableEntity table, OnAsyncEventListener callback) {
         repository.update(table, callback);
     }
+    public void deleteTable(TableEntity table, OnAsyncEventListener callback) {
+        repository.delete(table, callback);
+    }
 }

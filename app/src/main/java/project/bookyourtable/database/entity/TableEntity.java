@@ -28,7 +28,6 @@ public class TableEntity {
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("location", location);
         result.put("availability", availability);
         result.put("personNumber", personNumber);
         return result;
@@ -39,7 +38,6 @@ public class TableEntity {
 
     public boolean getAvailability(){return availability; }
     public void setAvailability(boolean availability){ this.availability=availability; }
-
     public int getLocation(){return location; }
     public void setLocation(int location){ this.location=location; }
 

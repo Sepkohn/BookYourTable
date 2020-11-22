@@ -9,16 +9,12 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.database.DatabaseReference;
 
-import java.util.List;
-
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.TableEntity;
-import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.viewmodel.table.TableViewModel;
 
@@ -37,6 +33,7 @@ public class EditTableActivity extends AppCompatActivity {
     private boolean uniqueTable = true;
     private TableViewModel tableViewModel;
     private DatabaseReference rootDatabaseref;
+    private int locationInit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +43,7 @@ public class EditTableActivity extends AppCompatActivity {
         etnumtable = findViewById(R.id.inputnumtable);
         etnumtable.requestFocus();
         etnumberperson = findViewById(R.id.intputnumberperson);
+
 
         swBtn = findViewById(R.id.swAvailability);
         swBtn.setText("");
@@ -128,6 +126,7 @@ public class EditTableActivity extends AppCompatActivity {
             tableEntity.setPersonNumber(personNumber);
             tableEntity.setLocation(location);
             tableEntity.setAvailability(state);
+            Log.d(TAG, "createTable: success" + locationInit + " / " + location);
 
             tableViewModel.updateTable(tableEntity, new OnAsyncEventListener() {
                 @Override
@@ -142,8 +141,9 @@ public class EditTableActivity extends AppCompatActivity {
             });
         } else {
             TableEntity newTableEntity = new TableEntity();
-            newTableEntity.setPersonNumber(personNumber);
             newTableEntity.setLocation(location);
+            newTableEntity.setPersonNumber(personNumber);
+
             newTableEntity.setAvailability(state);
 
             tableViewModel.createTable(newTableEntity, new OnAsyncEventListener() {

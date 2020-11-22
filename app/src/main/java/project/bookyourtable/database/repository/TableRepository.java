@@ -1,9 +1,6 @@
 package project.bookyourtable.database.repository;
 
 
-import android.app.Application;
-import android.content.Context;
-
 import androidx.lifecycle.LiveData;
 
 import com.google.firebase.database.DatabaseReference;
@@ -11,6 +8,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+import project.bookyourtable.database.firebase.TableListAvailableLiveData;
 import project.bookyourtable.database.firebase.TableListLiveData;
 import project.bookyourtable.database.firebase.TableLiveData;
 import project.bookyourtable.util.OnAsyncEventListener;
@@ -37,6 +35,7 @@ public class TableRepository {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("tables")
                 .child(tableId);
+
         return new TableLiveData(reference);
     }
 
@@ -45,7 +44,9 @@ public class TableRepository {
                 .getReference("tables")
                 .child(String.valueOf(state))
                 .child(String.valueOf(nbrePersons));
-        return new TableListLiveData(reference);
+
+
+        return new TableListAvailableLiveData(reference, String.valueOf(state), String.valueOf(nbrePersons));
     }
 
     public LiveData<List<TableEntity>> getByOwner() {
