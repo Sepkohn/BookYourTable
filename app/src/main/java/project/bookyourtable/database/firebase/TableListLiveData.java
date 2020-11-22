@@ -19,10 +19,7 @@ public class TableListLiveData extends LiveData<List<TableEntity>> {
     private static final String TAG = "TableListLiveData";
 
     private final DatabaseReference reference;
-
-
     private final MyValueEventListener listener = new MyValueEventListener();
-
 
     public TableListLiveData(DatabaseReference ref) {
         reference = ref;
@@ -42,7 +39,7 @@ public class TableListLiveData extends LiveData<List<TableEntity>> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            setValue(toAccounts(dataSnapshot));
+            setValue(toTablesList(dataSnapshot));
         }
 
         @Override
@@ -51,9 +48,8 @@ public class TableListLiveData extends LiveData<List<TableEntity>> {
         }
     }
 
-    private List<TableEntity> toAccounts(DataSnapshot snapshot) {
+    private List<TableEntity> toTablesList(DataSnapshot snapshot) {
         List<TableEntity> tables = new ArrayList<>();
-
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             TableEntity entity = childSnapshot.getValue(TableEntity.class);
             entity.setId(childSnapshot.getKey());

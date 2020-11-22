@@ -1,5 +1,6 @@
 package project.bookyourtable.database.entity;
 
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -27,8 +28,9 @@ public class TableEntity {
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("personNumber", personNumber);
+        result.put("location", location);
         result.put("availability", availability);
+        result.put("personNumber", personNumber);
         return result;
     }
 
@@ -40,5 +42,8 @@ public class TableEntity {
 
     public int getLocation(){return location; }
     public void setLocation(int location){ this.location=location; }
+
+
+
 
 }

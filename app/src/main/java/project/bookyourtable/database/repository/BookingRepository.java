@@ -48,7 +48,7 @@ public class BookingRepository {
     public LiveData<List<BookingEntity>> getBookingsByDateTime(final Date date, final String time) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("booking");
-        return new BookingListLiveData(reference, date);
+        return new BookingListLiveData(reference, date); // <<< ICI manque le time retiré en attendant
     }
 
     public void insert(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
