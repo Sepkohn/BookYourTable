@@ -35,14 +35,14 @@ public class BookingRepository {
 
     public LiveData<BookingEntity> getBookingById(final String accountId) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("booking")
+                .getReference("bookings")
                 .child(accountId);
         return new BookingLiveData(reference);
     }
 
     public LiveData<List<BookingEntity>> getBookingsByDate(final LocalDate date) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("booking");
+                .getReference("bookings");
         return new BookingListLiveData(reference, date);
     }
 
@@ -54,10 +54,12 @@ public class BookingRepository {
     }
 
     public void insert(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
-        String id = FirebaseDatabase.getInstance().getReference("booking").push().getKey();
-        FirebaseDatabase.getInstance()
-                .getReference("booking")
-                .child(id)
+        DatabaseReference myDatabase = FirebaseDatabase.getInstance().getReference("bookings");
+        String id = myDatabase.push().getKey();
+
+        myDatabase
+                .child(bookingEntity.getDate().toString())
+                .child(bookingEntity.getId())
                 .setValue(bookingEntity, (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
@@ -69,7 +71,7 @@ public class BookingRepository {
 
     public void update(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
-                .getReference("booking")
+                .getReference("bookings")
                 .child(bookingEntity.getId())
                 .updateChildren(bookingEntity.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
@@ -82,7 +84,7 @@ public class BookingRepository {
 
     public void delete(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
-                .getReference("booking")
+                .getReference("bookings")
                 .child(bookingEntity.getId())
                 .removeValue((databaseError, databaseReference) -> {
                     if (databaseError != null) {
