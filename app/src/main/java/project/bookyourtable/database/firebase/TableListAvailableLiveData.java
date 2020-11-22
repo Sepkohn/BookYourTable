@@ -15,14 +15,18 @@ import java.util.List;
 
 import project.bookyourtable.database.entity.TableEntity;
 
-public class TableListLiveData extends LiveData<List<TableEntity>> {
+public class TableListAvailableLiveData extends LiveData<List<TableEntity>> {
     private static final String TAG = "TableListLiveData";
 
     private final DatabaseReference reference;
     private final MyValueEventListener listener = new MyValueEventListener();
+    private final String state;
+    private final String nbrPersons;
 
-    public TableListLiveData(DatabaseReference ref) {
+    public TableListAvailableLiveData(DatabaseReference ref, String state, String nbrPersons) {
         reference = ref;
+        this.state = state;
+        this.nbrPersons = nbrPersons;
     }
 
     @Override
@@ -54,7 +58,7 @@ public class TableListLiveData extends LiveData<List<TableEntity>> {
 
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             TableEntity entity = childSnapshot.getValue(TableEntity.class);
-            if(String.valueOf(entity.getPersonNumber()).equals("2")) {
+            if(String.valueOf(entity.getPersonNumber()).equals(nbrPersons) && String.valueOf(entity.getAvailability()).equals(state)) {
                 entity.setId(childSnapshot.getKey());
                 tables.add(entity);
             }

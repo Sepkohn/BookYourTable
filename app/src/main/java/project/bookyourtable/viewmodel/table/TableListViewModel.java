@@ -57,7 +57,7 @@ public class TableListViewModel extends AndroidViewModel {
 
         public Factory(@NonNull Application application) {
             this.application = application;
-            tableRepository = ((BaseApp) application).getTableRepository();
+            tableRepository = TableRepository.getInstance();
         }
 
         @Override
