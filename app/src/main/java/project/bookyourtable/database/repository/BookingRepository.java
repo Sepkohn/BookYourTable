@@ -35,15 +35,14 @@ public class BookingRepository {
 
     public LiveData<BookingEntity> getBookingById(final String accountId) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("bookings")
-                .child(accountId);
-        return new BookingLiveData(reference);
+                .getReference("bookings");
+        return new BookingLiveData(reference, accountId);
     }
 
     public LiveData<List<BookingEntity>> getBookingsByDate(final LocalDate date) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("bookings");
-        return new BookingListLiveDateTime(reference, date);
+                .getReference("bookings").child(date.toString());
+        return new BookingListLiveDateTime(reference);
     }
 
     public LiveData<List<BookingEntity>> getBookingsByDateTime(final LocalDate date, final String time) {
@@ -54,26 +53,13 @@ public class BookingRepository {
     }
 
     public void insert(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
-//        DatabaseReference myDatabase = FirebaseDatabase.getInstance().getReference("bookings");
-//        String id = myDatabase.push().getKey();
-//
-//        myDatabase
-//                .child(bookingEntity.getDate().toString())
-//                .child(bookingEntity.getId())
-//                .setValue(bookingEntity, (databaseError, databaseReference) -> {
-//                    if (databaseError != null) {
-//                        callback.onFailure(databaseError.toException());
-//                    } else {
-//                        callback.onSuccess();
-//                    }
-//                });
+        DatabaseReference myDatabase = FirebaseDatabase.getInstance().getReference("bookings");
+        bookingEntity.setId(myDatabase.push().getKey());
 
-        String id = FirebaseDatabase.getInstance().getReference("bookings").push().getKey();
-
-        FirebaseDatabase.getInstance()
-                .getReference("bookings")
-                .child(id)
-                .setValue(bookingEntity, (databaseError, databaseReference) -> {
+        myDatabase
+                .child(bookingEntity.getDateToString())
+                .child(bookingEntity.getId())
+                        .setValue(bookingEntity.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
                     } else {

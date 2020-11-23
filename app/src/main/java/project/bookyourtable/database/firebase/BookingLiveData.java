@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 
@@ -17,11 +19,13 @@ public class BookingLiveData extends LiveData<BookingEntity> {
     private static final String TAG = "BookingLiveData";
 
     private final DatabaseReference reference;
+    private final String bookingId;
 
     private final BookingLiveData.MyValueEventListener listener = new BookingLiveData.MyValueEventListener();
 
-    public BookingLiveData(DatabaseReference ref) {
+    public BookingLiveData(DatabaseReference ref, String bookingId) {
         reference = ref;
+        this.bookingId = bookingId;
     }
 
     @Override
@@ -38,9 +42,17 @@ public class BookingLiveData extends LiveData<BookingEntity> {
     private class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            BookingEntity entity = dataSnapshot.getValue(BookingEntity.class);
-            entity.setId(dataSnapshot.getKey());
-            setValue(entity);
+            for (DataSnapshot snap:dataSnapshot.getChildren()) {
+                if(snap!=null){
+                   if(snap.child(bookingId).exists()){
+                       BookingEntity entity = snap.child(bookingId).getValue(BookingEntity.class);
+                       entity.setId(snap.child(bookingId).getKey());
+                       entity.setDate(LocalDate.parse(snap.getKey()));
+                       setValue(entity);
+                   }
+                }
+            }
+
         }
 
         @Override
