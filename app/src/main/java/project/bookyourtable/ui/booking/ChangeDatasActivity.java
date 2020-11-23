@@ -14,7 +14,10 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalField;
 import java.util.Date;
+import java.util.SimpleTimeZone;
 
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
@@ -115,7 +118,7 @@ public class ChangeDatasActivity extends AppCompatActivity {
         customerName.setText(entity.getName());
         numberPersons.setText(""+entity.getNumberPersons());
         LocalDate myDate = entity.getDate();
-        calendar.setDate(Long.parseLong(new Date(myDate.getYear(), myDate.getMonthValue(), myDate.getDayOfYear()).toString()));
+        calendar.setDate(new Date(myDate.getYear()-1900, myDate.getMonthValue()-1, myDate.getDayOfMonth()).getTime());
         bookingDate = entity.getDate();
 
         System.out.println();

@@ -1,5 +1,6 @@
 package project.bookyourtable.ui.booking;
 
+import android.content.Entity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -117,14 +118,9 @@ public class BookingDatasActivity extends AppCompatActivity {
     public void validateBooking(View view){
         if(verifyInformations()) {
 
-             BookingEntity newBookingEntity = new BookingEntity();
-            newBookingEntity.setTableNumber(tableNo);
-            newBookingEntity.setName("clientName");
-            newBookingEntity.setTelephoneNumber("clientPhoneNumber");
-            newBookingEntity.setMessage("clientMessage");
+            BookingEntity newEntity = entity;
 
-
-            createBookingViewModel.createBooking(newBookingEntity, new OnAsyncEventListener() {
+            createBookingViewModel.createBooking(newEntity, new OnAsyncEventListener() {
 
                 @Override
                 public void onSuccess() {

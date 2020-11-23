@@ -20,10 +20,6 @@ public class BookingsRecyclerAdapter<T> extends RecyclerView.Adapter<BookingsRec
 
     private List<BookingEntity> mdata;
 
-    public BookingsRecyclerAdapter(List<BookingEntity> mdata) {
-        this.mdata = mdata;
-    }
-
     private RecyclerViewItemClickListener listener;
 
     // Provide a reference to the views for each data item

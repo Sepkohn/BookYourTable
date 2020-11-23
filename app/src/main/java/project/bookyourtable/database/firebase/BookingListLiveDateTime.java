@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
@@ -20,15 +21,13 @@ public class BookingListLiveDateTime extends LiveData<List<BookingEntity>> {
     private static final String TAG = "BookingListLiveDateTime";
 
     private final DatabaseReference reference;
-    private final LocalDate date;
 
 
     private final BookingListLiveDateTime.MyValueEventListener listener = new BookingListLiveDateTime.MyValueEventListener();
 
 
-    public BookingListLiveDateTime(DatabaseReference ref, LocalDate date) {
+    public BookingListLiveDateTime(DatabaseReference ref) {
         reference = ref;
-        this.date=date;
     }
 
 
@@ -56,14 +55,12 @@ public class BookingListLiveDateTime extends LiveData<List<BookingEntity>> {
     }
 
     private List<BookingEntity> toAccounts(DataSnapshot snapshot) {
-        List<BookingEntity> tables = new ArrayList<>();
-
+        List<BookingEntity> bookings = new ArrayList<>();
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             BookingEntity entity = childSnapshot.getValue(BookingEntity.class);
-            if(String.valueOf(entity.getDate()).equals(date))
-                entity.setId(childSnapshot.getKey());
-            tables.add(entity);
+            entity.setId(childSnapshot.getKey());
+            bookings.add(entity);
         }
-        return tables;
+        return bookings;
     }
 }

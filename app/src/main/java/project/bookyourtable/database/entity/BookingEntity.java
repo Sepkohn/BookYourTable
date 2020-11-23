@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class BookingEntity implements Serializable {
     private String id;
-    private LocalDate date;
+    private String date;
     private String time;
     private String name;
     private String telephoneNumber;
@@ -22,7 +22,7 @@ public class BookingEntity implements Serializable {
     public BookingEntity(){}
 
     public BookingEntity(LocalDate date, String time, String name, String telephoneNumber, String message, int numberPersons, String tableNumber){
-        this.date = date;
+        this.date = date.toString();
         this.time = time;
         this.name = name;
         this.telephoneNumber = telephoneNumber;
@@ -49,9 +49,10 @@ public class BookingEntity implements Serializable {
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.date = date.toString();
     }
-    public LocalDate getDate(){return date;}
+    public LocalDate getDate(){return LocalDate.parse(date);}
+    public String getDateToString(){return date;}
 
     public String getTime() {
         return time;
@@ -62,7 +63,7 @@ public class BookingEntity implements Serializable {
     }
 
     public String getName(){return name; }
-    public void setName(String personNumber){ this.name=personNumber; }
+    public void setName(String name){ this.name=name; }
 
     public String getTelephoneNumber(){return telephoneNumber; }
     public void setTelephoneNumber(String telephoneNumber){ this.telephoneNumber=telephoneNumber; }
