@@ -20,15 +20,13 @@ public class BookingListTimeLiveData extends LiveData<List<BookingEntity>> {
     private static final String TAG = "BookingListLiveDateTime";
 
     private final DatabaseReference reference;
-    private final LocalDate date;
     private final String time;
 
 
     private final BookingListTimeLiveData.MyValueEventListener listener = new BookingListTimeLiveData.MyValueEventListener();
 
-    public BookingListTimeLiveData(DatabaseReference ref, LocalDate date, String time) {
+    public BookingListTimeLiveData(DatabaseReference ref, String time) {
         reference = ref;
-        this.date=date;
         this.time=time;
     }
 
@@ -60,9 +58,10 @@ public class BookingListTimeLiveData extends LiveData<List<BookingEntity>> {
 
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             BookingEntity entity = childSnapshot.getValue(BookingEntity.class);
-            if(String.valueOf(entity.getDate()).equals(date) &&  String.valueOf(entity.getDate()).equals(time))
-            entity.setId(childSnapshot.getKey());
-            tables.add(entity);
+            if(String.valueOf(entity.getTime()).equals(time)){
+                entity.setId(childSnapshot.getKey());
+                tables.add(entity);
+            }
         }
         return tables;
     }

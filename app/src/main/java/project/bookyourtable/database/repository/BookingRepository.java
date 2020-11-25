@@ -47,8 +47,8 @@ public class BookingRepository {
 
     public LiveData<List<BookingEntity>> getBookingsByDateTime(final LocalDate date, final String time) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("booking");
-        return new BookingListTimeLiveData(reference, date, time);
+                .getReference("bookings").child(date.toString());
+        return new BookingListTimeLiveData(reference, time);
 
     }
 
@@ -72,6 +72,7 @@ public class BookingRepository {
     public void update(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("bookings")
+                .child(bookingEntity.getDateToString())
                 .child(bookingEntity.getId())
                 .updateChildren(bookingEntity.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
@@ -82,9 +83,16 @@ public class BookingRepository {
                 });
     }
 
-    public void delete(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
+    public void updateWithDate(final BookingEntity bookingEntity, LocalDate date, OnAsyncEventListener callback) {
+        delete(bookingEntity, bookingEntity.getDateToString(), callback);
+        bookingEntity.setDate(date);
+        insert(bookingEntity, callback);
+    }
+
+    public void delete(final BookingEntity bookingEntity, String date, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("bookings")
+                .child(date)
                 .child(bookingEntity.getId())
                 .removeValue((databaseError, databaseReference) -> {
                     if (databaseError != null) {

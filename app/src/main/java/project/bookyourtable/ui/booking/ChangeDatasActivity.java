@@ -14,10 +14,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalField;
 import java.util.Date;
-import java.util.SimpleTimeZone;
 
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
@@ -49,6 +46,7 @@ public class ChangeDatasActivity extends AppCompatActivity {
     private LocalDate bookingDate;
 
     private boolean haveToChangedTable = false;
+    private boolean hasChangedDate = false;
 
     public static final String GET_ENTITY_ID = ".project.bookyourtable.ui.booking.GETENTITYID";
 
@@ -67,7 +65,7 @@ public class ChangeDatasActivity extends AppCompatActivity {
 
         getElements();
         setValues();
-        calendar.setOnDateChangeListener((arg0, year, month, date) -> bookingDate = LocalDate.of(year, month-1, date));
+        calendar.setOnDateChangeListener((arg0, year, month, date) -> bookingDate = LocalDate.of(year, month+1, date));
 
         factory = new BookingViewModel.Factory(getApplication(), entity.getId());
         viewModel = new ViewModelProvider(this,factory).get(BookingViewModel.class);
@@ -160,6 +158,20 @@ public class ChangeDatasActivity extends AppCompatActivity {
      */
     public void validateBooking(View view){
         if(checkInformations()) {
+            if(hasChangedDate){
+                viewModel.updateBookingWithDate(entity, bookingDate, new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {
+                        System.out.println("Customer's booking correctly updated");
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                        System.out.println("ERROR ON UPDATE");
+                    }
+                });
+            }
+            else {
                 viewModel.updateBooking(entity, new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
@@ -171,12 +183,15 @@ public class ChangeDatasActivity extends AppCompatActivity {
                         System.out.println("ERROR ON UPDATE");
                     }
                 });
+            }
+
             if(haveToChangedTable){
                 entity.setTableNumber(null);
                 Intent intent = new Intent(this, ChangeTableActivity.class);
                 intent.putExtra(GET_ENTITY_ID,entity);
                 startActivity(intent);
             }
+
             else {
                 Intent intent = new Intent(this, ConfirmationActivity.class);
                 startActivity(intent);
@@ -198,8 +213,15 @@ public class ChangeDatasActivity extends AppCompatActivity {
             if(number!=entity.getNumberPersons()){
                 haveToChangedTable = true;
             }
+            if(!(bookingDate.equals(entity.getDate()))){
+                hasChangedDate=true;
+            }
+            else {
+                entity.setDate(bookingDate);
+            }
+
             entity.setName(name);
-            entity.setDate(bookingDate);
+
             entity.setNumberPersons(number);
             Chip chip = findViewById(time);
             entity.setTime(chip.getText().toString());
