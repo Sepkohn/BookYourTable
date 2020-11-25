@@ -83,14 +83,11 @@ public class ReservationsListActivity extends AppCompatActivity {
         });
 
         repository = ((BaseApp) getApplication()).getBookingRepository();
-        repository.getBookingsByDate(date).observe(this, new Observer<List<BookingEntity>>() {
-            @Override
-            public void onChanged(List<BookingEntity> bookingEntities) {
-                displayBookings = bookingEntities;
-                adapter.setData(displayBookings);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
+        repository.getBookingsByDate(date).observe(this, bookingEntities -> {
+            displayBookings = bookingEntities;
+            adapter.setData(displayBookings);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         });
 
     }

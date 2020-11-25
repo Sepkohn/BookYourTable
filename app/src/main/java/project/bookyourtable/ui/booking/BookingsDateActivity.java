@@ -32,7 +32,7 @@ public class BookingsDateActivity extends AppCompatActivity {
 
         CalendarView view = findViewById(R.id.calendarView);
 
-        view.setOnDateChangeListener((arg0, year, month, date) -> bookingdate = LocalDate.of(year-1900, month, date));
+        view.setOnDateChangeListener((arg0, year, month, date) -> bookingdate = LocalDate.of(year, month+1, date));
 
     }
 

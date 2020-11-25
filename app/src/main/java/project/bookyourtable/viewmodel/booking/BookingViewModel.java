@@ -10,6 +10,8 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.time.LocalDate;
+
 import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.repository.BookingRepository;
@@ -81,7 +83,11 @@ public class BookingViewModel extends AndroidViewModel {
         repository.update(booking, callback);
     }
 
+    public void updateBookingWithDate(BookingEntity booking, LocalDate date, OnAsyncEventListener callback) {
+        repository.updateWithDate(booking, date, callback);
+    }
+
     public void deleteBooking(BookingEntity booking, OnAsyncEventListener callback) {
-        repository.delete(booking, callback);
+        repository.delete(booking, booking.getDateToString(), callback);
     }
 }
