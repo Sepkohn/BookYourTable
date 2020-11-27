@@ -88,6 +88,6 @@ public class BookingViewModel extends AndroidViewModel {
     }
 
     public void deleteBooking(BookingEntity booking, OnAsyncEventListener callback) {
-        repository.delete(booking, booking.getDateToString(), callback);
+        repository.delete(booking, callback);
     }
 }

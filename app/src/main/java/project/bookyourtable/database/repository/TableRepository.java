@@ -79,6 +79,13 @@ public class TableRepository {
                     }
                 });
     }
+    public void updateNewNumber(final TableEntity table,int newNumber, OnAsyncEventListener callback){
+
+        delete(table, callback);
+        table.setLocation(newNumber);
+        insert(table, callback);
+    }
+
     public void delete(final TableEntity table, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("tables")

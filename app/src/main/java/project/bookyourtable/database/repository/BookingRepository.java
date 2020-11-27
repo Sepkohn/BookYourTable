@@ -84,15 +84,15 @@ public class BookingRepository {
     }
 
     public void updateWithDate(final BookingEntity bookingEntity, LocalDate date, OnAsyncEventListener callback) {
-        delete(bookingEntity, bookingEntity.getDateToString(), callback);
+        delete(bookingEntity, callback);
         bookingEntity.setDate(date);
         insert(bookingEntity, callback);
     }
 
-    public void delete(final BookingEntity bookingEntity, String date, OnAsyncEventListener callback) {
+    public void delete(final BookingEntity bookingEntity, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("bookings")
-                .child(date)
+                .child(bookingEntity.getDateToString())
                 .child(bookingEntity.getId())
                 .removeValue((databaseError, databaseReference) -> {
                     if (databaseError != null) {
