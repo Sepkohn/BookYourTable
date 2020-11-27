@@ -215,6 +215,7 @@ public class ChangeDatasActivity extends AppCompatActivity {
             }
             if(!(bookingDate.equals(entity.getDate()))){
                 hasChangedDate=true;
+                haveToChangedTable = true;
             }
             else {
                 entity.setDate(bookingDate);

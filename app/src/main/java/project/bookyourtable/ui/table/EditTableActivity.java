@@ -32,6 +32,7 @@ public class EditTableActivity extends AppCompatActivity {
     private boolean statusSwitch;
     private boolean uniqueTable = true;
     private TableViewModel tableViewModel;
+    private boolean hasChangedNumber = false;
     private DatabaseReference rootDatabaseref;
     private int locationInit;
 
@@ -122,23 +123,40 @@ public class EditTableActivity extends AppCompatActivity {
     /**
      * Method to set all information in tableEntity that offer an distinction between adding mode or edit mode*/
     private void saveChanges(int location, int personNumber, boolean state) {
+
         if (isEditMode) {
             tableEntity.setPersonNumber(personNumber);
-            tableEntity.setLocation(location);
+
             tableEntity.setAvailability(state);
             Log.d(TAG, "createTable: success" + locationInit + " / " + location);
 
-            tableViewModel.updateTable(tableEntity, new OnAsyncEventListener() {
-                @Override
-                public void onSuccess() {
-                    Log.d(TAG, "updateTable: success");
-                }
+            if(tableEntity.getLocation()!=location){
+                tableViewModel.updateTableNewNumber(tableEntity, location,  new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "updateTable: success");
+                    }
 
-                @Override
-                public void onFailure(Exception e) {
-                    Log.d(TAG, "updateTable: failure", e);
-                }
-            });
+                    @Override
+                    public void onFailure(Exception e) {
+                        Log.d(TAG, "updateTable: failure", e);
+                    }
+                });
+            }
+            else {
+                tableEntity.setLocation(location);
+                tableViewModel.updateTable(tableEntity, new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "updateTable: success");
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                        Log.d(TAG, "updateTable: failure", e);
+                    }
+                });
+            }
         } else {
             TableEntity newTableEntity = new TableEntity();
             newTableEntity.setLocation(location);

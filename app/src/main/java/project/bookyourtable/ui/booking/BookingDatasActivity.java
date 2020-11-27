@@ -82,26 +82,25 @@ public class BookingDatasActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, factory2).get(AvailableTableListViewModel.class);
         viewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
-                List<TableEntity> newTables = new ArrayList<>();
                 BookingRepository.getInstance().getBookingsByDateTime(entity.getDate(), entity.getTime()).observe(this, bookingEntities -> {
                     if(bookingEntities.size()>0) {
+                        Boolean isTablefree;
                         for(TableEntity tableEntity : tableEntities){
+                            isTablefree = true;
                             for (BookingEntity entity : bookingEntities) {
-                                int i = newTables.indexOf(tableEntity);
-                                System.out.println(i);
-                                if(!(entity.getTableNumber().equals(tableEntity.getId()))&&newTables.indexOf(tableEntity)==-1){
-                                    newTables.add(tableEntity);
+                                if(entity.getTableNumber().equals(tableEntity.getId())){
+                                    isTablefree = false;
                                 }
                             }
+                            if (isTablefree){
+                                tables.add(tableEntity);
+                            }
                         }
-                        tables = newTables;
-                        displayTables();
                     }
                     else {
                         tables = tableEntities;
-                        displayTables();
                     }
-
+                    displayTables();
                 });
             }
         });
