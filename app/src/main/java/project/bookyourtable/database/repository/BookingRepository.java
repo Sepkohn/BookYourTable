@@ -1,17 +1,23 @@
 package project.bookyourtable.database.repository;
 
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import project.bookyourtable.database.firebase.BookingListLiveDateBefore;
 import project.bookyourtable.database.firebase.BookingListLiveDateTime;
 import project.bookyourtable.database.firebase.BookingListTimeLiveData;
 import project.bookyourtable.database.firebase.BookingLiveData;
+import project.bookyourtable.ui.MainActivity;
+import project.bookyourtable.ui.booking.ReservationsListActivity;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.database.entity.BookingEntity;
 
@@ -43,6 +49,11 @@ public class BookingRepository {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("bookings").child(date.toString());
         return new BookingListLiveDateTime(reference);
+    }
+    public LiveData<List<BookingEntity>> getBookingsByDateBefore(final LocalDate date) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("bookings");
+        return new BookingListLiveDateBefore(reference, date);
     }
 
     public LiveData<List<BookingEntity>> getBookingsByDateTime(final LocalDate date, final String time) {
@@ -101,5 +112,26 @@ public class BookingRepository {
                         callback.onSuccess();
                     }
                 });
+    }
+
+    public void deleteBookingHistory(final LocalDate date, LifecycleOwner owner){
+        BookingRepository.getInstance().getBookingsByDateBefore(date).observe(owner, new Observer<List<BookingEntity>>() {
+            @Override
+            public void onChanged(List<BookingEntity> bookingEntities) {
+                for(BookingEntity bookingEntity:bookingEntities) {
+                    delete(bookingEntity, new OnAsyncEventListener() {
+                        @Override
+                        public void onSuccess() {
+                            System.out.println("DELETED");
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            System.out.println("BOOKING NOT DELETED");
+                        }
+                    });
+                }
+            }
+        });
     }
 }
