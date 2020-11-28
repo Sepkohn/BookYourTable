@@ -67,6 +67,12 @@ public class BookingRepository {
         return new BookingListLiveByTable(reference, table);
     }
 
+    public LiveData<List<BookingEntity>> getBookingsByTable(final int location) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("bookings");
+        return new BookingLiveDataLocation(reference, location);
+    }
+
     public LiveData<List<BookingEntity>> getBookingsByDateTime(final LocalDate date, final String time) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("bookings").child(date.toString());
