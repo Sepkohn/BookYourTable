@@ -1,6 +1,7 @@
 package project.bookyourtable.viewmodel.table;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -8,7 +9,6 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.database.repository.TableRepository;
 import project.bookyourtable.util.OnAsyncEventListener;

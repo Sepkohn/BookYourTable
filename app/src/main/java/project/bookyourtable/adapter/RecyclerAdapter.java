@@ -36,7 +36,6 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
    * unnecessary View.findViewById(int) calls*/
     @Override
     public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-//ici on décrit ou on insuffle les données
         TextView v = (TextView) LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.recycler_view, viewGroup, false);
 
@@ -49,8 +48,6 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
         return viewHolder;
     }
 
-    /**
-     * */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewholder, int position) {
 
@@ -95,7 +92,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
                     if (data instanceof TableEntity) {
-                        return ((TableEntity) data.get(oldItemPosition)).getId().equals(((TableEntity) data.get(newItemPosition)).getId());
+                        return data.get(oldItemPosition).getId().equals(data.get(newItemPosition).getId());
                     }
                     return false;
                 }
@@ -103,8 +100,8 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
                     if (data instanceof TableEntity) {
-                        TableEntity newTable = (TableEntity) data.get(newItemPosition);
-                        TableEntity oldTable = (TableEntity) data.get(newItemPosition);
+                        TableEntity newTable = data.get(newItemPosition);
+                        TableEntity oldTable = data.get(newItemPosition);
                         return newTable.getId().equals(oldTable.getId())
                                 && Objects.equals(newTable.getPersonNumber(), oldTable.getPersonNumber())
                                 && Objects.equals(newTable.getAvailability(), oldTable.getAvailability())

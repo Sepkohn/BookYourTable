@@ -40,17 +40,14 @@ public class BookingsRecyclerAdapter<T> extends RecyclerView.Adapter<BookingsRec
         this.listener = listener;
     }
 
-    /*Maintenant, il ne nous reste plus qu'à lier tout cela ensemble grâce à un Adapter. Ainsi, dans le package Views de notre application, nous allons créer un Adapter*/
-    //VIA CA ON AJOUTE LES COMPORTEMENTS CLIC LONG ET CLICK A LA LISTE
     @Override
     public BookingsRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        //ici on décrit ou on insuffle les données
         TextView v = (TextView) LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.booking_recycler_view, viewGroup, false);
 
         final ViewHolder viewHolder = new ViewHolder(v);
-        v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));         //Créer le layout recycleView pour l'affichage des tables
+        v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));
         v.setOnLongClickListener(view -> {
             listener.onItemLongClick(view, viewHolder.getAdapterPosition());
             return true;

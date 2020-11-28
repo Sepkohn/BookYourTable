@@ -1,17 +1,13 @@
 package project.bookyourtable.ui.booking;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.LocaleList;
 import android.view.View;
 import android.widget.CalendarView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.time.LocalDate;
-import java.util.Date;
 
 import project.bookyourtable.R;
 

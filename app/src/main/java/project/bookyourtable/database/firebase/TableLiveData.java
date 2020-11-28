@@ -34,15 +34,11 @@ public class TableLiveData extends LiveData<TableEntity> {
     }
 
     private class MyValueEventListener implements ValueEventListener {
-        //DataSnapshot , qui est un instantané des données. Un instantané est une image des données
-        // à une référence de base de données particulière à un moment donné.
-
 
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {
-                TableEntity entity = dataSnapshot.getValue(TableEntity.class); //getValue() sur un instantané renvoie la représentation objet
-                //Si aucune donnée n'existe la valeur de l'instantané est null
+                TableEntity entity = dataSnapshot.getValue(TableEntity.class);
                 entity.setId(dataSnapshot.getKey());
                 setValue(entity);
             }

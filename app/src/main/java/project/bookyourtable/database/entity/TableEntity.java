@@ -1,6 +1,5 @@
 package project.bookyourtable.database.entity;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;

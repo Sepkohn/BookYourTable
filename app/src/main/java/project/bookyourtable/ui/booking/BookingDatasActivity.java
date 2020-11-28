@@ -1,6 +1,5 @@
 package project.bookyourtable.ui.booking;
 
-import android.content.Entity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -79,6 +77,7 @@ public class BookingDatasActivity extends AppCompatActivity {
 
         AvailableTableListViewModel.Factory factory2 = new AvailableTableListViewModel.Factory(getApplication(),entity.getNumberPersons());
 
+        //Check free tables for this DateTime
         viewModel = new ViewModelProvider(this, factory2).get(AvailableTableListViewModel.class);
         viewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
@@ -109,6 +108,9 @@ public class BookingDatasActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Display the tables on the screen
+     */
     private void displayTables() {
         adapter.setData(tables);
         recyclerView.setAdapter(adapter);
@@ -183,7 +185,7 @@ public class BookingDatasActivity extends AppCompatActivity {
 
             if(stringNumber.length()<11)
             {
-                phoneNumber.setError("The format is incorrect, please try again");
+                phoneNumber.setError(getString(R.string.IncorrectPhoneFormat));
                 phoneNumber.requestFocus();
                 return "";
             }

@@ -83,6 +83,7 @@ public class ChangeTableActivity extends AppCompatActivity {
         AvailableTableListViewModel.Factory factory2 = new AvailableTableListViewModel.Factory(
                 getApplication(),bookingEntity.getNumberPersons());
 
+        //Check free tables for this DateTime
         tableViewModel = new ViewModelProvider(this, factory2).get(AvailableTableListViewModel.class);
         tableViewModel.getOwnTables().observe(this, tableEntities -> {
             if (tableEntities != null) {
@@ -111,6 +112,10 @@ public class ChangeTableActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Check informations to validate the Table
+     * Update if informations are correct
+     */
     private void validateTable() {
         if(tableNo!=0){
             bookingEntity.setTableNumber(String.valueOf(tableNo));
@@ -132,6 +137,9 @@ public class ChangeTableActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Display the tables on screen
+     */
     private void displayTables() {
         adapter.setData(tables);
         recyclerView.setAdapter(adapter);

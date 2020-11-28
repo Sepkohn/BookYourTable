@@ -1,29 +1,23 @@
 package project.bookyourtable.database.repository;
 
 
-import android.util.Log;
-
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
+import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.database.firebase.BookingListLiveByTable;
 import project.bookyourtable.database.firebase.BookingListLiveDateBefore;
 import project.bookyourtable.database.firebase.BookingListLiveDateTime;
 import project.bookyourtable.database.firebase.BookingListTimeLiveData;
 import project.bookyourtable.database.firebase.BookingLiveData;
-import project.bookyourtable.ui.MainActivity;
-import project.bookyourtable.ui.booking.ReservationsListActivity;
 import project.bookyourtable.util.OnAsyncEventListener;
-import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.viewmodel.table.TableViewModel;
 
 public class BookingRepository {
@@ -61,16 +55,10 @@ public class BookingRepository {
         return new BookingListLiveDateBefore(reference, date);
     }
 
-    public LiveData<List<BookingEntity>> getBookingsByTable(final int table) {
-        DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("bookings");
-        return new BookingListLiveByTable(reference, table);
-    }
-
     public LiveData<List<BookingEntity>> getBookingsByTable(final int location) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("bookings");
-        return new BookingLiveDataLocation(reference, location);
+        return new BookingListLiveByTable(reference, location);
     }
 
     public LiveData<List<BookingEntity>> getBookingsByDateTime(final LocalDate date, final String time) {
@@ -120,6 +108,9 @@ public class BookingRepository {
                         @Override
                         public void onSuccess() {
                             System.out.println("Table number has changed");
+                            try {
+                                Thread.sleep(1000);
+
                             viewModel.deleteTable(tableEntity, new OnAsyncEventListener() {
                                 @Override
                                 public void onSuccess() {
@@ -131,6 +122,9 @@ public class BookingRepository {
                                     System.out.println("Error on delete the table");
                                 }
                             });
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
 
                         @Override
@@ -144,6 +138,12 @@ public class BookingRepository {
     }
 
 
+    /**
+     * Delete the actual booking on its date, and recreate on the new date
+     * @param bookingEntity actual booking
+     * @param date new date of registration
+     * @param callback on succes or failure message
+     */
     public void updateWithDate(final BookingEntity bookingEntity, LocalDate date, OnAsyncEventListener callback) {
         delete(bookingEntity, callback);
         bookingEntity.setDate(date);
@@ -164,6 +164,11 @@ public class BookingRepository {
                 });
     }
 
+    /**
+     * Delete all historic of passed bookings
+     * @param date actual date
+     * @param owner Activity in which is called this function
+     */
     public void deleteBookingHistory(final LocalDate date, LifecycleOwner owner){
        getBookingsByDateBefore(date).observe(owner, bookingEntities -> {
            for(BookingEntity bookingEntity:bookingEntities) {
