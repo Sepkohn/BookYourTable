@@ -10,7 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.time.LocalDate;
+
 import project.bookyourtable.R;
+import project.bookyourtable.database.repository.BookingRepository;
 import project.bookyourtable.ui.booking.BookingsDateActivity;
 import project.bookyourtable.ui.booking.MainBookingActivity;
 import project.bookyourtable.ui.table.TableActivity;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        BookingRepository.getInstance().deleteBookingHistory(LocalDate.now(), this);
 
     }
 
@@ -73,10 +78,6 @@ public class MainActivity extends AppCompatActivity {
     public void createTableManagement(View view){
         Intent intent = new Intent(this, TableActivity.class);
         startActivity(intent);
-    }
-
-    public void changeToFrench(View view){
-
     }
 
 

@@ -52,8 +52,6 @@ public class TableRepository {
     }
 
     public void insert(final TableEntity table, OnAsyncEventListener callback) {
-        String id = FirebaseDatabase.getInstance().getReference("tables").push().getKey();
-
         FirebaseDatabase.getInstance()
                 .getReference("tables")
                 .child(String.valueOf(table.getLocation()))
@@ -80,8 +78,6 @@ public class TableRepository {
                 });
     }
     public void updateNewNumber(final TableEntity table,int newNumber, OnAsyncEventListener callback){
-
-        delete(table, callback);
         table.setLocation(newNumber);
         insert(table, callback);
     }
