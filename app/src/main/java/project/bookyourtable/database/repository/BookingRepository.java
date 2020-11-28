@@ -114,6 +114,9 @@ public class BookingRepository {
                         @Override
                         public void onSuccess() {
                             System.out.println("Table number has changed");
+                            try {
+                                Thread.sleep(1000);
+
                             viewModel.deleteTable(tableEntity, new OnAsyncEventListener() {
                                 @Override
                                 public void onSuccess() {
@@ -125,6 +128,9 @@ public class BookingRepository {
                                     System.out.println("Error on delete the table");
                                 }
                             });
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
 
                         @Override
