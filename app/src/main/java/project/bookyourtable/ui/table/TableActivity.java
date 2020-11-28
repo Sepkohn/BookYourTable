@@ -22,7 +22,9 @@ import java.util.List;
 
 import project.bookyourtable.R;
 import project.bookyourtable.adapter.RecyclerAdapter;
+import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
+import project.bookyourtable.database.repository.BookingRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
 import project.bookyourtable.util.RecyclerViewItemClickListener;
 import project.bookyourtable.viewmodel.table.TableListViewModel;
@@ -116,21 +118,36 @@ public class TableActivity extends AppCompatActivity {
         deleteMessage.setText(getString(R.string.deleteMessage, ""+table.getLocation()));
         deleteMessage.setTextSize(20);
 
+
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.execute), (dialog, which) -> {
-            Toast toast = Toast.makeText(this, getString(R.string.tabledeleted), Toast.LENGTH_SHORT);
 
-            viewModel.deleteTable(table, new OnAsyncEventListener() {
-                @Override
-                public void onSuccess() {
-                    Log.d(TAG, "Table deleted");
+            BookingRepository.getInstance().getBookingsByTable(table.getLocation()).observe(this, bookingEntities -> {
+                if(bookingEntities==null) {
+                    if (bookingEntities.size() > 0) {
+                        Toast toast = Toast.makeText(this, getString(R.string.tabledeleted), Toast.LENGTH_SHORT);
+
+                        viewModel.deleteTable(table, new OnAsyncEventListener() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d(TAG, "Table deleted");
+                            }
+
+                            @Override
+                            public void onFailure(Exception e) {
+                                Log.d(TAG, "deleteTable: failure", e);
+                            }
+                        });
+                        toast.show();
+                    }
+                }else{
+                    Toast toast = Toast.makeText(this, "RESERVATIONS SUR LA TABLE", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
 
-                @Override
-                public void onFailure(Exception e) {
-                    Log.d(TAG, "deleteTable: failure", e);
-                }
             });
-            toast.show();
+
+
+
         });
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancel), (dialog, which) -> alertDialog.dismiss());
