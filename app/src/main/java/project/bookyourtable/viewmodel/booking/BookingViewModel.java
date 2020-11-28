@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.time.LocalDate;
 
-import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.repository.BookingRepository;
 import project.bookyourtable.util.OnAsyncEventListener;

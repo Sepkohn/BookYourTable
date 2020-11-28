@@ -88,6 +88,9 @@
     <string name="emptyTable">Please select a table</string>
     <string name="selectedTable">table no %1$s selected</string>
     <string name="selectAll">Please select all values to continue</string>
+    <string name="ReservationExists">A booking exists on this table, unable to delete</string>
+    <string name="IdExists">ID already exist, please choose another table\'s number</string>
+    <string name="IncorrectPhoneFormat">The format is incorrect, please try again</string>
 
 
 </resources>

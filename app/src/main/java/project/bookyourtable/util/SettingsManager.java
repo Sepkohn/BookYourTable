@@ -1,7 +1,6 @@
 package project.bookyourtable.util;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 

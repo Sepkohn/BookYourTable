@@ -11,10 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.List;
 
-import project.bookyourtable.BaseApp;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.database.repository.TableRepository;
-import project.bookyourtable.util.OnAsyncEventListener;
 
 public class AvailableTableListViewModel extends AndroidViewModel {
 

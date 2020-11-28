@@ -62,4 +62,7 @@
     <string name="language">Changer la langue</string>
     <string name="english">Anglais</string>
     <string name="french">Francais</string>
+    <string name="ReservationExists">Une réservation existe sur cette table, impossible de supprimer</string>
+    <string name="IdExists">L\'ID est déjà existant, veuillez choisir un nouveau numéro de table</string>
+    <string name="IncorrectPhoneFormat">Le format est incorrecte, veuillez réessayer</string>
 </resources>

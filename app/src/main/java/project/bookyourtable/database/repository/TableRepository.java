@@ -77,6 +77,8 @@ public class TableRepository {
                     }
                 });
     }
+
+
     public void updateNewNumber(final TableEntity table,int newNumber, OnAsyncEventListener callback){
         table.setLocation(newNumber);
         insert(table, callback);

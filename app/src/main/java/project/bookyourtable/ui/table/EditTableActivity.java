@@ -113,34 +113,32 @@ public class EditTableActivity extends AppCompatActivity {
             tableEntity = new TableEntity();
         }
 
-        TableRepository.getInstance().getByOwner().observe(this, new Observer<List<TableEntity>>() {
-            @Override
-            public void onChanged(List<TableEntity> tableEntities) {
-                if(tableEntities!=null){
-                    for(TableEntity table : tableEntities){
-                        if(table.getLocation() == Integer.parseInt(stringetnumtable)){
-                            uniqueTable = false;
-                        }
+        //check if Id is already used and save the table if it isn't
+        TableRepository.getInstance().getByOwner().observe(this, tableEntities -> {
+            if(tableEntities!=null){
+                for(TableEntity table : tableEntities){
+                    if(table.getLocation() == Integer.parseInt(stringetnumtable)){
+                        uniqueTable = false;
                     }
-                    if(isEditMode)
-                        if(tableEntity.getLocation() == Integer.parseInt(stringetnumtable))
-                            uniqueTable = true;
                 }
-                if (stringetnumtable.isEmpty()) {
-                    etnumtable.setError(getString(R.string.numberTableErr));
-                    etnumtable.requestFocus();
-                } else if (stringetnumberperson.isEmpty()) {
-                    etnumberperson.setError(getString(R.string.numberPersonErr));
-                } else {
-                    if(uniqueTable) {
-                        saveChanges(Integer.parseInt(etnumtable.getText().toString()), Integer.parseInt(etnumberperson.getText().toString()), statusSwitch);
-                        onBackPressed();
-                        toast.show();
-                        return;
-                    }
-                    else{
-                        Toast.makeText(EditTableActivity.this, "ID Already exist, please choose another number", Toast.LENGTH_SHORT ).show();
-                    }
+                if(isEditMode)
+                    if(tableEntity.getLocation() == Integer.parseInt(stringetnumtable))
+                        uniqueTable = true;
+            }
+            if (stringetnumtable.isEmpty()) {
+                etnumtable.setError(getString(R.string.numberTableErr));
+                etnumtable.requestFocus();
+            } else if (stringetnumberperson.isEmpty()) {
+                etnumberperson.setError(getString(R.string.numberPersonErr));
+            } else {
+                if(uniqueTable) {
+                    saveChanges(Integer.parseInt(etnumtable.getText().toString()), Integer.parseInt(etnumberperson.getText().toString()), statusSwitch);
+                    onBackPressed();
+                    toast.show();
+                    return;
+                }
+                else{
+                    Toast.makeText(EditTableActivity.this, R.string.IdExists, Toast.LENGTH_SHORT ).show();
                 }
             }
         });

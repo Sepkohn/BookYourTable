@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +21,6 @@ import java.util.List;
 
 import project.bookyourtable.R;
 import project.bookyourtable.adapter.RecyclerAdapter;
-import project.bookyourtable.database.entity.BookingEntity;
 import project.bookyourtable.database.entity.TableEntity;
 import project.bookyourtable.database.repository.BookingRepository;
 import project.bookyourtable.util.OnAsyncEventListener;
@@ -100,7 +98,7 @@ public class TableActivity extends AppCompatActivity {
             }
 
             public void onItemLongClick(View v, int position) {
-                createDeleteDialog(position); //method to create dialog for deleting item
+                createDeleteDialog(position);
             }
         });
     }
@@ -121,9 +119,9 @@ public class TableActivity extends AppCompatActivity {
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.execute), (dialog, which) -> {
 
+            //Verify if there is a booking based on this table. If not, the table will be deleted.
             BookingRepository.getInstance().getBookingsByTable(table.getLocation()).observe(this, bookingEntities -> {
-                if(bookingEntities==null) {
-                    if (bookingEntities.size() > 0) {
+                    if (bookingEntities.size() == 0) {
                         Toast toast = Toast.makeText(this, getString(R.string.tabledeleted), Toast.LENGTH_SHORT);
 
                         viewModel.deleteTable(table, new OnAsyncEventListener() {
@@ -139,8 +137,8 @@ public class TableActivity extends AppCompatActivity {
                         });
                         toast.show();
                     }
-                }else{
-                    Toast toast = Toast.makeText(this, "RESERVATIONS SUR LA TABLE", Toast.LENGTH_SHORT);
+                else{
+                    Toast toast = Toast.makeText(this, R.string.ReservationExists, Toast.LENGTH_SHORT);
                     toast.show();
                 }
 

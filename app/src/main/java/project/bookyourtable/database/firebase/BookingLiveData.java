@@ -13,7 +13,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.time.LocalDate;
 
 import project.bookyourtable.database.entity.BookingEntity;
-import project.bookyourtable.database.entity.TableEntity;
 
 public class BookingLiveData extends LiveData<BookingEntity> {
     private static final String TAG = "BookingLiveData";

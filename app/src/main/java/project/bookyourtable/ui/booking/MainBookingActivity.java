@@ -7,22 +7,13 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 import project.bookyourtable.R;
 import project.bookyourtable.database.entity.BookingEntity;
@@ -106,7 +97,7 @@ public class MainBookingActivity extends AppCompatActivity {
      * Method to continue the booking. We still have to check the informations before continuing.
      * @param view
      */
-    public void continueBooking(View view) throws ParseException {
+    public void continueBooking(View view) {
         BookingEntity entity;
         if((entity=verifyInformations()) !=null) {
             Intent intent = new Intent(this, BookingDatasActivity.class);

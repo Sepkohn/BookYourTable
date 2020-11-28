@@ -9,21 +9,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import project.bookyourtable.BaseApp;
 import project.bookyourtable.R;
 import project.bookyourtable.adapter.BookingsRecyclerAdapter;
 import project.bookyourtable.database.entity.BookingEntity;
@@ -36,7 +30,7 @@ import project.bookyourtable.viewmodel.booking.BookingViewModel;
 public class ReservationsListActivity extends AppCompatActivity {
 
     private LocalDate date;
-    private BookingRepository repository;
+
 
     private List<BookingEntity> displayBookings;
     private BookingsRecyclerAdapter<BookingEntity> adapter;
@@ -82,14 +76,12 @@ public class ReservationsListActivity extends AppCompatActivity {
             }
         });
 
-        repository = ((BaseApp) getApplication()).getBookingRepository();
-        repository.getBookingsByDate(date).observe(this, bookingEntities -> {
+        BookingRepository.getInstance().getBookingsByDate(date).observe(this, bookingEntities -> {
             displayBookings = bookingEntities;
             adapter.setData(displayBookings);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         });
-
     }
 
     /**
