@@ -110,21 +110,23 @@ public class BookingRepository {
                             System.out.println("Table number has changed");
                             try {
                                 Thread.sleep(1000);
+                                tableEntity.setId(String.valueOf(tableNumber));
+                                viewModel.deleteTable(tableEntity, new OnAsyncEventListener() {
+                                    @Override
+                                    public void onSuccess() {
+                                        System.out.println("Table deleted");
+                                    }
 
-                            viewModel.deleteTable(tableEntity, new OnAsyncEventListener() {
-                                @Override
-                                public void onSuccess() {
-                                    System.out.println("Table deleted");
-                                }
-
-                                @Override
-                                public void onFailure(Exception e) {
-                                    System.out.println("Error on delete the table");
-                                }
-                            });
+                                    @Override
+                                    public void onFailure(Exception e) {
+                                        System.out.println("Error on delete the table");
+                                    }
+                                });
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+
+
                         }
 
                         @Override

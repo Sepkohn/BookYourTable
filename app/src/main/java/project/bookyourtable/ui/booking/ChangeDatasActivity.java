@@ -207,10 +207,11 @@ public class ChangeDatasActivity extends AppCompatActivity {
         String name = customerName.getText().toString();
         int number = parseInt(numberPersons.getText().toString());
         int time = timeSlot.getCheckedChipId();
+        Chip chip = findViewById(time);
         LocalDate today = LocalDate.now();
 
         if(!name.equals("")&&number>0&&!bookingDate.isBefore(today)&&time!=-1) {
-            if(number!=entity.getNumberPersons()){
+            if(number!=entity.getNumberPersons()||!entity.getTime().equals(chip.getText().toString())){
                 haveToChangedTable = true;
             }
             if(!(bookingDate.equals(entity.getDate()))){
@@ -224,7 +225,6 @@ public class ChangeDatasActivity extends AppCompatActivity {
             entity.setName(name);
 
             entity.setNumberPersons(number);
-            Chip chip = findViewById(time);
             entity.setTime(chip.getText().toString());
 
             return true;

@@ -80,6 +80,7 @@ public class TableRepository {
 
 
     public void updateNewNumber(final TableEntity table,int newNumber, OnAsyncEventListener callback){
+        table.setId(String.valueOf(newNumber));
         table.setLocation(newNumber);
         insert(table, callback);
     }
