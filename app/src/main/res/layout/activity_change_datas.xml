@@ -59,9 +59,9 @@
     <Button
         android:id="@+id/plusButton"
         android:layout_width="57dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="15dp"
         android:onClick="addPerson"
         android:text="@string/plusButton"
         app:layout_constraintStart_toEndOf="@+id/editTextNumber"
@@ -70,9 +70,9 @@
     <Button
         android:id="@+id/minusButton"
         android:layout_width="57dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="15dp"
         android:onClick="decreasePerson"
         android:text="@string/minusButton"
         app:layout_constraintStart_toEndOf="@+id/plusButton"
